@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://dddkx13dwujh2"]
+
+[ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Resources/Ability.cs" id="1_ts7ro"]
+
+[resource]
+script = ExtResource("1_ts7ro")
+Id = "punch"
+Name = "punch"
+IsPhysical = true
+Power = 50
+Type = 2
+Description = "Punches the target."
+metadata/_custom_type_script = "uid://vy1r708gni21"

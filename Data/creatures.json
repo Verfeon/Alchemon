@@ -1,0 +1,283 @@
+{
+  "creatures": [
+	{
+	  "id": "rock_golem",
+	  "name": "Golem de Pierre",
+	  "sprite_path": "res://Assets/Creatures/rock_golem.png",
+	  "base_stats": {
+		"max_hp": 80,
+		"attack": 45,
+		"defense": 60,
+		"special_attack": 30,
+		"special_defense": 50,
+		"speed": 20
+	  },
+	  "type": "Earth",
+	  "abilities": [
+		{
+		  "name": "Lancer de Roc",
+		  "power": 40,
+		  "type": "Earth",
+		  "mana_cost": 15,
+		  "description": "Lance un rocher massif sur l'ennemi."
+		},
+		{
+		  "name": "Armure de Pierre",
+		  "power": 0,
+		  "type": "Earth",
+		  "mana_cost": 20,
+		  "description": "Augmente la défense pour 3 tours."
+		}
+	  ],
+	  "description": "Un gardien de pierre animé par la fusion de minéraux."
+	},
+	{
+	  "id": "treant",
+	  "name": "Tréant",
+	  "sprite_path": "res://Assets/Creatures/treant.png",
+	  "base_stats": {
+		"max_hp": 90,
+		"attack": 35,
+		"defense": 50,
+		"special_attack": 45,
+		"special_defense": 55,
+		"speed": 25
+	  },
+	  "type": "Nature",
+	  "abilities": [
+		{
+		  "name": "Fouet de Lianes",
+		  "power": 35,
+		  "type": "Nature",
+		  "mana_cost": 12,
+		  "description": "Frappe avec des lianes vivantes."
+		},
+		{
+		  "name": "Photosynthèse",
+		  "power": 0,
+		  "type": "Nature",
+		  "mana_cost": 15,
+		  "description": "Restaure 30% des HP."
+		}
+	  ],
+	  "description": "Un esprit de la forêt né du bois et de la nature."
+	},
+	{
+	  "id": "crystal_guardian",
+	  "name": "Gardien de Cristal",
+	  "sprite_path": "res://Assets/Creatures/crystal_guardian.png",
+	  "base_stats": {
+		"max_hp": 70,
+		"attack": 50,
+		"defense": 45,
+		"special_attack": 65,
+		"special_defense": 60,
+		"speed": 35
+	  },
+	  "type": "Light",
+	  "abilities": [
+		{
+		  "name": "Rayon Prismatique",
+		  "power": 50,
+		  "type": "Light",
+		  "mana_cost": 20,
+		  "description": "Un rayon de lumière pure."
+		},
+		{
+		  "name": "Bouclier Lumineux",
+		  "power": 0,
+		  "type": "Light",
+		  "mana_cost": 18,
+		  "description": "Crée un bouclier de lumière."
+		}
+	  ],
+	  "description": "Créature de lumière solidifiée dans le cristal."
+	},
+	{
+	  "id": "steam_elemental",
+	  "name": "Élémentaire de Vapeur",
+	  "sprite_path": "res://Assets/Creatures/steam_elemental.png",
+	  "base_stats": {
+		"max_hp": 65,
+		"attack": 55,
+		"defense": 35,
+		"special_attack": 60,
+		"special_defense": 40,
+		"speed": 50
+	  },
+	  "type": "Water",
+	  "abilities": [
+		{
+		  "name": "Jet de Vapeur",
+		  "power": 45,
+		  "type": "Water",
+		  "mana_cost": 16,
+		  "description": "Projette de la vapeur brûlante."
+		},
+		{
+		  "name": "Brume Aveuglante",
+		  "power": 0,
+		  "type": "Water",
+		  "mana_cost": 12,
+		  "description": "Réduit la précision de l'ennemi."
+		}
+	  ],
+	  "description": "Fusion du feu et de l'eau en vapeur vivante."
+	},
+	{
+	  "id": "inferno_beast",
+	  "name": "Bête Infernale",
+	  "sprite_path": "res://Assets/Creatures/inferno_beast.png",
+	  "base_stats": {
+		"max_hp": 75,
+		"attack": 70,
+		"defense": 40,
+		"special_attack": 55,
+		"special_defense": 45,
+		"speed": 45
+	  },
+	  "type": "Fire",
+	  "abilities": [
+		{
+		  "name": "Flamme Dévorante",
+		  "power": 60,
+		  "type": "Fire",
+		  "mana_cost": 22,
+		  "description": "Flammes qui brûlent tout."
+		},
+		{
+		  "name": "Rage Ardente",
+		  "power": 0,
+		  "type": "Fire",
+		  "mana_cost": 18,
+		  "description": "Augmente l'attaque mais réduit la défense."
+		}
+	  ],
+	  "description": "Créature de flammes pures et de bois consumé."
+	},
+	{
+	  "id": "thunder_titan",
+	  "name": "Titan Foudroyant",
+	  "sprite_path": "res://Assets/Creatures/thunder_titan.png",
+	  "base_stats": {
+		"max_hp": 85,
+		"attack": 65,
+		"defense": 55,
+		"special_attack": 75,
+		"special_defense": 65,
+		"speed": 60
+	  },
+	  "type": "Air",
+	  "abilities": [
+		{
+		  "name": "Éclair Titanesque",
+		  "power": 70,
+		  "type": "Air",
+		  "mana_cost": 25,
+		  "description": "Un éclair dévastateur."
+		},
+		{
+		  "name": "Charge Statique",
+		  "power": 0,
+		  "type": "Air",
+		  "mana_cost": 15,
+		  "description": "Paralyse l'ennemi pour 1 tour."
+		}
+	  ],
+	  "description": "Fusion du métal et de l'électricité en titan."
+	},
+	{
+	  "id": "shadow_wraith",
+	  "name": "Spectre d'Ombre",
+	  "sprite_path": "res://Assets/Creatures/shadow_wraith.png",
+	  "base_stats": {
+		"max_hp": 60,
+		"attack": 60,
+		"defense": 30,
+		"special_attack": 80,
+		"special_defense": 35,
+		"speed": 70
+	  },
+	  "type": "Dark",
+	  "abilities": [
+		{
+		  "name": "Lame Obscure",
+		  "power": 55,
+		  "type": "Dark",
+		  "mana_cost": 20,
+		  "description": "Frappe depuis les ténèbres."
+		},
+		{
+		  "name": "Phasing",
+		  "power": 0,
+		  "type": "Dark",
+		  "mana_cost": 25,
+		  "description": "Esquive l'attaque suivante."
+		}
+	  ],
+	  "description": "Entité née des ombres et du cristal noir."
+	},
+	{
+	  "id": "tech_sentinel",
+	  "name": "Sentinelle Mécanique",
+	  "sprite_path": "res://Assets/Creatures/tech_sentinel.png",
+	  "base_stats": {
+		"max_hp": 100,
+		"attack": 55,
+		"defense": 70,
+		"special_attack": 65,
+		"special_defense": 75,
+		"speed": 40
+	  },
+	  "type": "Tech",
+	  "abilities": [
+		{
+		  "name": "Laser Précis",
+		  "power": 50,
+		  "type": "Tech",
+		  "mana_cost": 18,
+		  "description": "Ne peut pas rater sa cible."
+		},
+		{
+		  "name": "Auto-Réparation",
+		  "power": 0,
+		  "type": "Tech",
+		  "mana_cost": 20,
+		  "description": "Restaure 25% des HP."
+		}
+	  ],
+	  "description": "Gardien mécanique d'une ère ancienne."
+	},
+	{
+	  "id": "celestial_phoenix",
+	  "name": "Phénix Céleste",
+	  "sprite_path": "res://Assets/Creatures/celestial_phoenix.png",
+	  "base_stats": {
+		"max_hp": 95,
+		"attack": 75,
+		"defense": 50,
+		"special_attack": 95,
+		"special_defense": 55,
+		"speed": 80
+	  },
+	  "type": "Light",
+	  "abilities": [
+		{
+		  "name": "Flamme Stellaire",
+		  "power": 80,
+		  "type": "Light",
+		  "mana_cost": 30,
+		  "description": "Flammes issues des étoiles."
+		},
+		{
+		  "name": "Renaissance",
+		  "power": 0,
+		  "type": "Light",
+		  "mana_cost": 50,
+		  "description": "Revient à la vie une fois avec 50% HP."
+		}
+	  ],
+	  "description": "Créature légendaire née du feu et de la lumière lunaire."
+	}
+  ]
+}

@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://5snde53fcpc0"]
+
+[ext_resource type="PackedScene" uid="uid://dtyx240gshm8n" path="res://Scenes/Managers/CreatureManager.tscn" id="1_3bpoc"]
+[ext_resource type="Script" uid="uid://lrq721vc8lai" path="res://Scripts/Autoload/GameManager.cs" id="1_3ns0j"]
+[ext_resource type="PackedScene" uid="uid://2lhle2xakemw" path="res://Scenes/Managers/MergeManager.tscn" id="2_lyu6u"]
+[ext_resource type="PackedScene" uid="uid://cy7xaog5r2y4h" path="res://Scenes/Managers/InventoryManager.tscn" id="3_3ns0j"]
+[ext_resource type="PackedScene" uid="uid://br1jwst57qb3q" path="res://Scenes/Creature.tscn" id="3_lyu6u"]
+[ext_resource type="PackedScene" uid="uid://ccoexvslcjddd" path="res://Scenes/Managers/PlayerManager.tscn" id="4_ugfa4"]
+[ext_resource type="PackedScene" uid="uid://qkekbg64s8eh" path="res://Scenes/Managers/SaveManager.tscn" id="5_v10iq"]
+
+[node name="GameManager" type="Node" node_paths=PackedStringArray("Inventory", "Merge", "Creatures", "Player", "SaveData")]
+script = ExtResource("1_3ns0j")
+Inventory = NodePath("InventoryManager")
+Merge = NodePath("MergeManager")
+Creatures = NodePath("CreatureManager")
+Player = NodePath("PlayerManager")
+SaveData = NodePath("SaveManager")
+
+[node name="CreatureManager" parent="." instance=ExtResource("1_3bpoc")]
+
+[node name="MergeManager" parent="." instance=ExtResource("2_lyu6u")]
+_creatureScenePath = ExtResource("3_lyu6u")
+
+[node name="InventoryManager" parent="." instance=ExtResource("3_3ns0j")]
+
+[node name="PlayerManager" parent="." instance=ExtResource("4_ugfa4")]
+
+[node name="SaveManager" parent="." instance=ExtResource("5_v10iq")]

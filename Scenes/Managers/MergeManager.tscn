@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://2lhle2xakemw"]
+
+[ext_resource type="Script" uid="uid://b2lrqx7pfyi4d" path="res://Scripts/Managers/MergeManager.cs" id="1_usw3a"]
+[ext_resource type="PackedScene" uid="uid://br1jwst57qb3q" path="res://Scenes/Creature.tscn" id="2_32mth"]
+
+[node name="MergeManager" type="Node"]
+script = ExtResource("1_usw3a")
+CreatureScenePath = ExtResource("2_32mth")

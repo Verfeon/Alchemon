@@ -1,0 +1,67 @@
+{
+  "recipes": [
+	{
+	  "ingredients": ["stone", "stone"],
+	  "result": "rock_golem",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "Deux pierres peuvent former quelque chose de plus grand..."
+	},
+	{
+	  "ingredients": ["wood_stick", "wood_stick"],
+	  "result": "treant",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "Le bois et la vie végétale forment un esprit de la forêt."
+	},
+	{
+	  "ingredients": ["stone", "crystal"],
+	  "result": "crystal_guardian",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "La pierre peut devenir transparente et lumineuse."
+	},
+	{
+	  "ingredients": ["water_essence", "fire_ember"],
+	  "result": "steam_elemental",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "L'eau et le feu créent de la vapeur..."
+	},
+	{
+	  "ingredients": ["wood", "fire_ember"],
+	  "result": "inferno_beast",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "Le bois nourrit les flammes pour créer un brasier vivant."
+	},
+	{
+	  "ingredients": ["metal_shard", "lightning_rod"],
+	  "result": "thunder_titan",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "Le métal et l'électricité fusionnent en puissance."
+	},
+	{
+	  "ingredients": ["shadow_gem", "crystal"],
+	  "result": "shadow_wraith",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "L'ombre et la lumière se disputent dans ce cristal..."
+	},
+	{
+	  "ingredients": ["metal_shard", "ancient_gear"],
+	  "result": "tech_sentinel",
+	  "is_discovered": false,
+	  "unlock_condition": "have_3_creatures",
+	  "hint": "La technologie ancienne attend d'être réactivée."
+	},
+	{
+	  "ingredients": ["fire_ember", "moon_dust"],
+	  "result": "celestial_phoenix",
+	  "is_discovered": false,
+	  "unlock_condition": "have_5_creatures",
+	  "hint": "Les flammes terrestres rencontrent la poussière céleste..."
+	}
+  ]
+}

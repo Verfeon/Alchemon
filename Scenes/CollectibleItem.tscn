@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmpr6vljei3x1"]
+
+[ext_resource type="Script" uid="uid://b0c3w8auke7f3" path="res://Scripts/CollectibleItem.cs" id="1_1x5hq"]
+[ext_resource type="Texture2D" uid="uid://bk3qlps4ep1d3" path="res://Assets/MergeableItems/woodstick.png" id="2_7vxoh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1x5hq"]
+size = Vector2(15, 26)
+
+[node name="CollectibleItem" type="Area2D"]
+script = ExtResource("1_1x5hq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7vxoh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 2)
+shape = SubResource("RectangleShape2D_1x5hq")

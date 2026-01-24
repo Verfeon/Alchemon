@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtyx240gshm8n"]
+
+[ext_resource type="Script" uid="uid://bnne8qg7p28op" path="res://Scripts/Managers/CreatureManager.cs" id="1_l6tyw"]
+
+[node name="CreatureManager" type="Node"]
+script = ExtResource("1_l6tyw")

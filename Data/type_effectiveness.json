@@ -1,0 +1,49 @@
+{
+  "type_chart": {
+	"Fire": {
+	  "strong_against": ["Nature", "Tech"],
+	  "weak_against": ["Water", "Earth"],
+	  "neutral": ["Fire", "Air", "Light", "Dark"]
+	},
+	"Water": {
+	  "strong_against": ["Fire", "Earth"],
+	  "weak_against": ["Nature", "Air"],
+	  "neutral": ["Water", "Tech", "Light", "Dark"]
+	},
+	"Earth": {
+	  "strong_against": ["Air", "Tech"],
+	  "weak_against": ["Nature", "Water"],
+	  "neutral": ["Earth", "Fire", "Light", "Dark"]
+	},
+	"Air": {
+	  "strong_against": ["Water", "Nature"],
+	  "weak_against": ["Earth", "Tech"],
+	  "neutral": ["Air", "Fire", "Light", "Dark"]
+	},
+	"Nature": {
+	  "strong_against": ["Water", "Earth"],
+	  "weak_against": ["Fire", "Air"],
+	  "neutral": ["Nature", "Tech", "Light", "Dark"]
+	},
+	"Light": {
+	  "strong_against": ["Dark"],
+	  "weak_against": ["Dark"],
+	  "neutral": ["Fire", "Water", "Earth", "Air", "Nature", "Tech", "Light"]
+	},
+	"Dark": {
+	  "strong_against": ["Light"],
+	  "weak_against": ["Light"],
+	  "neutral": ["Fire", "Water", "Earth", "Air", "Nature", "Tech", "Dark"]
+	},
+	"Tech": {
+	  "strong_against": ["Earth", "Air"],
+	  "weak_against": ["Fire", "Water"],
+	  "neutral": ["Nature", "Tech", "Light", "Dark"]
+	}
+  },
+  "multipliers": {
+	"strong": 1.5,
+	"neutral": 1.0,
+	"weak": 0.75
+  }
+}

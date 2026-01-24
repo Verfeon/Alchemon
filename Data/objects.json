@@ -1,0 +1,112 @@
+{
+  "objects": [
+	{
+	  "id": "stone",
+	  "name": "Pierre",
+	  "sprite_path": "res://Assets/MergeableItems/stone.png",
+	  "rarity": "Common",
+	  "category": "mineral",
+	  "properties": ["hard", "heavy", "earth"],
+	  "description": "Une pierre ordinaire trouvée partout."
+	},
+	{
+	  "id": "wood",
+	  "name": "Bois",
+	  "sprite_path": "res://Assets/MergeableItems/wood.png",
+	  "rarity": "Common",
+	  "category": "organic",
+	  "properties": ["light", "flammable", "nature"],
+	  "description": "Un morceau de bois sec."
+	},
+	{
+	  "id": "crystal",
+	  "name": "Cristal",
+	  "sprite_path": "res://Assets/Objects/crystal.png",
+	  "rarity": "Rare",
+	  "category": "mineral",
+	  "properties": ["shiny", "magical", "light"],
+	  "description": "Un cristal brillant et mystérieux."
+	},
+	{
+	  "id": "water_essence",
+	  "name": "Essence d'Eau",
+	  "sprite_path": "res://Assets/Objects/water_essence.png",
+	  "rarity": "Rare",
+	  "category": "essence",
+	  "properties": ["liquid", "cold", "water"],
+	  "description": "L'essence pure de l'eau."
+	},
+	{
+	  "id": "fire_ember",
+	  "name": "Braise",
+	  "sprite_path": "res://Assets/Objects/fire_ember.png",
+	  "rarity": "Rare",
+	  "category": "essence",
+	  "properties": ["hot", "burning", "fire"],
+	  "description": "Une braise qui ne s'éteint jamais."
+	},
+	{
+	  "id": "metal_shard",
+	  "name": "Éclat de Métal",
+	  "sprite_path": "res://Assets/Objects/metal_shard.png",
+	  "rarity": "Common",
+	  "category": "mineral",
+	  "properties": ["hard", "conductive", "tech"],
+	  "description": "Un fragment de métal ancien."
+	},
+	{
+	  "id": "leaf",
+	  "name": "Feuille Magique",
+	  "sprite_path": "res://Assets/Objects/leaf.png",
+	  "rarity": "Common",
+	  "category": "organic",
+	  "properties": ["light", "natural", "nature"],
+	  "description": "Une feuille d'un vert éclatant."
+	},
+	{
+	  "id": "lightning_rod",
+	  "name": "Tige Électrique",
+	  "sprite_path": "res://Assets/Objects/lightning_rod.png",
+	  "rarity": "Epic",
+	  "category": "tech",
+	  "properties": ["conductive", "charged", "air"],
+	  "description": "Crépite d'électricité statique."
+	},
+	{
+	  "id": "shadow_gem",
+	  "name": "Gemme d'Ombre",
+	  "sprite_path": "res://Assets/Objects/shadow_gem.png",
+	  "rarity": "Epic",
+	  "category": "mineral",
+	  "properties": ["dark", "mysterious", "dark"],
+	  "description": "Absorbe la lumière autour d'elle."
+	},
+	{
+	  "id": "prism",
+	  "name": "Prisme",
+	  "sprite_path": "res://Assets/Objects/prism.png",
+	  "rarity": "Epic",
+	  "category": "mineral",
+	  "properties": ["shiny", "reflective", "light"],
+	  "description": "Réfracte la lumière en arc-en-ciel."
+	},
+	{
+	  "id": "ancient_gear",
+	  "name": "Engrenage Ancien",
+	  "sprite_path": "res://Assets/Objects/ancient_gear.png",
+	  "rarity": "Legendary",
+	  "category": "tech",
+	  "properties": ["mechanical", "ancient", "tech"],
+	  "description": "Vestige d'une technologie oubliée."
+	},
+	{
+	  "id": "moon_dust",
+	  "name": "Poussière Lunaire",
+	  "sprite_path": "res://Assets/Objects/moon_dust.png",
+	  "rarity": "Legendary",
+	  "category": "essence",
+	  "properties": ["ethereal", "magical", "light"],
+	  "description": "Scintille comme les étoiles."
+	}
+  ]
+}

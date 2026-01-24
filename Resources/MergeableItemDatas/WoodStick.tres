@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://ciwu0jkuadewg"]
+
+[ext_resource type="Texture2D" uid="uid://bk3qlps4ep1d3" path="res://Assets/MergeableItems/woodstick.png" id="1_31n1t"]
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="2_i206y"]
+
+[resource]
+script = ExtResource("2_i206y")
+Id = "wood_stick"
+Name = "Wood Stick"
+Texture2d = ExtResource("1_31n1t")
+metadata/_custom_type_script = "uid://ccsxrvv1k3vi"

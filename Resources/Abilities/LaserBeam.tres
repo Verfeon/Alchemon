@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://ciah307vaepge"]
+
+[ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Resources/Ability.cs" id="1_ge6vd"]
+
+[resource]
+script = ExtResource("1_ge6vd")
+Id = "laser_beam"
+Name = "Laser Beam"
+Power = 100
+Type = 4
+Description = "Fires a laser towards the target."
+metadata/_custom_type_script = "uid://vy1r708gni21"

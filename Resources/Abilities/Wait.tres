@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://suxlcaaklhsx"]
+
+[ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Resources/Ability.cs" id="1_xmmam"]
+
+[resource]
+script = ExtResource("1_xmmam")
+Id = "wait"
+Name = "Wait"
+Type = 5
+Description = "Your creature is waiting."
+metadata/_custom_type_script = "uid://vy1r708gni21"
