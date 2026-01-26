@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://dyl2ese180f5r"]
+
+[ext_resource type="Texture2D" uid="uid://d3fr6d4b4pama" path="res://Assets/MergeableItems/leaf.png" id="1_a7wxi"]
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="1_gf8ei"]
+
+[resource]
+script = ExtResource("1_gf8ei")
+Id = "leaf"
+Name = "Leaf"
+Texture2d = ExtResource("1_a7wxi")
+metadata/_custom_type_script = "uid://ccsxrvv1k3vi"

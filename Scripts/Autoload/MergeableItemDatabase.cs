@@ -7,18 +7,11 @@ namespace Game.Autoload;
 
 public partial class MergeableItemDatabase : Node
 {
-	public static MergeableItemDatabase Instance { get; private set; }
-	
-	private string MergeableItemDataFolder = "res://Resources/MergeableItemDatas";
+	[Export] private string MergeableItemDataFolder = "res://Resources/MergeableItemDatas";
 	private Dictionary<string, MergeableItemData> _byId;
 
-	public override void _Ready()
+	public override void _EnterTree()
 	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		
 		_byId = new Dictionary<string, MergeableItemData>();
 		List<MergeableItemData> mergeableItemDatas = LoadAllMergeableItemDatas();
 
@@ -51,6 +44,9 @@ public partial class MergeableItemDatabase : Node
 		int count = 0;
 		while ((fileName = dir.GetNext()) != "")
 		{
+			if (dir.CurrentIsDir()) continue;
+			if (!fileName.EndsWith(".tres") && !fileName.EndsWith(".res")) continue;
+
 			string fullPath = MergeableItemDataFolder + "/" + fileName;
 
 			var res = ResourceLoader.Load<MergeableItemData>(fullPath);
@@ -69,6 +65,11 @@ public partial class MergeableItemDatabase : Node
 
 	public MergeableItemData Get(string id)
 	{
+		if (_byId == null)
+		{
+			GD.PrintErr("MergeableItemDatabase not initialized");
+			return null;
+		}
 		_byId.TryGetValue(id, out var item);
 		if (item == null)
 		{

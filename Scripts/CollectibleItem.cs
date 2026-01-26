@@ -25,7 +25,7 @@ public partial class CollectibleItem : Area2D
 		
 		if (IsMergeable)
 		{
-			_sprite.Texture = MergeableItemDatabase.Instance.Get(ObjectId).Texture2d;
+			_sprite.Texture = GetNode<MergeableItemDatabase>("/root/MergeableItemDatabase").Get(ObjectId).Texture2d;
 		}
 		
 		// Connecter le signal de collision

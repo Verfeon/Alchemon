@@ -156,7 +156,7 @@ public partial class MergeManager : Node
 	
 	private Creature CreateCreatureFromRecipe(MergeRecipe recipe)
 	{
-		Creature creature =  new Creature(CreatureDatabase.Instance.Get(recipe.ResultCreatureId));
+		Creature creature =  new Creature(GetNode<CreatureDatabase>("/root/CreatureDatabase").Get(recipe.ResultCreatureId));
 		// créer une scène creature
 
 		CreatureNode newCreature = _creatureScenePath.Instantiate<CreatureNode>();

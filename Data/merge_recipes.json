@@ -15,6 +15,13 @@
 	  "hint": "Le bois et la vie végétale forment un esprit de la forêt."
 	},
 	{
+	  "ingredients": ["eye", "feather"],
+	  "result": "winged_eye",
+	  "is_discovered": false,
+	  "unlock_condition": null,
+	  "hint": "Il faut parfois prendre de la hauteur pour avoir une meilleure vue."
+	},
+	{
 	  "ingredients": ["stone", "crystal"],
 	  "result": "crystal_guardian",
 	  "is_discovered": false,

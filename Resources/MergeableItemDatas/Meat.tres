@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://chmgkn663wq0g"]
+
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="1_400y4"]
+[ext_resource type="Texture2D" uid="uid://6uxjrk0p0amk" path="res://Assets/MergeableItems/meat.png" id="1_jubd1"]
+
+[resource]
+script = ExtResource("1_400y4")
+Id = "meat"
+Texture2d = ExtResource("1_jubd1")
+metadata/_custom_type_script = "uid://ccsxrvv1k3vi"

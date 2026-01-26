@@ -16,17 +16,14 @@ public partial class CreatureData : Resource
 	[Export] public CreatureStats BaseStats { get; set; }  // intrinsic to the species
 	[Export] public CreatureType Type { get; set; }
 	[Export] public Godot.Collections.Array<Ability> Abilities { get; set; }
-	public CreatureStats RealStats { get; set; }           // computed on merge
 	
-	public void Validate()
+	public void _ValidateProperty()
 	{
-		GD.Print("enter notification");
-		RemoveDuplicateIds();
+		RemoveDuplicateAbilities();
 	}
 
-	private void RemoveDuplicateIds()
+	private void RemoveDuplicateAbilities()
 	{
-		GD.Print("enter remove duplicate");
 		var seenIds = new HashSet<string>();
 		var unique = new Godot.Collections.Array<Ability>();
 

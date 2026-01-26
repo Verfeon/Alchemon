@@ -9,17 +9,11 @@ namespace Game.Autoload;
 
 public partial class CreatureDatabase : Node
 {
-	public static CreatureDatabase Instance { get; private set; }
-	private string CreatureDataFolder = "res://Resources/CreatureDatas";
+	[Export] private string CreatureDataFolder = "res://Resources/CreatureDatas";
 	private Dictionary<string, CreatureData> _byId;
 
-	public override void _Ready()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		
+	public override void _EnterTree()
+	{	
 		_byId = new Dictionary<string, CreatureData>();
 		List<CreatureData> creatureDatas = CreatureDatas();
 
@@ -52,6 +46,9 @@ public partial class CreatureDatabase : Node
 		int count = 0;
 		while ((fileName = dir.GetNext()) != "")
 		{
+			if (dir.CurrentIsDir()) continue;
+			if (!fileName.EndsWith(".tres") && !fileName.EndsWith(".res")) continue;
+
 			string fullPath = CreatureDataFolder + "/" + fileName;
 
 			var res = ResourceLoader.Load<CreatureData>(fullPath);
@@ -70,12 +67,16 @@ public partial class CreatureDatabase : Node
 
 	public CreatureData Get(string id)
 	{
+		if (_byId == null)
+		{
+			GD.PrintErr("CreatureDatabase not initialized");
+			return null;
+		}
 		_byId.TryGetValue(id, out var creature);
 		if (creature == null)
 		{
 			GD.PrintErr($"Couldn't find creature with id : {id}");
 		}
-		GD.Print("creature found : " + creature.Id);
 		return  creature;
 	}
 }

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://ggpjm8s6jrmr"]
+
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="1_00vt6"]
+[ext_resource type="Texture2D" uid="uid://blt0vitif242h" path="res://Assets/MergeableItems/feather.png" id="1_2g87b"]
+
+[resource]
+script = ExtResource("1_00vt6")
+Id = "feather"
+Name = "Feather"
+Rarity = 2
+Texture2d = ExtResource("1_2g87b")
+metadata/_custom_type_script = "uid://ccsxrvv1k3vi"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://12xm3v41bv3t"]
+
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="1_fx6pn"]
+[ext_resource type="Texture2D" uid="uid://bynbic8kc3job" path="res://Assets/MergeableItems/bone.png" id="1_h176j"]
+
+[resource]
+script = ExtResource("1_fx6pn")
+Id = "bone"
+Name = "Bone"
+Rarity = 1
+Texture2d = ExtResource("1_h176j")
+metadata/_custom_type_script = "uid://ccsxrvv1k3vi"

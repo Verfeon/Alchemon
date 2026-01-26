@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://c73nim3y50a1w"]
+
+[ext_resource type="Texture2D" uid="uid://dhhna331s50hw" path="res://Assets/MergeableItems/egg.png" id="1_egev3"]
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="2_0bagw"]
+
+[resource]
+script = ExtResource("2_0bagw")
+Id = "egg"
+Name = "Egg"
+Rarity = 1
+Texture2d = ExtResource("1_egev3")
+metadata/_custom_type_script = "uid://ccsxrvv1k3vi"

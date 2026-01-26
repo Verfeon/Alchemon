@@ -41,4 +41,12 @@ position = Vector2(92, 29)
 ObjectId = "pebble"
 IsMergeable = true
 
+[node name="Eye" parent="Collectibles" instance=ExtResource("3_8gbba")]
+ObjectId = "eye"
+IsMergeable = true
+
+[node name="Feather" parent="Collectibles" instance=ExtResource("3_8gbba")]
+ObjectId = "feather"
+IsMergeable = true
+
 [node name="Ui" parent="." instance=ExtResource("4_jjvhh")]

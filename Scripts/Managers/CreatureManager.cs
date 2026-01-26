@@ -52,7 +52,7 @@ public partial class CreatureManager : Node
 	{
 		foreach (var creature in _party)
 		{
-			creature.Data.BaseStats.CurrentHP = creature.Data.BaseStats.MaxHP;
+			creature.CurrentHP = creature.RealStats.MaxHP;
 		}
 	}
 	

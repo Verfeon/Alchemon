@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ItemDatabase="*res://Scripts/Autoload/MergeableItemDatabase.cs"
-GameManager="*res://Scenes/Managers/GameManager.tscn"
-CreatureDatabase="*res://Scripts/Autoload/CreatureDatabase.cs"
+GameManager="*res://Scenes/Autoload/GameManager.tscn"
+CreatureDatabase="*res://Scenes/Autoload/CreatureDatabase.tscn"
+MergeableItemDatabase="*res://Scenes/Autoload/MergeableItemDatabase.tscn"
 
 [display]
 

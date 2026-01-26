@@ -56,11 +56,11 @@ public partial class BattleManager : Node
 	private bool DetermineFirstTurn()
 	{
 		// Si vitesse égale, c'est aléatoire
-		if (_playerCreature.Data.RealStats.Speed == _enemyCreature.Data.RealStats.Speed)
+		if (_playerCreature.RealStats.Speed == _enemyCreature.RealStats.Speed)
 		{
 			return GD.Randf() > 0.5f;
 		}
-		return _playerCreature.Data.RealStats.Speed >= _enemyCreature.Data.RealStats.Speed;
+		return _playerCreature.RealStats.Speed >= _enemyCreature.RealStats.Speed;
 	}
 	
 	public void UseAbility(Ability ability, Creature attacker, Creature defender)
@@ -80,15 +80,15 @@ public partial class BattleManager : Node
 		int damage = CalculateDamage(ability, attacker, defender, attackerMods, defenderMods);
 		
 		// Appliquer les dégâts
-		var defenderStats = defender.Data.RealStats;
-		defenderStats.CurrentHP = Math.Max(0, defenderStats.CurrentHP - damage);
-		defender.Data.RealStats = defenderStats;
+		var defenderStats = defender.RealStats;
+		defender.CurrentHP = Math.Max(0, defender.CurrentHP - damage);
+		defender.RealStats = defenderStats;
 		
 		EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
-		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defenderStats.CurrentHP}/{defenderStats.MaxHP}");
+		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defenderStats.MaxHP}");
 		
 		// Vérifier si le défenseur est KO
-		if (defenderStats.CurrentHP <= 0)
+		if (defender.CurrentHP <= 0)
 		{
 			EmitSignal(SignalName.CreatureFainted, defender.Data.Name);
 			EndBattle(defender == _enemyCreature);
@@ -112,8 +112,8 @@ public partial class BattleManager : Node
 		if (isPhysical)
 		{
 			// Attaque physique : utilise Attack vs Defense
-			attackStat = attacker.Data.RealStats.Attack;
-			defenseStat = defender.Data.RealStats.Defense;
+			attackStat = attacker.RealStats.Attack;
+			defenseStat = defender.RealStats.Defense;
 			
 			// Appliquer les modificateurs
 			if (attackerMods.ContainsKey("Attack"))
@@ -124,8 +124,8 @@ public partial class BattleManager : Node
 		else
 		{
 			// Attaque spéciale : utilise SpecialAttack vs SpecialDefense
-			attackStat = attacker.Data.RealStats.SpecialAttack;
-			defenseStat = defender.Data.RealStats.SpecialDefense;
+			attackStat = attacker.RealStats.SpecialAttack;
+			defenseStat = defender.RealStats.SpecialDefense;
 			
 			// Appliquer les modificateurs
 			if (attackerMods.ContainsKey("SpecialAttack"))
@@ -232,10 +232,10 @@ public partial class BattleManager : Node
 		if (abilityName.Contains("soin") || abilityName.Contains("photosynthèse") || 
 			abilityName.Contains("réparation") || abilityName.Contains("renaissance"))
 		{
-			var attackerStats = attacker.Data.RealStats;
+			var attackerStats = attacker.RealStats;
 			int healAmount = attackerStats.MaxHP * 30 / 100; // 30% des HP max
-			attackerStats.CurrentHP = Math.Min(attackerStats.MaxHP, attackerStats.CurrentHP + healAmount);
-			attacker.Data.RealStats = attackerStats;
+			attacker.CurrentHP = Math.Min(attackerStats.MaxHP, attacker.CurrentHP + healAmount);
+			attacker.RealStats = attackerStats;
 			GD.Print($"{attacker.Data.Name} restored {healAmount} HP!");
 		}
 		

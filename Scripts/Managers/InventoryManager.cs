@@ -40,7 +40,7 @@ public partial class InventoryManager : Node
 				{
 					ItemQualityWeights weights = ResourceLoader.Load<ItemQualityWeights>("res://Resources/ItemQualityWeights.tres");
 					ItemQuality quality = ItemQualityRoller.Roll(weights);
-					_mergeableItems[i] = new MergeableItem(MergeableItemDatabase.Instance.Get(itemId), quality);
+					_mergeableItems[i] = new MergeableItem(GetNode<MergeableItemDatabase>("/root/MergeableItemDatabase").Get(itemId), quality);
 					break;
 				}
 			}
