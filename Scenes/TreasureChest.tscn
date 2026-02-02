@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb4rrespjcvfa"]
 
-[ext_resource type="Script" uid="uid://b10uvvl23dphp" path="res://Scripts/TreasureChest.cs" id="1_sn604"]
+[ext_resource type="Script" uid="uid://b10uvvl23dphp" path="res://Scripts/World/TreasureChest.cs" id="1_sn604"]
 [ext_resource type="Texture2D" uid="uid://dcjoiq0r4utth" path="res://Assets/treasureChest.png" id="2_kaa0s"]
 
 [node name="TreasureChest" type="Node"]

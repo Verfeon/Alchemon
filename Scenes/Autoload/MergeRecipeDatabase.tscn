@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://t1d32a12j8o1"]
+
+[ext_resource type="Script" uid="uid://dlq6xoxk5fqt6" path="res://Scripts/Core/Autoload/MergeRecipeDatabase.cs" id="1_ba71u"]
+
+[node name="MergeRecipeDatabase" type="Node"]
+script = ExtResource("1_ba71u")

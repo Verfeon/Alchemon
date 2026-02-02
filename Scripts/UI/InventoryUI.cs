@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-using GameManager = Game.Autoload.GameManager;
+using GameManager = Game.Core.Autoload.GameManager;
 
 namespace Game.UI;
 
@@ -31,9 +31,10 @@ public partial class InventoryUI : Control
 		
 		_changeItemsListButton.Pressed += ChangeItemsList;
 		
-		if (GameManager.Instance?.Inventory != null)
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.Inventory != null)
 		{
-			GameManager.Instance.Inventory.itemCollected += OnItemCollected;
+			gameManager.Inventory.itemCollected += OnItemCollected;
 		}
 		
 		UpdateInventoryDisplay();
@@ -55,10 +56,11 @@ public partial class InventoryUI : Control
 			child.QueueFree();
 		}
 		
-		if (GameManager.Instance?.Inventory != null)
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.Inventory != null)
 		{
-			var items = GameManager.Instance.Inventory.GetAllItems();
-			var mergeableItems = GameManager.Instance.Inventory.GetAllMergeableItems();
+			var items = gameManager.Inventory.GetAllItems();
+			var mergeableItems = gameManager.Inventory.GetAllMergeableItems();
 			
 			if (items.Count == 0)
 			{

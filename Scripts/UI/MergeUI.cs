@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-using GameManager = Game.Autoload.GameManager;
+using GameManager = Game.Core.Autoload.GameManager;
 
 namespace Game.UI;
 
@@ -47,9 +48,10 @@ public partial class MergeUI : Control
 		
 		_selectPanel.Visible = false;
 		
-		if (GameManager.Instance?.Inventory != null)
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.Inventory != null)
 		{
-			GameManager.Instance.Inventory.itemCollected += OnItemCollected;
+			gameManager.Inventory.itemCollected += OnItemCollected;
 		}
 		_slot1Button.Pressed += () => SelectItem(1);
 		_slot2Button.Pressed += () => SelectItem(2);
@@ -67,9 +69,10 @@ public partial class MergeUI : Control
 	private void UpdateMergeableItemsListDisplay()
 	{
 		_mergeableItemsList.Clear();
-		if (GameManager.Instance?.Inventory != null)
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.Inventory != null)
 		{
-			var items = GameManager.Instance.Inventory.GetAllMergeableItems();
+			var items = gameManager.Inventory.GetAllMergeableItems();
 			foreach (var item in items)
 			{
 				if (item != null)
@@ -82,9 +85,10 @@ public partial class MergeUI : Control
 	
 	private void SelectItem(int slot)
 	{
-		if (GameManager.Instance?.Inventory == null) return;
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.Inventory == null) return;
 		
-		var items = GameManager.Instance.Inventory.GetAllMergeableItems();
+		var items = gameManager.Inventory.GetAllMergeableItems();
 		if (items.Length == 0)
 		{
 			_resultLabel.Text = "Aucun objet dans l'inventaire !";
@@ -102,9 +106,10 @@ public partial class MergeUI : Control
 	
 	private void OnMergePressed()
 	{
-		if (GameManager.Instance?.Merge == null) return;
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.Merge == null) return;
 		
-		var result = GameManager.Instance.Merge.AttemptMerge(_selectedObject1, _selectedObject2);
+		var result = gameManager.Merge.AttemptMerge(new List<string>() { _selectedObject1, _selectedObject2 });
 		
 		if (result.Success)
 		{

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://dyqqfnwa42ca8"]
 
-[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="1_rkycg"]
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Items/Data/MergeableItemData.cs" id="1_rkycg"]
 [ext_resource type="Texture2D" uid="uid://mro4e6j2na8g" path="res://Assets/MergeableItems/pebble.png" id="1_yagpc"]
 
 [resource]

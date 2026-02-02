@@ -1,22 +1,23 @@
-[gd_resource type="Resource" script_class="CreatureData" load_steps=10 format=3 uid="uid://na55uxiassjj"]
+[gd_resource type="Resource" script_class="CreatureData" load_steps=11 format=3 uid="uid://na55uxiassjj"]
 
+[ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_3cmqm"]
 [ext_resource type="Resource" uid="uid://dddkx13dwujh2" path="res://Resources/Abilities/Punch.tres" id="1_vfuwl"]
 [ext_resource type="Texture2D" uid="uid://crpqw70ral88k" path="res://Assets/Creatures/treant.png" id="2_vfuwl"]
 [ext_resource type="Resource" uid="uid://suxlcaaklhsx" path="res://Resources/Abilities/Wait.tres" id="2_yj7qr"]
 [ext_resource type="Resource" uid="uid://brqcinifpqxrn" path="res://Resources/Abilities/Tackle.tres" id="3_36rse"]
-[ext_resource type="Script" uid="uid://fvt1k1fhpaxg" path="res://Scripts/Resources/CreatureData.cs" id="3_yj7qr"]
+[ext_resource type="Script" uid="uid://fvt1k1fhpaxg" path="res://Scripts/Creatures/Data/CreatureData.cs" id="3_yj7qr"]
 [ext_resource type="Resource" uid="uid://ciah307vaepge" path="res://Resources/Abilities/LaserBeam.tres" id="4_3cmqm"]
 [ext_resource type="Resource" uid="uid://dc2moog1rmcrs" path="res://Resources/Abilities/FireBreath.tres" id="5_i8sur"]
-[ext_resource type="Script" uid="uid://bxeke84vubmt1" path="res://Scripts/Creatures/CreatureStats.cs" id="6_dp24q"]
+[ext_resource type="Script" uid="uid://bxeke84vubmt1" path="res://Scripts/Creatures/Data/BaseCreatureStats.cs" id="6_dp24q"]
 
-[sub_resource type="Resource" id="Resource_bfjda"]
+[sub_resource type="Resource" id="Resource_i8sur"]
 script = ExtResource("6_dp24q")
 MaxHP = 90
-Attack = 86
+Attack = 71
 Defense = 73
-SpecialAttack = 58
-SpecialDefense = 68
-Speed = 61
+SpecialAttack = 64
+SpecialDefense = 87
+Speed = 68
 metadata/_custom_type_script = "uid://bxeke84vubmt1"
 
 [resource]
@@ -24,7 +25,7 @@ script = ExtResource("3_yj7qr")
 Id = "treant"
 Name = "Treant"
 Texture2d = ExtResource("2_vfuwl")
-BaseStats = SubResource("Resource_bfjda")
+BaseStats = SubResource("Resource_i8sur")
 Type = 7
-Abilities = [ExtResource("1_vfuwl"), ExtResource("2_yj7qr"), ExtResource("3_36rse"), ExtResource("4_3cmqm"), ExtResource("5_i8sur")]
+Abilities = Array[ExtResource("1_3cmqm")]([ExtResource("2_yj7qr"), ExtResource("1_vfuwl"), ExtResource("3_36rse"), ExtResource("4_3cmqm"), ExtResource("5_i8sur")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

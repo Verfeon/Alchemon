@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CreatureData" load_steps=10 format=3 uid="uid://cfrhf7l4jlu2t"]
+[gd_resource type="Resource" script_class="CreatureData" load_steps=11 format=3 uid="uid://cfrhf7l4jlu2t"]
 
-[ext_resource type="Script" uid="uid://bxeke84vubmt1" path="res://Scripts/Creatures/CreatureStats.cs" id="1_5p7jx"]
-[ext_resource type="Script" uid="uid://fvt1k1fhpaxg" path="res://Scripts/Resources/CreatureData.cs" id="1_wmjit"]
+[ext_resource type="Script" uid="uid://bxeke84vubmt1" path="res://Scripts/Creatures/Data/BaseCreatureStats.cs" id="1_5p7jx"]
+[ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_kfj0x"]
+[ext_resource type="Script" uid="uid://fvt1k1fhpaxg" path="res://Scripts/Creatures/Data/CreatureData.cs" id="1_wmjit"]
 [ext_resource type="Resource" uid="uid://suxlcaaklhsx" path="res://Resources/Abilities/Wait.tres" id="1_yodce"]
 [ext_resource type="Resource" uid="uid://dddkx13dwujh2" path="res://Resources/Abilities/Punch.tres" id="2_kfj0x"]
 [ext_resource type="Texture2D" uid="uid://b7qwox4elwd6a" path="res://Assets/Creatures/winged_eye.png" id="2_tjgy8"]
@@ -9,14 +10,14 @@
 [ext_resource type="Resource" uid="uid://ciah307vaepge" path="res://Resources/Abilities/LaserBeam.tres" id="4_wp74j"]
 [ext_resource type="Resource" uid="uid://dc2moog1rmcrs" path="res://Resources/Abilities/FireBreath.tres" id="5_0ik86"]
 
-[sub_resource type="Resource" id="Resource_sn1pj"]
+[sub_resource type="Resource" id="Resource_owpxh"]
 script = ExtResource("1_5p7jx")
-MaxHP = 68
-Attack = 47
-Defense = 54
-SpecialAttack = 113
-SpecialDefense = 75
-Speed = 96
+MaxHP = 67
+Attack = 53
+Defense = 48
+SpecialAttack = 121
+SpecialDefense = 78
+Speed = 89
 metadata/_custom_type_script = "uid://bxeke84vubmt1"
 
 [resource]
@@ -24,7 +25,7 @@ script = ExtResource("1_wmjit")
 Id = "winged_eye"
 Name = "Winged Eye"
 Texture2d = ExtResource("2_tjgy8")
-BaseStats = SubResource("Resource_sn1pj")
+BaseStats = SubResource("Resource_owpxh")
 Type = 4
-Abilities = Array[Object]([ExtResource("1_yodce"), ExtResource("2_kfj0x"), ExtResource("3_owpxh"), ExtResource("4_wp74j"), ExtResource("5_0ik86")])
+Abilities = Array[ExtResource("1_kfj0x")]([ExtResource("1_yodce"), ExtResource("2_kfj0x"), ExtResource("3_owpxh"), ExtResource("4_wp74j"), ExtResource("5_0ik86")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

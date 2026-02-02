@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MergeRecipe" load_steps=5 format=3 uid="uid://fij74q5o04kf"]
+
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Items/Data/MergeableItemData.cs" id="1_b2wdg"]
+[ext_resource type="Script" uid="uid://c8jq4qeygcle5" path="res://Scripts/Merge/Data/MergeRecipe.cs" id="2_6s72w"]
+[ext_resource type="Resource" uid="uid://ciwu0jkuadewg" path="res://Resources/MergeableItemDatas/WoodStick.tres" id="2_pmaqr"]
+[ext_resource type="Resource" uid="uid://na55uxiassjj" path="res://Resources/CreatureDatas/Treant.tres" id="3_aee16"]
+
+[resource]
+script = ExtResource("2_6s72w")
+Id = "wood_stick_wood_stick_treant"
+Name = "Wood Stick + Wood Stick → Treant"
+RequiredItems = Array[ExtResource("1_b2wdg")]([ExtResource("2_pmaqr"), ExtResource("2_pmaqr")])
+ResultCreature = ExtResource("3_aee16")
+metadata/_custom_type_script = "uid://c8jq4qeygcle5"

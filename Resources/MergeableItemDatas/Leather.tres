@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://cucy7ub10i1cv"]
 
 [ext_resource type="Texture2D" uid="uid://c7t5ki61fbysc" path="res://Assets/MergeableItems/leather.png" id="1_6mxfg"]
-[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="1_dqur2"]
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Items/Data/MergeableItemData.cs" id="1_dqur2"]
 
 [resource]
 script = ExtResource("1_dqur2")

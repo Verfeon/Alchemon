@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://Scenes/Autoload/GameManager.tscn"
 CreatureDatabase="*res://Scenes/Autoload/CreatureDatabase.tscn"
 MergeableItemDatabase="*res://Scenes/Autoload/MergeableItemDatabase.tscn"
+MergeRecipeDatabase="*res://Scenes/Autoload/MergeRecipeDatabase.tscn"
 
 [display]
 

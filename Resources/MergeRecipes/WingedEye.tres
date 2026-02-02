@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MergeRecipe" load_steps=6 format=3 uid="uid://bkb3t2ouw56v"]
+
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Items/Data/MergeableItemData.cs" id="1_bxryy"]
+[ext_resource type="Script" uid="uid://c8jq4qeygcle5" path="res://Scripts/Merge/Data/MergeRecipe.cs" id="2_2voc5"]
+[ext_resource type="Resource" uid="uid://bp5o2ba8v41po" path="res://Resources/MergeableItemDatas/Eye.tres" id="2_bsrri"]
+[ext_resource type="Resource" uid="uid://ggpjm8s6jrmr" path="res://Resources/MergeableItemDatas/Feather.tres" id="3_wtt4a"]
+[ext_resource type="Resource" uid="uid://cfrhf7l4jlu2t" path="res://Resources/CreatureDatas/WingedEye.tres" id="4_q6w0u"]
+
+[resource]
+script = ExtResource("2_2voc5")
+Id = "eye_feather_winged_eye"
+Name = "Eye + Feather → Winged Eye"
+RequiredItems = Array[ExtResource("1_bxryy")]([ExtResource("2_bsrri"), ExtResource("3_wtt4a")])
+ResultCreature = ExtResource("4_q6w0u")
+metadata/_custom_type_script = "uid://c8jq4qeygcle5"

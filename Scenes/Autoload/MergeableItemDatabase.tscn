@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccsr8ffq2325y"]
 
-[ext_resource type="Script" uid="uid://i6gf47q4bwmf" path="res://Scripts/Autoload/MergeableItemDatabase.cs" id="1_k2h1r"]
+[ext_resource type="Script" uid="uid://i6gf47q4bwmf" path="res://Scripts/Core/Autoload/MergeableItemDatabase.cs" id="1_k2h1r"]
 
 [node name="MergeableItemDatabase" type="Node"]
 script = ExtResource("1_k2h1r")

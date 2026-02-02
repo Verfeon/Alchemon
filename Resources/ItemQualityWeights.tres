@@ -1,27 +1,24 @@
 [gd_resource type="Resource" script_class="ItemQualityWeights" load_steps=7 format=3 uid="uid://l4cr610nptl1"]
 
-[ext_resource type="Script" uid="uid://cdixm3doe7ssc" path="res://Scripts/Resources/ItemQualityWeight.cs" id="1_3tapr"]
-[ext_resource type="Script" uid="uid://d12iuly8lhene" path="res://Scripts/Resources/ItemQualityWeights.cs" id="1_qm58y"]
+[ext_resource type="Script" uid="uid://cdixm3doe7ssc" path="res://Scripts/Items/Data/ItemQualityWeight.cs" id="1_3tapr"]
+[ext_resource type="Script" uid="uid://d12iuly8lhene" path="res://Scripts/Items/Data/ItemQualityWeights.cs" id="1_qm58y"]
+
+[sub_resource type="Resource" id="Resource_3tapr"]
+script = ExtResource("1_3tapr")
 
 [sub_resource type="Resource" id="Resource_4hu4s"]
 script = ExtResource("1_3tapr")
-Weight = 70.0
+Quality = 1
 
 [sub_resource type="Resource" id="Resource_gtxye"]
 script = ExtResource("1_3tapr")
-Quality = 1
-Weight = 20.0
+Quality = 2
 
 [sub_resource type="Resource" id="Resource_gsxcp"]
-script = ExtResource("1_3tapr")
-Quality = 2
-Weight = 9.0
-
-[sub_resource type="Resource" id="Resource_i3b8u"]
 script = ExtResource("1_3tapr")
 Quality = 3
 
 [resource]
 script = ExtResource("1_qm58y")
-Weights = [SubResource("Resource_4hu4s"), SubResource("Resource_gtxye"), SubResource("Resource_gsxcp"), SubResource("Resource_i3b8u")]
+Weights = [SubResource("Resource_3tapr"), SubResource("Resource_4hu4s"), SubResource("Resource_gtxye"), SubResource("Resource_gsxcp")]
 metadata/_custom_type_script = "uid://d12iuly8lhene"

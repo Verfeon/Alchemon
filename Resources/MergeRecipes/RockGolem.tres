@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MergeRecipe" load_steps=5 format=3 uid="uid://dviac0j8r68k0"]
+
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Items/Data/MergeableItemData.cs" id="1_ttjqi"]
+[ext_resource type="Resource" uid="uid://dbmelw6ar1e8g" path="res://Resources/MergeableItemDatas/Stone.tres" id="2_aob43"]
+[ext_resource type="Script" uid="uid://c8jq4qeygcle5" path="res://Scripts/Merge/Data/MergeRecipe.cs" id="2_b8v8l"]
+[ext_resource type="Resource" uid="uid://psk3qy5updl6" path="res://Resources/CreatureDatas/RockGolem.tres" id="3_0hvvb"]
+
+[resource]
+script = ExtResource("2_b8v8l")
+Id = "stone_stone_rock_golem"
+Name = "Stone + Stone → Rock Golem"
+RequiredItems = Array[ExtResource("1_ttjqi")]([ExtResource("2_aob43"), ExtResource("2_aob43")])
+ResultCreature = ExtResource("3_0hvvb")
+metadata/_custom_type_script = "uid://c8jq4qeygcle5"

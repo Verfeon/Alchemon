@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MergeableItemData" load_steps=3 format=3 uid="uid://ggpjm8s6jrmr"]
 
-[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Resources/MergeableItemData.cs" id="1_00vt6"]
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Items/Data/MergeableItemData.cs" id="1_00vt6"]
 [ext_resource type="Texture2D" uid="uid://blt0vitif242h" path="res://Assets/MergeableItems/feather.png" id="1_2g87b"]
 
 [resource]

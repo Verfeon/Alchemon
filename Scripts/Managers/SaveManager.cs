@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-using GameManager = Game.Autoload.GameManager;
+using GameManager = Game.Core.Autoload.GameManager;
 
 namespace Game.Managers;
 
@@ -15,7 +15,6 @@ public partial class SaveManager : Node
 		var saveDict = new Godot.Collections.Dictionary
 		{
 			{ "inventory", ConvertInventoryToDict() },
-			{ "party", ConvertPartyToArray() },
 			{ "player_position", GetPlayerPosition() },
 			{ "discovered_recipes", ConvertRecipesToArray() }
 		};
@@ -29,21 +28,12 @@ public partial class SaveManager : Node
 	private Godot.Collections.Dictionary ConvertInventoryToDict()
 	{
 		var dict = new Godot.Collections.Dictionary();
-		foreach (var kvp in GameManager.Instance.Inventory.GetAllItems())
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		foreach (var kvp in gameManager.Inventory.GetAllItems())
 		{
 			dict[kvp.Key] = kvp.Value;
 		}
 		return dict;
-	}
-	
-	private Godot.Collections.Array ConvertPartyToArray()
-	{
-		var array = new Godot.Collections.Array();
-		foreach (var creature in GameManager.Instance.Creatures.GetParty())
-		{
-			array.Add(creature.Data.Id);
-		}
-		return array;
 	}
 	
 	private Godot.Collections.Dictionary GetPlayerPosition()
