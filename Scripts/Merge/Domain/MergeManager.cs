@@ -19,6 +19,27 @@ public partial class MergeManager : Node
 	[Signal] public delegate void MergeFailedEventHandler(string reason);
 	[Signal] public delegate void RecipeDiscoveredEventHandler(string recipeId);
 
+
+	public bool CanMerge(List<string> items)
+	{
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		var inventory = gameManager.Inventory;
+
+		MergeRecipeDatabase mergeRecipeDatabase = GetNode<MergeRecipeDatabase>("/root/MergeRecipeDatabase");
+		var recipes = mergeRecipeDatabase.FindRecipes(items);
+		return !(recipes.Count == 0 || recipes[0].RequiredItems.Count != items.Count);
+	}
+
+	public List<string> GetCompatibleItems(List<string> selectedItems)
+	{
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		var inventory = gameManager.Inventory;
+
+		MergeRecipeDatabase mergeRecipeDatabase = GetNode<MergeRecipeDatabase>("/root/MergeRecipeDatabase");
+		var compatibleItems = mergeRecipeDatabase.FindCompatibleItems(selectedItems);
+		return compatibleItems;
+	}
+
 	public MergeResult AttemptMerge(List<string> items)
 	{
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");

@@ -103,4 +103,36 @@ public partial class MergeRecipeDatabase : Node
 		});
 		return foundRecipes;
 	}
+
+	public List<string> FindCompatibleItems(List<string> selectedItemIds)
+	{
+		HashSet<string> compatibleItemIds = new HashSet<string>();
+		
+		foreach (var recipe in _byId.Values)
+		{
+			var requiredIds = recipe.RequiredItems.Select(item => item.Id).ToList();
+			if (selectedItemIds.All(id => requiredIds.Contains(id)))
+			{
+				var requiredCounts = requiredIds.GroupBy(id => id)
+					.ToDictionary(g => g.Key, g => g.Count());
+
+				var selectedCounts = selectedItemIds.GroupBy(id => id)
+					.ToDictionary(g => g.Key, g => g.Count());
+
+				foreach (var kvp in requiredCounts)
+				{
+					var id = kvp.Key;
+					var requiredCount = kvp.Value;
+					selectedCounts.TryGetValue(id, out int selectedCount);
+
+					if (selectedCount < requiredCount)
+					{
+						compatibleItemIds.Add(id);
+					}
+				}
+			}
+		}
+		
+		return compatibleItemIds.ToList();
+	}
 }

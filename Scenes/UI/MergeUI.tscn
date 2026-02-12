@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://b23g6ftuc30n8"]
+
+[ext_resource type="Script" uid="uid://wk7cw6q04f73" path="res://Scripts/UI/MergeUI.cs" id="1_71s20"]
+
+[node name="MergeUi" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_71s20")
+MergeButton = NodePath("SelectPanel/VBoxContainer/MergeButton")
+CloseButton = NodePath("SelectPanel/VBoxContainer/CloseButton")
+SelectPanel = NodePath("SelectPanel")
+MergeableItemsList = NodePath("SelectPanel/VBoxContainer/MergeableItemsList")
+
+[node name="SelectPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -100.0
+offset_right = 125.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="SelectPanel/VBoxContainer"]
+layout_mode = 2
+text = "ITEMS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="SelectPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MergeableItemsList" type="ItemList" parent="SelectPanel/VBoxContainer"]
+layout_mode = 2
+select_mode = 2
+auto_height = true
+max_columns = 4
+same_column_width = true
+icon_mode = 0
+
+[node name="MergeButton" type="Button" parent="SelectPanel/VBoxContainer"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+disabled = true
+text = "MERGE !"
+
+[node name="CloseButton" type="Button" parent="SelectPanel/VBoxContainer"]
+layout_mode = 2
+text = "Close"

@@ -13,7 +13,9 @@ namespace Game.Items.Domain;
 public partial class InventoryManager : Node
 {
 	private Dictionary<string, int> _items = new(); 
-	private MergeableItem[] _mergeableItems = new MergeableItem[12]; 
+	private const int MaxMergeableItems = 12;
+	private MergeableItem[] _mergeableItems = new MergeableItem[MaxMergeableItems]; 
+	private bool[] _isMergeableItemUsed = new bool[MaxMergeableItems];
 	
 	[Signal]
 	public delegate void itemCollectedEventHandler(string itemId);
@@ -66,6 +68,26 @@ public partial class InventoryManager : Node
 		EmitSignal(SignalName.itemUsed, itemId);
 		return true;
 	}
+
+	public void MarkMergeableItemAsUsed(string itemId)
+	{
+		for (int i = 0; i < _mergeableItems.Length; i++)
+		{
+			if (_mergeableItems[i] != null && _mergeableItems[i].Data.Id == itemId && !_isMergeableItemUsed[i])
+			{
+				_isMergeableItemUsed[i] = true;
+				break;
+			}
+		}
+	}
+
+	public void ResetMergeableItemsUsage()
+	{
+		for (int i = 0; i < _isMergeableItemUsed.Length; i++)
+		{
+			_isMergeableItemUsed[i] = false;
+		}
+	}
 	
 	public Dictionary<string, int> GetAllItems()
 	{
@@ -75,5 +97,31 @@ public partial class InventoryManager : Node
 	public MergeableItem[] GetAllMergeableItems()
 	{
 		return _mergeableItems;
+	}
+
+	public MergeableItem[] GetUnusedMergeableItems()
+	{
+		List<MergeableItem> unusedItems = new List<MergeableItem>();
+		for (int i = 0; i < _mergeableItems.Length; i++)
+		{
+			if (_mergeableItems[i] != null && !_isMergeableItemUsed[i])
+			{
+				unusedItems.Add(_mergeableItems[i]);
+			}
+		}
+		return unusedItems.ToArray();
+	}
+
+	public MergeableItem[] GetUsedMergeableItems()
+	{
+		List<MergeableItem> usedItems = new List<MergeableItem>();
+		for (int i = 0; i < _mergeableItems.Length; i++)
+		{
+			if (_mergeableItems[i] != null && _isMergeableItemUsed[i])
+			{
+				usedItems.Add(_mergeableItems[i]);
+			}
+		}
+		return usedItems.ToArray();
 	}
 }

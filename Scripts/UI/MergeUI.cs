@@ -1,64 +1,44 @@
+using Game.Merge.Domain;
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using GameManager = Game.Core.Autoload.GameManager;
+using MergeableItem = Game.Items.Domain.MergeableItem;
 
 namespace Game.UI;
 
 public partial class MergeUI : Control
 {
-	[Export] NodePath Slot1Button;
-	[Export] NodePath Slot2Button;
 	[Export] NodePath MergeButton;
-	[Export] NodePath CloseMergeButton;
-	[Export] NodePath CloseSelectButton;
-	[Export] NodePath ResultLabel;
+	[Export] NodePath CloseButton;
 	[Export] NodePath SelectPanel;
-	[Export] NodePath MergePanel;
 	[Export] NodePath MergeableItemsList;
 	
-	private Button _slot1Button;
-	private Button _slot2Button;
 	private Button _mergeButton;
-	private Button _closeMergeButton;
-	private Button _closeSelectButton;
-	private Label _resultLabel;
+	private Button _closeButton;
 	private Panel _selectPanel;
-	private Panel _mergePanel;
 	private ItemList _mergeableItemsList;
 	
-	private string _selectedObject1 = null;
-	private string _selectedObject2 = null;
-	private int _currentSlot = 1;
 	
 	public override void _Ready()
 	{
 		Visible = false;
 		
-		_slot1Button = GetNodeOrNull<Button>(Slot1Button);
-		_slot2Button = GetNodeOrNull<Button>(Slot2Button);
 		_mergeButton = GetNodeOrNull<Button>(MergeButton);
-		_closeMergeButton = GetNodeOrNull<Button>(CloseMergeButton);
-		_closeSelectButton = GetNodeOrNull<Button>(CloseSelectButton);
-		_resultLabel = GetNodeOrNull<Label>(ResultLabel);
+		_closeButton = GetNodeOrNull<Button>(CloseButton);
 		_selectPanel = GetNodeOrNull<Panel>(SelectPanel);
-		_mergePanel = GetNodeOrNull<Panel>(MergePanel);
 		_mergeableItemsList = GetNodeOrNull<ItemList>(MergeableItemsList);
-		
-		_selectPanel.Visible = false;
 		
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
 		if (gameManager.Inventory != null)
 		{
 			gameManager.Inventory.itemCollected += OnItemCollected;
 		}
-		_slot1Button.Pressed += () => SelectItem(1);
-		_slot2Button.Pressed += () => SelectItem(2);
 		_mergeButton.Pressed += OnMergePressed;
-		_closeMergeButton.Pressed += () => Visible = false;
-		_closeSelectButton.Pressed += () => {_selectPanel.Visible = false; _mergePanel.Visible = true;};
-		_mergeableItemsList.ItemSelected += OnMergeableItemListItemSelected;
+		_closeButton.Pressed += () => Visible = false;
+		_mergeableItemsList.ItemClicked += OnMergeableItemListItemClicked;
 	}
 	
 	private void OnItemCollected(string itemId)
@@ -72,8 +52,8 @@ public partial class MergeUI : Control
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
 		if (gameManager.Inventory != null)
 		{
-			var items = gameManager.Inventory.GetAllMergeableItems();
-			foreach (var item in items)
+			MergeableItem[] items = gameManager.Inventory.GetAllMergeableItems();
+			foreach (MergeableItem item in items)
 			{
 				if (item != null)
 				{
@@ -83,68 +63,87 @@ public partial class MergeUI : Control
 		}
 	}
 	
-	private void SelectItem(int slot)
-	{
-		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
-		if (gameManager.Inventory == null) return;
-		
-		var items = gameManager.Inventory.GetAllMergeableItems();
-		if (items.Length == 0)
-		{
-			_resultLabel.Text = "Aucun objet dans l'inventaire !";
-			return;
-		}
-
-		_currentSlot = slot;
-		_mergeableItemsList.DeselectAll();
-		_selectPanel.Visible = true;
-		_mergePanel.Visible = false;
-		
-		_mergeButton.Disabled = string.IsNullOrEmpty(_selectedObject1) || 
-							   string.IsNullOrEmpty(_selectedObject2);
-	}
-	
 	private void OnMergePressed()
 	{
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
 		if (gameManager.Merge == null) return;
 		
-		var result = gameManager.Merge.AttemptMerge(new List<string>() { _selectedObject1, _selectedObject2 });
+		
+		int[] selectedIndices = _mergeableItemsList.GetSelectedItems();
+		List<string> itemIds = new List<string>();
+		foreach (int idx in selectedIndices)
+		{
+			itemIds.Add(_mergeableItemsList.GetItemText(idx));
+		}
+
+		var result = gameManager.Merge.AttemptMerge(itemIds);
 		
 		if (result.Success)
 		{
-			_resultLabel.Text = $"Creature created : {result.Creature.Data.Name} !";
-			_resultLabel.AddThemeColorOverride("font_color", Colors.Green);
-			
-			_selectedObject1 = null;
-			_selectedObject2 = null;
-			_slot1Button.Text = "Item 1";
-			_slot2Button.Text = "Item 2";
 			_mergeButton.Disabled = true;
+			_mergeableItemsList.DeselectAll();
+			for (int i = 0; i < selectedIndices.Length; i++)
+			{
+				gameManager.Inventory.MarkMergeableItemAsUsed(itemIds[i]);
+			}
+
+			List<string> usedItems = gameManager.Inventory.GetUsedMergeableItems().Select(item => item.Data.Id).ToList();
+			foreach (var usedItem in usedItems)
+			{
+				GD.Print($"Used item: {usedItem}");
+			}
+
+			for (int i = 0; i < _mergeableItemsList.GetItemCount(); i++)
+			{
+				string currentItemId = _mergeableItemsList.GetItemText(i);
+				if (usedItems.Contains(currentItemId))
+				{
+					_mergeableItemsList.SetItemDisabled(i, true);
+					usedItems.Remove(currentItemId);
+				}
+				else
+				{
+					_mergeableItemsList.SetItemDisabled(i, false);
+				}
+			}
 		}
 		else
 		{
-			_resultLabel.Text = $"Fail : {result.Message}";
-			_resultLabel.AddThemeColorOverride("font_color", Colors.Red);
+			GD.Print($"Fail : {result.Message}");
 		}
 	}
 	
-	private void OnMergeableItemListItemSelected(long index)
+	private void OnMergeableItemListItemClicked(long index, Vector2 position, long mouseButtonIndex)
 	{
-		string itemId = _mergeableItemsList.GetItemText((int)index);
-		_mergeableItemsList.SetItemDisabled((int)index, true);
-		if (_currentSlot == 1)
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.Merge == null) return;
+		List<int> selectedIndices = _mergeableItemsList.GetSelectedItems().ToList();
+		List<string> itemIds = new List<string>();
+		foreach (int idx in selectedIndices)
 		{
-			_selectedObject1 = itemId;
-			_slot1Button.Text = $"{itemId}";
+			itemIds.Add(_mergeableItemsList.GetItemText(idx));
 		}
-		else
+
+		List<string> compatibleItems = gameManager.Merge.GetCompatibleItems(itemIds);
+		List<string> usedItems = gameManager.Inventory.GetUsedMergeableItems().Select(item => item.Data.Id).ToList();
+		
+		for (int i = 0; i < _mergeableItemsList.GetItemCount(); i++)
 		{
-			_selectedObject2 = itemId;
-			_slot2Button.Text = $"{itemId}";
+			string currentItemId = _mergeableItemsList.GetItemText(i);
+			if ((compatibleItems.Contains(currentItemId) || selectedIndices.Contains(i) || selectedIndices.Count == 0) && !usedItems.Contains(currentItemId))
+			{
+				_mergeableItemsList.SetItemDisabled(i, false);
+			}
+			else
+			{
+				_mergeableItemsList.SetItemDisabled(i, true);
+			}
 		}
-		_selectPanel.Visible = false;
-		_mergePanel.Visible = true;
+
+		if (gameManager.Merge.CanMerge(itemIds))
+		{
+			_mergeButton.Disabled = false;
+		}
 	}
 	
 	public override void _UnhandledInput(InputEvent @event)
