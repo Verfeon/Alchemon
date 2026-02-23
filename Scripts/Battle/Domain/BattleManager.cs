@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using Creature = Game.Creatures.Domain.Creature;
 using CreatureType = Game.Creatures.Domain.CreatureType;
 using Ability = Game.Creatures.Data.Ability;
+using Game.Creatures.Presentation;
+using System.ComponentModel;
 
 namespace Game.Battle.Domain;
 
 public partial class BattleManager : Node
 {
-	[Export] PackedScene BattleScene;
+	[Export] private PackedScene BattleScene;
+	[Export] private PackedScene _creatureScenePath;
 	
 	private Creature _playerCreature;
 	private Creature _enemyCreature;
@@ -19,7 +22,7 @@ public partial class BattleManager : Node
 	
 	private Dictionary<string, int> _playerStatModifiers = new();
 	private Dictionary<string, int> _enemyStatModifiers = new();
-	
+
 	[Signal]
 	public delegate void BattleStartedEventHandler();
 	
@@ -38,12 +41,20 @@ public partial class BattleManager : Node
 	public void StartBattle(Creature playerCreature, Creature enemyCreature)
 	{
 		GD.Print("Start Battle");
-		var battle = BattleScene.Instantiate();
+		BattleScene battle = BattleScene.Instantiate() as BattleScene;
 		
-		var overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
+		CanvasLayer overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
+
+		CreatureNode playerCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
+		playerCreatureNode.Bind(playerCreature);
+		battle.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
+		
+		CreatureNode enemyCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
+		enemyCreatureNode.Bind(enemyCreature);
+		battle.GetEnemyPosition().CallDeferred("add_child", enemyCreatureNode);
 		
 		overlayLayer.AddChild(battle);
-		
+
 		_playerCreature = playerCreature;
 		_enemyCreature = enemyCreature;
 		_turnCount = 0;

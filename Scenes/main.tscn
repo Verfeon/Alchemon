@@ -56,6 +56,7 @@ IsMergeable = true
 
 [node name="Creature" parent="World" instance=ExtResource("4_kry3j")]
 position = Vector2(-147, 176)
+IsWild = true
 
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 

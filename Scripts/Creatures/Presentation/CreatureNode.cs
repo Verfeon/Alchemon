@@ -18,7 +18,7 @@ public partial class CreatureNode : Node2D
 	[Export] private float speed = 50f;
 	[Export] private float changeDirectionTime = 2f;
 	[ExportGroup("Is Wild")]
-	[Export(PropertyHint.GroupEnable, "")] private bool isWild = false;
+	[Export(PropertyHint.GroupEnable, "")] public bool IsWild { get; private set; } = false;
 	[Export] private Godot.Collections.Array<CreatureData> possibleCreatures;
 
 	private Vector2 _direction = Vector2.Zero;
@@ -27,8 +27,9 @@ public partial class CreatureNode : Node2D
 	
 	public override void _Ready()
 	{
-		if (isWild)
+		if (IsWild)
 		{
+			_hpBar.Visible = false;
 			if (possibleCreatures.Count == 0)
 			{
 				GD.PushError("CreatureNode is marked as wild but has no possible creatures assigned.");
@@ -36,25 +37,29 @@ public partial class CreatureNode : Node2D
 			}
 			Creature creature = new Creature(possibleCreatures[_random.NextInt(0, possibleCreatures.Count - 1)], 1, new GodotRandomAdapter());
 			Bind(creature);
+			Move();
 		}
 	}
 
-	public override void _PhysicsProcess(double delta)
+	private async void Move()
 	{
-		_timer -= (float)delta;
-
-		if (_timer <= 0f)
+		while (true)
 		{
-			PickNewDirection();
-		}
+			await ToSignal(GetTree(), "physics_frame");
+			float delta = (float)GetProcessDeltaTime();
+			_timer -= delta;
 
-		Position += _direction * speed * (float)delta;
+			if (_timer <= 0f)
+			{
+				_timer = changeDirectionTime;
+				PickNewDirection();
+			}
+			Position += _direction * speed * delta;
+		}
 	}
 
 	private void PickNewDirection()
 	{
-		_timer = changeDirectionTime;
-
 		float angle = _random.NextFloat(0f, 2 * (float)Math.PI);
 		_direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).Normalized();
 	}

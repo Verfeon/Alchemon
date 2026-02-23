@@ -85,7 +85,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 disable_mode = 1
 collision_layer = 2
 motion_mode = 1

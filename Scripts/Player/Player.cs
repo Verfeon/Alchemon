@@ -25,25 +25,15 @@ public partial class Player : CharacterBody2D
 		_animatedSprite = GetNodeOrNull<AnimatedSprite2D>(AnimatedSpritePath);
 		_camera = GetNodeOrNull<Camera2D>(CameraPath);
 		
-		// Ajouter au groupe Player
-		AddToGroup(PlayerGroup);
-		
-		// Activer la caméra
 		if (_camera != null)
 		{
 			_camera.Enabled = true;
 		}
 		
-		// Configuration de l'AnimatedSprite2D si elle existe
 		if (_animatedSprite != null)
 		{
-			// Assurez-vous d'avoir ces animations dans votre SpriteFrames :
-			// idle_down, idle_up, idle_left, idle_right
-			// walk_down, walk_up, walk_left, walk_right
 			_animatedSprite.Play("idle_down");
 		}
-		
-		GD.Print("Player initialisé !");
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -70,7 +60,6 @@ public partial class Player : CharacterBody2D
 	{
 		if (_animatedSprite == null) return;
 		
-		// Déterminer la direction
 		if (direction != Vector2.Zero)
 		{
 			if (Math.Abs(direction.X) > Math.Abs(direction.Y))
@@ -83,7 +72,6 @@ public partial class Player : CharacterBody2D
 			}
 		}
 		
-		// Jouer l'animation appropriée
 		string animName = isMoving ? $"walk_{_currentDirection}" : $"idle_{_currentDirection}";
 		
 		if (_animatedSprite.SpriteFrames.HasAnimation(animName))
@@ -96,7 +84,9 @@ public partial class Player : CharacterBody2D
 	{
 		if (!body.IsInGroup("Enemy")) return;
 		BattleManager battleManager = GetNode<GameManager>("/root/GameManager").Battle;
-		Creature enemy = (body as CreatureNode).GetCreature();
+		CreatureNode enemyNode = body as CreatureNode;
+		if (!enemyNode.IsWild) return;
+		Creature enemy = enemyNode.GetCreature();
 		battleManager.StartBattle(enemy, enemy);
 	}
 }
