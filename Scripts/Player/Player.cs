@@ -2,6 +2,7 @@ using Godot;
 using System;
 
 using GameManager = Game.Core.Autoload.GameManager;
+using BattleManager = Game.Battle.Domain.BattleManager;
 
 namespace Game.Player;
 
@@ -61,12 +62,6 @@ public partial class Player : CharacterBody2D
 		
 		Velocity = velocity;
 		MoveAndSlide();
-		
-		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
-		if (gameManager.Player != null)
-		{
-			gameManager.Player.SetPlayerPosition(GlobalPosition);
-		}
 	}
 	
 	private void UpdateAnimation(Vector2 direction, bool isMoving)
@@ -93,5 +88,13 @@ public partial class Player : CharacterBody2D
 		{
 			_animatedSprite.Play(animName);
 		}
+	}
+	
+	public void _OnBodyEntered(Node2D body)
+	{
+		GD.Print("body entered : " + body.Name);
+		if (!body.IsInGroup("Enemy")) return;
+		BattleManager battleManager = GetNode<GameManager>("/root/GameManager").Battle;
+		battleManager.StartBattle(null, null);
 	}
 }

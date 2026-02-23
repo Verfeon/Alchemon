@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxk3imb4bkbo8"]
+
+[ext_resource type="Texture2D" uid="uid://br5m5yusjq8s3" path="res://Assets/battle_scene.png" id="1_12f34"]
+[ext_resource type="Script" uid="uid://bi40v1qmua848" path="res://Scripts/UI/BattleScene.cs" id="1_hip74"]
+
+[node name="BattleScene" type="CanvasLayer" node_paths=PackedStringArray("background")]
+script = ExtResource("1_hip74")
+background = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_12f34")
+
+[node name="PlayerPosition" type="Node2D" parent="."]
+position = Vector2(204, 267)
+
+[node name="EnemyPosition" type="Node2D" parent="."]
+position = Vector2(490, 105)

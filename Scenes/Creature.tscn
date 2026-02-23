@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://br1jwst57qb3q"]
+[gd_scene load_steps=4 format=3 uid="uid://br1jwst57qb3q"]
 
 [ext_resource type="Script" uid="uid://c8mgcnklesmnq" path="res://Scripts/Creatures/Presentation/CreatureNode.cs" id="1_0inej"]
 [ext_resource type="Texture2D" uid="uid://crpqw70ral88k" path="res://Assets/Creatures/treant.png" id="2_s16ri"]
 
-[node name="Creature" type="Node" node_paths=PackedStringArray("_sprite", "_hpBar")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s16ri"]
+size = Vector2(128, 128)
+
+[node name="Creature" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_hpBar") groups=["Enemy"]]
+collision_layer = 4
+motion_mode = 1
 script = ExtResource("1_0inej")
 _sprite = NodePath("Sprite2D")
 _hpBar = NodePath("ProgressBar")
+Speed = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s16ri")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_s16ri")
@@ -17,3 +26,10 @@ offset_top = -100.0
 offset_right = 50.0
 offset_bottom = -80.0
 show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_s16ri")

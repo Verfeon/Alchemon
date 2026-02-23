@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcjoiq0r4utth"
-path="res://.godot/imported/treasureChest.png-f8f700e46804439ad98bc1f245156cf1.ctex"
+uid="uid://br5m5yusjq8s3"
+path="res://.godot/imported/battle_scene.png-ddf3189726f75c035f7a5d20d985dc55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/treasureChest.png"
-dest_files=["res://.godot/imported/treasureChest.png-f8f700e46804439ad98bc1f245156cf1.ctex"]
+source_file="res://Assets/battle_scene.png"
+dest_files=["res://.godot/imported/battle_scene.png-ddf3189726f75c035f7a5d20d985dc55.ctex"]
 
 [params]
 

@@ -10,12 +10,13 @@ namespace Game.Battle.Domain;
 
 public partial class BattleManager : Node
 {
+	[Export] PackedScene BattleScene;
+	
 	private Creature _playerCreature;
 	private Creature _enemyCreature;
 	private bool _isPlayerTurn = true;
 	private int _turnCount = 0;
 	
-	// Modificateurs de stats temporaires
 	private Dictionary<string, int> _playerStatModifiers = new();
 	private Dictionary<string, int> _enemyStatModifiers = new();
 	
@@ -36,15 +37,20 @@ public partial class BattleManager : Node
 	
 	public void StartBattle(Creature playerCreature, Creature enemyCreature)
 	{
+		GD.Print("Start Battle");
+		var battle = BattleScene.Instantiate();
+		
+		var overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
+		
+		overlayLayer.AddChild(battle);
+		
 		_playerCreature = playerCreature;
 		_enemyCreature = enemyCreature;
 		_turnCount = 0;
 		
-		// Réinitialiser les modificateurs
 		_playerStatModifiers.Clear();
 		_enemyStatModifiers.Clear();
 		
-		// Déterminer qui commence
 		_isPlayerTurn = DetermineFirstTurn();
 		
 		EmitSignal(SignalName.BattleStarted);
@@ -55,7 +61,6 @@ public partial class BattleManager : Node
 	
 	private bool DetermineFirstTurn()
 	{
-		// Si vitesse égale, c'est aléatoire
 		if (_playerCreature.RealStats.Speed == _enemyCreature.RealStats.Speed)
 		{
 			return GD.Randf() > 0.5f;
@@ -71,22 +76,16 @@ public partial class BattleManager : Node
 		var attackerMods = isPlayerAttacking ? _playerStatModifiers : _enemyStatModifiers;
 		var defenderMods = isPlayerAttacking ? _enemyStatModifiers : _playerStatModifiers;
 		
-		// Vérifier si l'attaquant a assez de mana (si implémenté)
-		// Pour l'instant, on suppose que oui
-		
 		GD.Print($"{attacker.Data.Name} uses {ability.Name}!");
 		
-		// Calculer les dégâts
 		int damage = CalculateDamage(ability, attacker, defender, attackerMods, defenderMods);
 		
-		// Appliquer les dégâts
 		var defenderStats = defender.RealStats;
 		defender.CurrentHP = Math.Max(0, defender.CurrentHP - damage);
 		
 		EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
 		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defenderStats.MaxHP}");
 		
-		// Vérifier si le défenseur est KO
 		if (defender.CurrentHP <= 0)
 		{
 			EmitSignal(SignalName.CreatureFainted, defender.Data.Name);
@@ -94,7 +93,6 @@ public partial class BattleManager : Node
 			return;
 		}
 		
-		// Passer au tour suivant
 		_isPlayerTurn = !_isPlayerTurn;
 		EmitSignal(SignalName.TurnStarted, _isPlayerTurn);
 	}
@@ -102,7 +100,6 @@ public partial class BattleManager : Node
 	private int CalculateDamage(Ability ability, Creature attacker, Creature defender, 
 								Dictionary<string, int> attackerMods, Dictionary<string, int> defenderMods)
 	{
-		// Déterminer si c'est une attaque physique ou spéciale
 		bool isPhysical = true; //IsPhysicalAbility(ability);
 		
 		int attackStat;
@@ -110,11 +107,9 @@ public partial class BattleManager : Node
 		
 		if (isPhysical)
 		{
-			// Attaque physique : utilise Attack vs Defense
 			attackStat = attacker.RealStats.Attack;
 			defenseStat = defender.RealStats.Defense;
 			
-			// Appliquer les modificateurs
 			if (attackerMods.ContainsKey("Attack"))
 				attackStat += attackerMods["Attack"];
 			if (defenderMods.ContainsKey("Defense"))
@@ -122,11 +117,9 @@ public partial class BattleManager : Node
 		}
 		else
 		{
-			// Attaque spéciale : utilise SpecialAttack vs SpecialDefense
 			attackStat = attacker.RealStats.SpecialAttack;
 			defenseStat = defender.RealStats.SpecialDefense;
 			
-			// Appliquer les modificateurs
 			if (attackerMods.ContainsKey("SpecialAttack"))
 				attackStat += attackerMods["SpecialAttack"];
 			if (defenderMods.ContainsKey("SpecialDefense"))

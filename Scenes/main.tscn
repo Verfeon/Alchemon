@@ -1,52 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://vn5706krl4pt"]
+[gd_scene load_steps=5 format=3 uid="uid://vn5706krl4pt"]
 
 [ext_resource type="PackedScene" uid="uid://c27mhvx4p0nlt" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bmpr6vljei3x1" path="res://Scenes/CollectibleItem.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://nnbl5be3ht0h" path="res://Scenes/UI.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://br1jwst57qb3q" path="res://Scenes/Creature.tscn" id="4_kry3j"]
 
 [node name="Main" type="Node"]
 
-[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(49, 114)
+[node name="World" type="Node2D" parent="."]
 
-[node name="Collectibles" type="Node" parent="."]
+[node name="Player" parent="World" instance=ExtResource("1_jjgbg")]
+position = Vector2(68, 129)
 
-[node name="Stone" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Collectibles" type="Node" parent="World"]
+
+[node name="Stone" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
 position = Vector2(48, 27)
 ObjectId = "stone"
 IsMergeable = true
 
-[node name="Stone2" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Stone2" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
 position = Vector2(-31, 92)
 ObjectId = "stone"
 IsMergeable = true
 
-[node name="Stone3" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Stone3" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
 position = Vector2(141, 102)
 ObjectId = "stone"
 IsMergeable = true
 
-[node name="Wood" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Wood" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
 position = Vector2(-13, 44)
 ObjectId = "wood_stick"
 IsMergeable = true
 
-[node name="Wood2" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Wood2" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
 position = Vector2(101, 73)
 ObjectId = "wood_stick"
 IsMergeable = true
 
-[node name="Pebble" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Pebble" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
 position = Vector2(92, 29)
 ObjectId = "pebble"
 IsMergeable = true
 
-[node name="Eye" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Eye" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
+position = Vector2(-105, 55)
 ObjectId = "eye"
 IsMergeable = true
 
-[node name="Feather" parent="Collectibles" instance=ExtResource("3_8gbba")]
+[node name="Feather" parent="World/Collectibles" instance=ExtResource("3_8gbba")]
+position = Vector2(167, 24)
 ObjectId = "feather"
 IsMergeable = true
 
-[node name="Ui" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Creature" parent="World" instance=ExtResource("4_kry3j")]
+position = Vector2(-147, 176)
+
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+
+[node name="Ui" parent="OverlayLayer" instance=ExtResource("4_jjvhh")]
