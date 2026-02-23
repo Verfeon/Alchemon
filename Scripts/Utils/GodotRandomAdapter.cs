@@ -15,4 +15,9 @@ public sealed class GodotRandomAdapter : IRandom
 	{
 		return _rng.RandiRange(minInclusive, maxInclusive);
 	}
+
+	public float NextFloat(float minInclusive, float maxInclusive)
+	{
+		return _rng.RandfRange(minInclusive, maxInclusive);
+	}
 }

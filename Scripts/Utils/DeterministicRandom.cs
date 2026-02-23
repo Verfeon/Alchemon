@@ -15,4 +15,9 @@ public sealed class DeterministicRandom : IRandom
 	{
 		return _random.Next(minInclusive, maxInclusive + 1);
 	}
+
+	public float NextFloat(float minInclusive, float maxInclusive)
+	{
+		return (float)_random.NextDouble() * (maxInclusive - minInclusive) + minInclusive;
+	}
 }

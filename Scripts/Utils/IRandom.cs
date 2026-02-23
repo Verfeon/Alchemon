@@ -5,4 +5,5 @@ namespace Game.Utils;
 public interface IRandom
 {
 	int NextInt(int minInclusive, int maxInclusive);
+	float NextFloat(float minInclusive, float maxInclusive);
 }

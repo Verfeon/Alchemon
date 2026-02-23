@@ -3,6 +3,8 @@ using System;
 
 using GameManager = Game.Core.Autoload.GameManager;
 using BattleManager = Game.Battle.Domain.BattleManager;
+using CreatureNode = Game.Creatures.Presentation.CreatureNode;
+using Creature = Game.Creatures.Domain.Creature;
 
 namespace Game.Player;
 
@@ -92,9 +94,9 @@ public partial class Player : CharacterBody2D
 	
 	public void _OnBodyEntered(Node2D body)
 	{
-		GD.Print("body entered : " + body.Name);
 		if (!body.IsInGroup("Enemy")) return;
 		BattleManager battleManager = GetNode<GameManager>("/root/GameManager").Battle;
-		battleManager.StartBattle(null, null);
+		Creature enemy = (body as CreatureNode).GetCreature();
+		battleManager.StartBattle(enemy, enemy);
 	}
 }

@@ -2,8 +2,9 @@ using Godot;
 using System;
 
 using Creature = Game.Creatures.Domain.Creature;
-using GameManager = Game.Core.Autoload.GameManager;
-using BattleManager = Game.Battle.Domain.BattleManager;
+using Game.Utils;
+using Godot.NativeInterop;
+using Game.Creatures.Data;
 
 namespace Game.Creatures.Presentation;
 
@@ -14,16 +15,28 @@ public partial class CreatureNode : Node2D
 	private Creature _creature;
 	
 	
-	[Export] public float Speed = 100f;
-	[Export] public float ChangeDirectionTime = 2f;
+	[Export] private float speed = 50f;
+	[Export] private float changeDirectionTime = 2f;
+	[ExportGroup("Is Wild")]
+	[Export(PropertyHint.GroupEnable, "")] private bool isWild = false;
+	[Export] private Godot.Collections.Array<CreatureData> possibleCreatures;
 
 	private Vector2 _direction = Vector2.Zero;
 	private float _timer = 0f;
-	private Random _random = new Random();
+	private IRandom _random = new GodotRandomAdapter();
 	
 	public override void _Ready()
 	{
-		PickNewDirection();
+		if (isWild)
+		{
+			if (possibleCreatures.Count == 0)
+			{
+				GD.PushError("CreatureNode is marked as wild but has no possible creatures assigned.");
+				return;
+			}
+			Creature creature = new Creature(possibleCreatures[_random.NextInt(0, possibleCreatures.Count - 1)], 1, new GodotRandomAdapter());
+			Bind(creature);
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -35,14 +48,14 @@ public partial class CreatureNode : Node2D
 			PickNewDirection();
 		}
 
-		Position += _direction * Speed * (float)delta;
+		Position += _direction * speed * (float)delta;
 	}
 
 	private void PickNewDirection()
 	{
-		_timer = ChangeDirectionTime;
+		_timer = changeDirectionTime;
 
-		float angle = (float)(_random.NextDouble() * Math.PI * 2);
+		float angle = _random.NextFloat(0f, 2 * (float)Math.PI);
 		_direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).Normalized();
 	}
 	
@@ -93,5 +106,10 @@ public partial class CreatureNode : Node2D
 	public override void _ExitTree()
 	{
 		Unbind();
+	}
+	
+	public Creature GetCreature()
+	{
+		return _creature;
 	}
 }

@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://br1jwst57qb3q"]
+[gd_scene load_steps=7 format=3 uid="uid://br1jwst57qb3q"]
 
 [ext_resource type="Script" uid="uid://c8mgcnklesmnq" path="res://Scripts/Creatures/Presentation/CreatureNode.cs" id="1_0inej"]
+[ext_resource type="Resource" uid="uid://na55uxiassjj" path="res://Resources/CreatureDatas/Treant.tres" id="2_fr2yh"]
 [ext_resource type="Texture2D" uid="uid://crpqw70ral88k" path="res://Assets/Creatures/treant.png" id="2_s16ri"]
+[ext_resource type="Resource" uid="uid://psk3qy5updl6" path="res://Resources/CreatureDatas/RockGolem.tres" id="3_8gas3"]
+[ext_resource type="Resource" uid="uid://cfrhf7l4jlu2t" path="res://Resources/CreatureDatas/WingedEye.tres" id="4_mdtnb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s16ri"]
 size = Vector2(128, 128)
@@ -12,7 +15,8 @@ motion_mode = 1
 script = ExtResource("1_0inej")
 _sprite = NodePath("Sprite2D")
 _hpBar = NodePath("ProgressBar")
-Speed = 25.0
+isWild = true
+possibleCreatures = Array[Object]([ExtResource("2_fr2yh"), ExtResource("3_8gas3"), ExtResource("4_mdtnb")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_s16ri")
