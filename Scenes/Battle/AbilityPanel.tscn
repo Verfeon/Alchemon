@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bg1bpu54h6kk5"]
+
+[ext_resource type="PackedScene" uid="uid://d4jh34jfeegw7" path="res://Scenes/Battle/AbilityButton1.tscn" id="1_yyh3d"]
+[ext_resource type="PackedScene" uid="uid://dpemd3uvchc23" path="res://Scenes/Battle/AbilityButton2.tscn" id="2_bjr3h"]
+[ext_resource type="PackedScene" uid="uid://dsqdwg32cjk3n" path="res://Scenes/Battle/AbilityButton3.tscn" id="3_0urfh"]
+[ext_resource type="PackedScene" uid="uid://d1fn6biv5jmyj" path="res://Scenes/Battle/AbilityButton4.tscn" id="4_gk3e7"]
+[ext_resource type="PackedScene" uid="uid://cfrxhu6n76w8" path="res://Scenes/Battle/AbilityButton5.tscn" id="5_k1g7u"]
+[ext_resource type="PackedScene" uid="uid://csu862mruxo8x" path="res://Scenes/Battle/AbilityButton6.tscn" id="6_lfng0"]
+
+[node name="AbilityPanel" type="Node2D"]
+
+[node name="AbilityButton" parent="." instance=ExtResource("1_yyh3d")]
+
+[node name="AbilityButton2" parent="." instance=ExtResource("2_bjr3h")]
+position = Vector2(32, 0)
+
+[node name="AbilityButton3" parent="." instance=ExtResource("3_0urfh")]
+position = Vector2(64, 0)
+
+[node name="AbilityButton4" parent="." instance=ExtResource("4_gk3e7")]
+position = Vector2(64, 54)
+
+[node name="AbilityButton5" parent="." instance=ExtResource("5_k1g7u")]
+position = Vector2(32, 54)
+
+[node name="AbilityButton6" parent="." instance=ExtResource("6_lfng0")]
+position = Vector2(0, 54)

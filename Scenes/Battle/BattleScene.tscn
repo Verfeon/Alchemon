@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxk3imb4bkbo8"]
+
+[ext_resource type="Script" uid="uid://bi40v1qmua848" path="res://Scripts/UI/BattleScene.cs" id="1_k6flv"]
+[ext_resource type="Texture2D" uid="uid://br5m5yusjq8s3" path="res://Assets/Battle/battle_scene.png" id="2_nutpp"]
+[ext_resource type="PackedScene" uid="uid://bg1bpu54h6kk5" path="res://Scenes/Battle/AbilityPanel.tscn" id="3_k6flv"]
+
+[node name="BattleScene" type="CanvasLayer" node_paths=PackedStringArray("background", "playerPosition", "enemyPosition")]
+script = ExtResource("1_k6flv")
+background = NodePath("TextureRect")
+playerPosition = NodePath("PlayerPosition")
+enemyPosition = NodePath("EnemyPosition")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_nutpp")
+
+[node name="PlayerPosition" type="Node2D" parent="."]
+position = Vector2(200, 284)
+
+[node name="EnemyPosition" type="Node2D" parent="."]
+position = Vector2(488, 122)
+
+[node name="AbilityPanel" parent="." instance=ExtResource("3_k6flv")]
+position = Vector2(32, 230)
