@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg1bpu54h6kk5"]
+[gd_scene load_steps=8 format=3 uid="uid://bg1bpu54h6kk5"]
 
+[ext_resource type="Script" uid="uid://ckflxkgy5nlxa" path="res://Scripts/Battle/UI/AbilityPanel.cs" id="1_bjr3h"]
 [ext_resource type="PackedScene" uid="uid://d4jh34jfeegw7" path="res://Scenes/Battle/AbilityButton1.tscn" id="1_yyh3d"]
 [ext_resource type="PackedScene" uid="uid://dpemd3uvchc23" path="res://Scenes/Battle/AbilityButton2.tscn" id="2_bjr3h"]
 [ext_resource type="PackedScene" uid="uid://dsqdwg32cjk3n" path="res://Scenes/Battle/AbilityButton3.tscn" id="3_0urfh"]
@@ -7,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cfrxhu6n76w8" path="res://Scenes/Battle/AbilityButton5.tscn" id="5_k1g7u"]
 [ext_resource type="PackedScene" uid="uid://csu862mruxo8x" path="res://Scenes/Battle/AbilityButton6.tscn" id="6_lfng0"]
 
-[node name="AbilityPanel" type="Node2D"]
+[node name="AbilityPanel" type="Node2D" node_paths=PackedStringArray("_buttons")]
+script = ExtResource("1_bjr3h")
+_buttons = [NodePath("AbilityButton"), NodePath("AbilityButton2"), NodePath("AbilityButton3"), NodePath("AbilityButton4"), NodePath("AbilityButton5"), NodePath("AbilityButton6")]
 
 [node name="AbilityButton" parent="." instance=ExtResource("1_yyh3d")]
 

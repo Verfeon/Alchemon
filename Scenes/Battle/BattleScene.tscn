@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://br5m5yusjq8s3" path="res://Assets/Battle/battle_scene.png" id="2_nutpp"]
 [ext_resource type="PackedScene" uid="uid://bg1bpu54h6kk5" path="res://Scenes/Battle/AbilityPanel.tscn" id="3_k6flv"]
 
-[node name="BattleScene" type="CanvasLayer" node_paths=PackedStringArray("background", "playerPosition", "enemyPosition")]
+[node name="BattleScene" type="CanvasLayer" node_paths=PackedStringArray("_background", "_playerPosition", "_enemyPosition", "_abilityPanel")]
 script = ExtResource("1_k6flv")
-background = NodePath("TextureRect")
-playerPosition = NodePath("PlayerPosition")
-enemyPosition = NodePath("EnemyPosition")
+_background = NodePath("TextureRect")
+_playerPosition = NodePath("PlayerPosition")
+_enemyPosition = NodePath("EnemyPosition")
+_abilityPanel = NodePath("AbilityPanel")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 40.0

@@ -83,4 +83,9 @@ public partial class Creature
 			_abilities.Add(pool[i]);
 		}
 	}
+	
+	public List<Ability> GetAbilities ()
+	{
+		return _abilities;
+	}
 }

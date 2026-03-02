@@ -71,10 +71,7 @@ public partial class CreatureNode : Node2D
 			throw new ArgumentNullException(nameof(creature));
 		}
 
-		if (_creature == creature)
-		{
-			return;
-		}
+		if (_creature == creature) return ;
 		
 		Unbind();
 

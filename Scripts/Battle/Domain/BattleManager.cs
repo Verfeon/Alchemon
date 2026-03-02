@@ -7,6 +7,7 @@ using CreatureType = Game.Creatures.Domain.CreatureType;
 using Ability = Game.Creatures.Data.Ability;
 using Game.Creatures.Presentation;
 using System.ComponentModel;
+using BattleScene = Game.Battle.UI.BattleScene;
 
 namespace Game.Battle.Domain;
 
@@ -42,6 +43,7 @@ public partial class BattleManager : Node
 	{
 		GD.Print("Start Battle");
 		BattleScene battle = BattleScene.Instantiate() as BattleScene;
+		battle.Init(playerCreature);
 		
 		CanvasLayer overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
 
