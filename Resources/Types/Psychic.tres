@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Type" load_steps=6 format=3 uid="uid://p220p64wqims"]
+
+[ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_4uwgu"]
+
+[resource]
+script = ExtResource("1_4uwgu")
+TypeEnum = 10
+Name = "Psychic"
+Color = Color(0.78, 0.195, 0.61425, 1)
+StrongAgainst = Array[Object]([])
+WeakAgainst = Array[Object]([])
+UselessAgainst = Array[Object]([])
+metadata/_custom_type_script = "uid://bj53ebc1488mw"

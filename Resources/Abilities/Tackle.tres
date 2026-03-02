@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://brqcinifpqxrn"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://brqcinifpqxrn"]
 
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_bj5we"]
+[ext_resource type="Resource" uid="uid://ckb28xu6wdwnv" path="res://Resources/Types/Neutral.tres" id="1_s0k0k"]
 
 [resource]
 script = ExtResource("1_bj5we")
 Id = "tackle"
 Name = "Tackle"
-IsPhysical = true
 Power = 40
-Type = 7
+Type = ExtResource("1_s0k0k")
 Description = "Tackles the target."
 metadata/_custom_type_script = "uid://vy1r708gni21"

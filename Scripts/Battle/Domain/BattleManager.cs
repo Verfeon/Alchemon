@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 
 using Creature = Game.Creatures.Domain.Creature;
-using CreatureType = Game.Creatures.Domain.CreatureType;
+using TypeEnum = Game.Creatures.Domain.TypeEnum;
+using Type = Game.Creatures.Data.Type;
 using Ability = Game.Creatures.Data.Ability;
 using Game.Creatures.Presentation;
 using System.ComponentModel;
@@ -225,67 +226,22 @@ public partial class BattleManager : Node
 		}
 	}
 	
-	private float GetTypeEffectiveness(CreatureType attackType, CreatureType defenseType)
+	private float GetTypeEffectiveness(Type attackType, Type defenseType)
 	{
-		// Table des efficacités de types
-		// Super efficace = 1.5x, Normal = 1.0x, Peu efficace = 0.75x
-		
-		switch (attackType)
+		if (attackType.IsStrongAgainst(defenseType))
 		{
-			case CreatureType.Fire:
-				if (defenseType == CreatureType.Nature || defenseType == CreatureType.Tech)
-					return 1.5f;
-				if (defenseType == CreatureType.Water || defenseType == CreatureType.Earth)
-					return 0.75f;
-				break;
-				
-			case CreatureType.Water:
-				if (defenseType == CreatureType.Fire || defenseType == CreatureType.Earth)
-					return 1.5f;
-				if (defenseType == CreatureType.Nature || defenseType == CreatureType.Air)
-					return 0.75f;
-				break;
-				
-			case CreatureType.Earth:
-				if (defenseType == CreatureType.Air || defenseType == CreatureType.Tech)
-					return 1.5f;
-				if (defenseType == CreatureType.Nature || defenseType == CreatureType.Water)
-					return 0.75f;
-				break;
-				
-			case CreatureType.Air:
-				if (defenseType == CreatureType.Water || defenseType == CreatureType.Nature)
-					return 1.5f;
-				if (defenseType == CreatureType.Earth || defenseType == CreatureType.Tech)
-					return 0.75f;
-				break;
-				
-			case CreatureType.Nature:
-				if (defenseType == CreatureType.Water || defenseType == CreatureType.Earth)
-					return 1.5f;
-				if (defenseType == CreatureType.Fire || defenseType == CreatureType.Air)
-					return 0.75f;
-				break;
-				
-			case CreatureType.Light:
-				if (defenseType == CreatureType.Dark)
-					return 1.5f;
-				break;
-				
-			case CreatureType.Dark:
-				if (defenseType == CreatureType.Light)
-					return 1.5f;
-				break;
-				
-			case CreatureType.Tech:
-				if (defenseType == CreatureType.Earth || defenseType == CreatureType.Air)
-					return 1.5f;
-				if (defenseType == CreatureType.Fire || defenseType == CreatureType.Water)
-					return 0.75f;
-				break;
+			return 1.5f;
+		}
+		else if (attackType.IsWeakAgainst(defenseType))
+		{
+			return 0.75f;
+		}
+		else if (attackType.IsUselessAgainst(defenseType))
+		{
+			return 0f;
 		}
 		
-		return 1.0f; // Dégâts normaux
+		return 1.0f;
 	}
 	
 	private void EndBattle(bool playerWon)

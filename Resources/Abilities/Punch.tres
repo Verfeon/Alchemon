@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://dddkx13dwujh2"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://dddkx13dwujh2"]
 
+[ext_resource type="Resource" uid="uid://dlhsgrmkokoiw" path="res://Resources/Types/Fighting.tres" id="1_djvft"]
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_ts7ro"]
 
 [resource]
 script = ExtResource("1_ts7ro")
 Id = "punch"
 Name = "punch"
-IsPhysical = true
 Power = 50
-Type = 2
+Type = ExtResource("1_djvft")
 Description = "Punches the target."
 metadata/_custom_type_script = "uid://vy1r708gni21"

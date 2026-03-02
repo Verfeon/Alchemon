@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Type" load_steps=10 format=3 uid="uid://c3dsiawte4vv6"]
+
+[ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_vm6es"]
+
+[resource]
+script = ExtResource("1_vm6es")
+TypeEnum = 5
+Name = "Plant"
+Color = Color(0, 0.5882353, 0, 1)
+StrongAgainst = Array[Object]([])
+WeakAgainst = Array[Object]([])
+UselessAgainst = Array[Object]([])
+metadata/_custom_type_script = "uid://bj53ebc1488mw"

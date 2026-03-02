@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Type" load_steps=7 format=3 uid="uid://cospvdv4s84yh"]
+
+[ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_cqao7"]
+
+[resource]
+script = ExtResource("1_cqao7")
+TypeEnum = 9
+Name = "Ice"
+Color = Color(0, 0.78431374, 0.78431374, 1)
+StrongAgainst = Array[Object]([])
+WeakAgainst = Array[Object]([])
+UselessAgainst = Array[Object]([])
+metadata/_custom_type_script = "uid://bj53ebc1488mw"

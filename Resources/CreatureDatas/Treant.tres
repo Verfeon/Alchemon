@@ -26,6 +26,5 @@ Id = "treant"
 Name = "Treant"
 Texture2d = ExtResource("2_vfuwl")
 BaseStats = SubResource("Resource_i8sur")
-Type = 7
 Abilities = Array[ExtResource("1_3cmqm")]([ExtResource("2_yj7qr"), ExtResource("1_vfuwl"), ExtResource("3_36rse"), ExtResource("4_3cmqm"), ExtResource("5_i8sur")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

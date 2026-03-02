@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://bpyxte7j0wvkk"]
+
+[ext_resource type="Resource" uid="uid://db1ljf0wj5mv7" path="res://Resources/Types/Water.tres" id="1_gn0a6"]
+[ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_kcqer"]
+
+[resource]
+script = ExtResource("1_kcqer")
+Id = "water_gun"
+Name = "Water Gun"
+Category = 1
+Power = 50
+Type = ExtResource("1_gn0a6")
+metadata/_custom_type_script = "uid://vy1r708gni21"

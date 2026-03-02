@@ -26,6 +26,5 @@ Id = "winged_eye"
 Name = "Winged Eye"
 Texture2d = ExtResource("2_tjgy8")
 BaseStats = SubResource("Resource_owpxh")
-Type = 4
 Abilities = Array[ExtResource("1_kfj0x")]([ExtResource("1_yodce"), ExtResource("2_kfj0x"), ExtResource("3_owpxh"), ExtResource("4_wp74j"), ExtResource("5_0ik86")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

@@ -26,6 +26,5 @@ Id = "rock_golem"
 Name = "Rock Golem"
 Texture2d = ExtResource("2_ajs75")
 BaseStats = SubResource("Resource_bermt")
-Type = 2
 Abilities = Array[ExtResource("1_g37wl")]([ExtResource("2_nm8xq"), ExtResource("1_nm8xq"), ExtResource("3_g37wl"), ExtResource("4_bermt"), ExtResource("5_e8kvg")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

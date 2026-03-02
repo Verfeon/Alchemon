@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Type" load_steps=10 format=3 uid="uid://bw6v4mv1phe7d"]
+
+[ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_hinfk"]
+
+[resource]
+script = ExtResource("1_hinfk")
+TypeEnum = 3
+Name = "Earth"
+Color = Color(0.33333334, 0.19607843, 0.039215688, 1)
+StrongAgainst = Array[Object]([])
+WeakAgainst = Array[Object]([])
+UselessAgainst = Array[Object]([])
+metadata/_custom_type_script = "uid://bj53ebc1488mw"

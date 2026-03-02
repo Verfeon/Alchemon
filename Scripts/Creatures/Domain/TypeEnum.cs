@@ -3,14 +3,24 @@ using System;
 
 namespace Game.Creatures.Domain;
 
-public enum CreatureType
+public enum TypeEnum
 {
+	Neutral,
 	Fire,
 	Water,
 	Earth,
 	Air,
+	Plant,
+	Bug,
+	Rock,
+	Electric,
+	Ice,
+	Psychic,
+	Fighting,
+	Toxic,
+	Ghost,
 	Light,
 	Dark,
 	Tech,
-	Nature
+	Space
 }

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://dc2moog1rmcrs"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://dc2moog1rmcrs"]
 
+[ext_resource type="Resource" uid="uid://6p50rv4vavmv" path="res://Resources/Types/Fire.tres" id="1_38byt"]
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_1831w"]
 
 [resource]
@@ -8,5 +9,6 @@ Id = "fire_breath"
 Name = "Fire Breath"
 Category = 1
 Power = 80
+Type = ExtResource("1_38byt")
 Description = "Breathes fire towards the enemy."
 metadata/_custom_type_script = "uid://vy1r708gni21"

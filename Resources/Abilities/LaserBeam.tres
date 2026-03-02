@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://ciah307vaepge"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://ciah307vaepge"]
 
+[ext_resource type="Resource" uid="uid://cjs87n5fsh1vq" path="res://Resources/Types/Light.tres" id="1_8e7sk"]
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_ge6vd"]
 
 [resource]
@@ -8,6 +9,6 @@ Id = "laser_beam"
 Name = "Laser Beam"
 Category = 1
 Power = 100
-Type = 4
+Type = ExtResource("1_8e7sk")
 Description = "Fires a laser towards the target."
 metadata/_custom_type_script = "uid://vy1r708gni21"

@@ -35,6 +35,7 @@ public partial class AbilityButton : Node2D
 		
 		_ability = ability;
 		_abilityLabel.Text = _ability.Name;
+		_textureButton.Modulate = ability.Type.Color;
 	}
 	
 	private void Unbind()
@@ -43,6 +44,7 @@ public partial class AbilityButton : Node2D
 		
 		_ability = null;
 		_abilityLabel.Text = "";
+		_textureButton.Modulate = Colors.White;
 	}
 	
 	public void OnButtonPressed() 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 using BaseCreatureStats = Game.Creatures.Data.BaseCreatureStats;
-using CreatureType = Game.Creatures.Domain.CreatureType;
+using Type = Game.Creatures.Data.Type;
 
 namespace Game.Creatures.Data;
 
@@ -14,7 +14,7 @@ public partial class CreatureData : Resource
 	[Export] public string Name { get; set; }
 	[Export] public Texture2D Texture2d { get; set; }
 	[Export] public BaseCreatureStats BaseStats { get; set; }  // intrinsic to the species
-	[Export] public CreatureType Type { get; set; }
+	[Export] public Type Type { get; set; }
 	[Export] public Godot.Collections.Array<Ability> Abilities { get; set; }
 	
 	public override void _ValidateProperty(Godot.Collections.Dictionary property)

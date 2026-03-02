@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Type" load_steps=12 format=3 uid="uid://dlhsgrmkokoiw"]
+
+[ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_5inij"]
+
+[resource]
+script = ExtResource("1_5inij")
+TypeEnum = 11
+Name = "Fighting"
+Color = Color(0.78431374, 0.39215687, 0.3137255, 1)
+StrongAgainst = Array[Object]([])
+WeakAgainst = Array[Object]([])
+UselessAgainst = Array[Object]([])
+metadata/_custom_type_script = "uid://bj53ebc1488mw"

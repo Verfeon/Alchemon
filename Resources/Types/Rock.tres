@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Type" load_steps=9 format=3 uid="uid://dfahuhn5nqnjf"]
+
+[ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_gdspo"]
+
+[resource]
+script = ExtResource("1_gdspo")
+TypeEnum = 7
+Name = "Rock"
+Color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+StrongAgainst = Array[Object]([])
+WeakAgainst = Array[Object]([])
+UselessAgainst = Array[Object]([])
+metadata/_custom_type_script = "uid://bj53ebc1488mw"
