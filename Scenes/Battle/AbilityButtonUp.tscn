@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4jh34jfeegw7"]
+
+[ext_resource type="Script" uid="uid://dq6s2wwesguou" path="res://Scripts/Battle/UI/AbilityButton.cs" id="1_r132w"]
+[ext_resource type="Texture2D" uid="uid://bbwv5qy3u2ajj" path="res://Assets/Battle/ability_button.png" id="2_hm12t"]
+[ext_resource type="Theme" uid="uid://vx7hvoobihwx" path="res://Resources/UITheme.tres" id="3_orw1e"]
+
+[node name="AbilityButton" type="Node2D" node_paths=PackedStringArray("_abilityLabel", "_textureButton")]
+script = ExtResource("1_r132w")
+_id = 1
+_abilityLabel = NodePath("AbilityName")
+_textureButton = NodePath("TextureButton")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+texture_filter = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_hm12t")
+texture_pressed = ExtResource("2_hm12t")
+texture_hover = ExtResource("2_hm12t")
+texture_disabled = ExtResource("2_hm12t")
+texture_focused = ExtResource("2_hm12t")
+flip_v = true
+
+[node name="AbilityName" type="Label" parent="."]
+offset_left = 35.0
+offset_top = 95.0
+offset_right = 135.0
+offset_bottom = 150.0
+theme = ExtResource("3_orw1e")
+text = "test"
+autowrap_mode = 3
+clip_text = true
+
+[connection signal="pressed" from="TextureButton" to="." method="OnButtonPressed"]

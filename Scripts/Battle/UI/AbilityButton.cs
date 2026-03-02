@@ -9,8 +9,18 @@ public partial class AbilityButton : Node2D
 {
 	[Export] private int _id;
 	[Export] private Label _abilityLabel;
+	[Export] private TextureButton _textureButton;
 	
 	private Ability _ability;
+	
+	public override void _Ready() 
+	{
+		Bitmap bitmap = new Bitmap();
+		Texture2D texture = _textureButton.GetTextureNormal();
+		Image image = texture.GetImage();
+		bitmap.CreateFromImageAlpha(image);
+		_textureButton.SetClickMask(bitmap);
+	}
 	
 	public void Bind(Ability ability)
 	{
