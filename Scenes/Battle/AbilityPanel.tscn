@@ -15,16 +15,16 @@ _buttons = [NodePath("AbilityButton"), NodePath("AbilityButton2"), NodePath("Abi
 [node name="AbilityButton" parent="." instance=ExtResource("1_yyh3d")]
 
 [node name="AbilityButton2" parent="." instance=ExtResource("2_bjr3h")]
-position = Vector2(32, 0)
+position = Vector2(110, 0)
 
 [node name="AbilityButton3" parent="." instance=ExtResource("3_0urfh")]
-position = Vector2(64, 0)
+position = Vector2(220, 0)
 
 [node name="AbilityButton4" parent="." instance=ExtResource("4_gk3e7")]
-position = Vector2(64, 54)
+position = Vector2(220, 170)
 
 [node name="AbilityButton5" parent="." instance=ExtResource("5_k1g7u")]
-position = Vector2(32, 54)
+position = Vector2(110, 170)
 
 [node name="AbilityButton6" parent="." instance=ExtResource("6_lfng0")]
-position = Vector2(0, 54)
+position = Vector2(0, 170)

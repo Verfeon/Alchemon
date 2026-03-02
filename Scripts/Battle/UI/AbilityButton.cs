@@ -8,6 +8,7 @@ namespace Game.Battle.UI;
 public partial class AbilityButton : Node2D
 {
 	[Export] private int _id;
+	[Export] private Label _abilityLabel;
 	
 	private Ability _ability;
 	
@@ -23,6 +24,7 @@ public partial class AbilityButton : Node2D
 		Unbind();
 		
 		_ability = ability;
+		_abilityLabel.Text = _ability.Name;
 	}
 	
 	private void Unbind()
@@ -30,16 +32,17 @@ public partial class AbilityButton : Node2D
 		if (_ability == null) return;
 		
 		_ability = null;
+		_abilityLabel.Text = "";
 	}
 	
 	public void OnButtonPressed() 
 	{
 		if (_ability != null) 
 		{
-			GD.Print($"ability : {_ability.Name} chosen");
+			GD.Print($"ability : {_ability.Name}");
 		} else 
 		{
-			GD.Print("NoAbility here");
+			GD.Print("No Ability here");
 		}
 	}
 }

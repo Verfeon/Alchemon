@@ -34,7 +34,7 @@ public partial class CollectibleItem : Area2D
 		// Variation aléatoire du temps pour désynchroniser les bounces
 		_time = (float)GD.RandRange(0, Mathf.Pi * 2);
 		
-		GD.Print($"Objet collectible créé : {ObjectId}");
+		GD.Print($"Collectible object created : {ObjectId}");
 	}
 	
 	public override void _Process(double delta)
@@ -65,7 +65,7 @@ public partial class CollectibleItem : Area2D
 		if (gameManager.Inventory != null)
 		{
 			gameManager.Inventory.AddItem(ObjectId, isMergeable: IsMergeable);
-			GD.Print($"Objet collecté : {ObjectId}");
+			GD.Print($"Object collected : {ObjectId}");
 		}
 		
 		if (_sprite != null)

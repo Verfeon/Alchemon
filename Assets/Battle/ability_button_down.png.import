@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci5angmh6mxtq"
-path="res://.godot/imported/ability_button_3.png-cdaa5f4676cbf6a8ebaa3403bb8b78c2.ctex"
+uid="uid://boawa18wmo8dj"
+path="res://.godot/imported/ability_button_down.png-f46547a38b46d72e22f5c60117a23a05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Battle/ability_button_3.png"
-dest_files=["res://.godot/imported/ability_button_3.png-cdaa5f4676cbf6a8ebaa3403bb8b78c2.ctex"]
+source_file="res://Assets/Battle/ability_button_down.png"
+dest_files=["res://.godot/imported/ability_button_down.png-f46547a38b46d72e22f5c60117a23a05.ctex"]
 
 [params]
 
