@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Type" load_steps=7 format=3 uid="uid://dukrvimi546yl"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://dukrvimi546yl"]
 
+[ext_resource type="Texture2D" uid="uid://fm62q1h7yi5r" path="res://Assets/TypeSymbols/ElectricSymbol.png" id="1_7x5m4"]
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_n4fku"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_n4fku")
 TypeEnum = 8
 Name = "Electric"
 Color = Color(0.78431374, 0.78431374, 0.078431375, 1)
+Icon = ExtResource("1_7x5m4")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

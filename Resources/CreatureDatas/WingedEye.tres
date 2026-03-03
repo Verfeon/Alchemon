@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CreatureData" load_steps=11 format=3 uid="uid://cfrhf7l4jlu2t"]
+[gd_resource type="Resource" script_class="CreatureData" load_steps=12 format=3 uid="uid://cfrhf7l4jlu2t"]
 
 [ext_resource type="Script" uid="uid://bxeke84vubmt1" path="res://Scripts/Creatures/Data/BaseCreatureStats.cs" id="1_5p7jx"]
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_kfj0x"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://brqcinifpqxrn" path="res://Resources/Abilities/Tackle.tres" id="3_owpxh"]
 [ext_resource type="Resource" uid="uid://ciah307vaepge" path="res://Resources/Abilities/LaserBeam.tres" id="4_wp74j"]
 [ext_resource type="Resource" uid="uid://dc2moog1rmcrs" path="res://Resources/Abilities/FireBreath.tres" id="5_0ik86"]
+[ext_resource type="Resource" uid="uid://b7146mh74nwbd" path="res://Resources/Types/Air.tres" id="9_owpxh"]
 
 [sub_resource type="Resource" id="Resource_owpxh"]
 script = ExtResource("1_5p7jx")
@@ -26,5 +27,6 @@ Id = "winged_eye"
 Name = "Winged Eye"
 Texture2d = ExtResource("2_tjgy8")
 BaseStats = SubResource("Resource_owpxh")
+Type = ExtResource("9_owpxh")
 Abilities = Array[ExtResource("1_kfj0x")]([ExtResource("1_yodce"), ExtResource("2_kfj0x"), ExtResource("3_owpxh"), ExtResource("4_wp74j"), ExtResource("5_0ik86")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

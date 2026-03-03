@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Type" load_steps=4 format=3 uid="uid://bvi620n6x0gni"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://bvi620n6x0gni"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_gpp8c"]
+[ext_resource type="Texture2D" uid="uid://bclq0ite44r1p" path="res://Assets/TypeSymbols/GhostSymbol.png" id="1_rtqwx"]
 
 [resource]
 script = ExtResource("1_gpp8c")
 TypeEnum = 13
 Name = "Ghost"
 Color = Color(0.27450982, 0.078431375, 0.39215687, 1)
+Icon = ExtResource("1_rtqwx")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

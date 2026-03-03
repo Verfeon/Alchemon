@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Type" load_steps=11 format=3 uid="uid://dfciyhj66f2wb"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://dfciyhj66f2wb"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_1ma1f"]
+[ext_resource type="Texture2D" uid="uid://bebfslxbvdx6o" path="res://Assets/TypeSymbols/BugSymbol.png" id="1_inp4g"]
 
 [resource]
 script = ExtResource("1_1ma1f")
 TypeEnum = 6
 Name = "Bug"
 Color = Color(0.039215688, 0.3529412, 0.039215688, 1)
+Icon = ExtResource("1_inp4g")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

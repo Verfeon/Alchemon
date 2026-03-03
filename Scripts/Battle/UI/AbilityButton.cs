@@ -10,6 +10,7 @@ public partial class AbilityButton : Node2D
 	[Export] private int _id;
 	[Export] private Label _abilityLabel;
 	[Export] private TextureButton _textureButton;
+	[Export] private Sprite2D _iconSprite;
 	
 	private Ability _ability;
 	
@@ -36,6 +37,7 @@ public partial class AbilityButton : Node2D
 		_ability = ability;
 		_abilityLabel.Text = _ability.Name;
 		_textureButton.Modulate = ability.Type.Color;
+		_iconSprite.Texture = ability.Type.Icon;
 	}
 	
 	private void Unbind()
@@ -45,6 +47,7 @@ public partial class AbilityButton : Node2D
 		_ability = null;
 		_abilityLabel.Text = "";
 		_textureButton.Modulate = Colors.White;
+		_iconSprite.Texture = null;
 	}
 	
 	public void OnButtonPressed() 

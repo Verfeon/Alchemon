@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Type" load_steps=10 format=3 uid="uid://c3dsiawte4vv6"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://c3dsiawte4vv6"]
 
+[ext_resource type="Texture2D" uid="uid://dsd8qgbwvx41s" path="res://Assets/TypeSymbols/PlantSymbol.png" id="1_hm1v2"]
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_vm6es"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_vm6es")
 TypeEnum = 5
 Name = "Plant"
 Color = Color(0, 0.5882353, 0, 1)
+Icon = ExtResource("1_hm1v2")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

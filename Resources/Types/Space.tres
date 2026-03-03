@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Type" load_steps=7 format=3 uid="uid://ot18ysnl6teu"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://ot18ysnl6teu"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_0y56i"]
+[ext_resource type="Texture2D" uid="uid://bi1x84li4m4q7" path="res://Assets/TypeSymbols/SpaceSymbol.png" id="1_yio0e"]
 
 [resource]
 script = ExtResource("1_0y56i")
 TypeEnum = 17
 Name = "Space"
 Color = Color(0.43137255, 0.11764706, 0.43137255, 1)
+Icon = ExtResource("1_yio0e")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

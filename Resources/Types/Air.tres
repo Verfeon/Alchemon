@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Type" load_steps=2 format=3 uid="uid://b7146mh74nwbd"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://b7146mh74nwbd"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_d4hlt"]
+[ext_resource type="Texture2D" uid="uid://cfk3q3f3h24p1" path="res://Assets/TypeSymbols/AirSymbol.png" id="1_g0tbn"]
 
 [resource]
 script = ExtResource("1_d4hlt")
 TypeEnum = 4
 Name = "Air"
 Color = Color(0.39215687, 0.7058824, 0.98039216, 1)
-StrongAgainst = Array[Object]([])
+Icon = ExtResource("1_g0tbn")
+StrongAgainst = []
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])
 metadata/_custom_type_script = "uid://bj53ebc1488mw"

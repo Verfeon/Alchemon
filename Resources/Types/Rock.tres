@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Type" load_steps=9 format=3 uid="uid://dfahuhn5nqnjf"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://dfahuhn5nqnjf"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_gdspo"]
+[ext_resource type="Texture2D" uid="uid://b4camhiym1vdq" path="res://Assets/TypeSymbols/RockSymbol.png" id="1_vutlq"]
 
 [resource]
 script = ExtResource("1_gdspo")
 TypeEnum = 7
 Name = "Rock"
 Color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+Icon = ExtResource("1_vutlq")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

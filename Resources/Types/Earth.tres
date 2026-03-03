@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Type" load_steps=10 format=3 uid="uid://bw6v4mv1phe7d"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://bw6v4mv1phe7d"]
 
+[ext_resource type="Texture2D" uid="uid://cyg3yay7q2h1" path="res://Assets/TypeSymbols/EarthSymbol.png" id="1_381s6"]
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_hinfk"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_hinfk")
 TypeEnum = 3
 Name = "Earth"
 Color = Color(0.33333334, 0.19607843, 0.039215688, 1)
+Icon = ExtResource("1_381s6")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

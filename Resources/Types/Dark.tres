@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Type" load_steps=9 format=3 uid="uid://cp6vy6gpx743x"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://cp6vy6gpx743x"]
 
+[ext_resource type="Texture2D" uid="uid://cbhqs3p10sjwh" path="res://Assets/TypeSymbols/DarkSymbol.png" id="1_300jc"]
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_rkou5"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_rkou5")
 TypeEnum = 15
 Name = "Dark"
 Color = Color(0.1, 0.1, 0.1, 1)
+Icon = ExtResource("1_300jc")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

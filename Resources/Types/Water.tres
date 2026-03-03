@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Type" load_steps=7 format=3 uid="uid://db1ljf0wj5mv7"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://db1ljf0wj5mv7"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_crtvo"]
+[ext_resource type="Texture2D" uid="uid://bf4xh0kmnciqv" path="res://Assets/TypeSymbols/WaterSymbol.png" id="1_o245b"]
 
 [resource]
 script = ExtResource("1_crtvo")
 TypeEnum = 2
 Name = "Water"
 Color = Color(0, 0.3137255, 1, 1)
+Icon = ExtResource("1_o245b")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

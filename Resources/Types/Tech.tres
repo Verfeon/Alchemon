@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Type" load_steps=8 format=3 uid="uid://bkk7xe8dowfcf"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://bkk7xe8dowfcf"]
 
+[ext_resource type="Texture2D" uid="uid://dkoiiw0c4sjx4" path="res://Assets/TypeSymbols/TechSymbol.png" id="1_tvmky"]
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_yuvmf"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_yuvmf")
 TypeEnum = 16
 Name = "Tech"
 Color = Color(0.78431374, 0.78431374, 0.5882353, 1)
+Icon = ExtResource("1_tvmky")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

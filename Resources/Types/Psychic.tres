@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Type" load_steps=6 format=3 uid="uid://p220p64wqims"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://p220p64wqims"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_4uwgu"]
+[ext_resource type="Texture2D" uid="uid://xt62cdya3qtl" path="res://Assets/TypeSymbols/PsychicSymbol.png" id="1_ybllt"]
 
 [resource]
 script = ExtResource("1_4uwgu")
 TypeEnum = 10
 Name = "Psychic"
 Color = Color(0.78, 0.195, 0.61425, 1)
+Icon = ExtResource("1_ybllt")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

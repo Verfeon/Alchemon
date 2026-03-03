@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Type" load_steps=8 format=3 uid="uid://bqq1bgxmhelds"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://bqq1bgxmhelds"]
 
+[ext_resource type="Texture2D" uid="uid://pxdfwicyopkm" path="res://Assets/TypeSymbols/ToxicSymbol.png" id="1_qjukc"]
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_ux7hv"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_ux7hv")
 TypeEnum = 12
 Name = "Toxic"
 Color = Color(0.627451, 0, 0.8627451, 1)
+Icon = ExtResource("1_qjukc")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Type" load_steps=2 format=3 uid="uid://ckb28xu6wdwnv"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://ckb28xu6wdwnv"]
 
+[ext_resource type="Texture2D" uid="uid://d2mybosahyoa7" path="res://Assets/TypeSymbols/NeutralSymbol.png" id="1_4l77m"]
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_s2ffh"]
 
 [resource]
 script = ExtResource("1_s2ffh")
 Name = "Neutral"
 Color = Color(0.5882353, 0.5882353, 0.5882353, 1)
+Icon = ExtResource("1_4l77m")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])

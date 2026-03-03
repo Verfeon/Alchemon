@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://bbwv5qy3u2ajj" path="res://Assets/Battle/ability_button.png" id="2_hm12t"]
 [ext_resource type="Theme" uid="uid://vx7hvoobihwx" path="res://Resources/UITheme.tres" id="3_orw1e"]
 
-[node name="AbilityButton" type="Node2D" node_paths=PackedStringArray("_abilityLabel", "_textureButton")]
+[node name="AbilityButton" type="Node2D" node_paths=PackedStringArray("_abilityLabel", "_textureButton", "_iconSprite")]
 script = ExtResource("1_r132w")
 _id = 1
 _abilityLabel = NodePath("AbilityName")
 _textureButton = NodePath("TextureButton")
+_iconSprite = NodePath("Symbol")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 texture_filter = 2
@@ -28,7 +29,12 @@ offset_right = 135.0
 offset_bottom = 150.0
 theme = ExtResource("3_orw1e")
 text = "test"
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
+
+[node name="Symbol" type="Sprite2D" parent="."]
+position = Vector2(80, 64)
 
 [connection signal="pressed" from="TextureButton" to="." method="OnButtonPressed"]

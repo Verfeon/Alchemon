@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Type" load_steps=7 format=3 uid="uid://cospvdv4s84yh"]
+[gd_resource type="Resource" script_class="Type" load_steps=3 format=3 uid="uid://cospvdv4s84yh"]
 
 [ext_resource type="Script" uid="uid://bj53ebc1488mw" path="res://Scripts/Creatures/Data/Type.cs" id="1_cqao7"]
+[ext_resource type="Texture2D" uid="uid://do6mauwoeyphw" path="res://Assets/TypeSymbols/IceSymbol.png" id="1_v6trx"]
 
 [resource]
 script = ExtResource("1_cqao7")
 TypeEnum = 9
 Name = "Ice"
 Color = Color(0, 0.78431374, 0.78431374, 1)
+Icon = ExtResource("1_v6trx")
 StrongAgainst = Array[Object]([])
 WeakAgainst = Array[Object]([])
 UselessAgainst = Array[Object]([])
