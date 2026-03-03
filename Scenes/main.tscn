@@ -8,6 +8,7 @@
 [node name="Main" type="Node"]
 
 [node name="World" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="Player" parent="World" instance=ExtResource("1_jjgbg")]
 position = Vector2(68, 129)
@@ -59,5 +60,6 @@ position = Vector2(-147, 176)
 IsWild = true
 
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="Ui" parent="OverlayLayer" instance=ExtResource("4_jjvhh")]

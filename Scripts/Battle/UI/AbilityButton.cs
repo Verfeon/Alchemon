@@ -16,15 +16,18 @@ public partial class AbilityButton : Node2D
 	
 	public override void _Ready() 
 	{
+		GD.Print("ready");
 		Bitmap bitmap = new Bitmap();
 		Texture2D texture = _textureButton.GetTextureNormal();
 		Image image = texture.GetImage();
 		bitmap.CreateFromImageAlpha(image);
 		_textureButton.SetClickMask(bitmap);
+		_abilityLabel.Text = "";
 	}
 	
 	public void Bind(Ability ability)
 	{
+		GD.Print("bind");
 		if (ability == null)
 		{
 			throw new ArgumentNullException(nameof(ability));

@@ -17,10 +17,12 @@ offset_bottom = 40.0
 texture = ExtResource("2_nutpp")
 
 [node name="PlayerPosition" type="Node2D" parent="."]
-position = Vector2(592, 788)
+position = Vector2(573, 831)
+scale = Vector2(2, 2)
 
 [node name="EnemyPosition" type="Node2D" parent="."]
-position = Vector2(1461, 304)
+position = Vector2(1444, 349)
+scale = Vector2(2, 2)
 
 [node name="AbilityPanel" parent="." instance=ExtResource("3_k6flv")]
 position = Vector2(110, 650)

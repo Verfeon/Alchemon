@@ -43,20 +43,21 @@ public partial class BattleManager : Node
 	public void StartBattle(Creature playerCreature, Creature enemyCreature)
 	{
 		GD.Print("Start Battle");
+		GetTree().Paused = true;
 		BattleScene battle = BattleScene.Instantiate() as BattleScene;
-		battle.Init(playerCreature);
 		
 		CanvasLayer overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
 
 		CreatureNode playerCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
-		playerCreatureNode.Bind(playerCreature);
 		battle.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
+		playerCreatureNode.Bind(playerCreature);
 		
 		CreatureNode enemyCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
-		enemyCreatureNode.Bind(enemyCreature);
 		battle.GetEnemyPosition().CallDeferred("add_child", enemyCreatureNode);
+		enemyCreatureNode.Bind(enemyCreature);
 		
 		overlayLayer.AddChild(battle);
+		battle.Init(playerCreature);
 
 		_playerCreature = playerCreature;
 		_enemyCreature = enemyCreature;
