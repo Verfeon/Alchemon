@@ -7,6 +7,8 @@ namespace Game.Battle.UI;
 
 public partial class AbilityButton : Node2D
 {
+	[Signal] public delegate void AbilitySelectedEventHandler(Ability ability);
+
 	[Export] private int _id;
 	[Export] private Label _abilityLabel;
 	[Export] private TextureButton _textureButton;
@@ -40,6 +42,7 @@ public partial class AbilityButton : Node2D
 		_ability = ability;
 		_abilityLabel.Text = _ability.Name;
 		_textureButton.Modulate = ability.Type.Color;
+		_textureButton.Disabled = false;
 		_iconSprite.Texture = ability.Type.Icon;
 	}
 	
@@ -50,7 +53,13 @@ public partial class AbilityButton : Node2D
 		_ability = null;
 		_abilityLabel.Text = "";
 		_textureButton.Modulate = Colors.White;
+		_textureButton.Disabled = true;
 		_iconSprite.Texture = null;
+	}
+
+	public bool IsBound()
+	{
+		return _ability != null;
 	}
 	
 	public void OnButtonPressed() 
@@ -58,6 +67,8 @@ public partial class AbilityButton : Node2D
 		if (_ability != null) 
 		{
 			GD.Print($"ability : {_ability.Name}");
+			EmitSignal(SignalName.AbilitySelected, _ability);
+
 		} else 
 		{
 			GD.Print("No Ability here");

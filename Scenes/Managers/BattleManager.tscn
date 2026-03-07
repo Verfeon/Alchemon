@@ -6,5 +6,5 @@
 
 [node name="BattleManager" type="Node"]
 script = ExtResource("1_g7a4w")
-BattleScene = ExtResource("2_gsddk")
+_battleScenePath = ExtResource("2_gsddk")
 _creatureScenePath = ExtResource("3_gm2pr")

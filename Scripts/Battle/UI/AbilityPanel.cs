@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 using Ability = Game.Creatures.Data.Ability;
 using Creature = Game.Creatures.Domain.Creature;
@@ -22,5 +23,18 @@ public partial class AbilityPanel : Node2D
 				GD.PushError($"Too many abilities in creature {creature}");
 			}
 		}
+	}
+	
+	public List<AbilityButton> GetActiveAbilityButtons()
+	{
+		List<AbilityButton> activeButtons = new List<AbilityButton>();
+		foreach (AbilityButton button in _buttons)
+		{
+			if (button.IsBound())
+			{
+				activeButtons.Add(button);
+			}
+		}
+		return activeButtons;
 	}
 }

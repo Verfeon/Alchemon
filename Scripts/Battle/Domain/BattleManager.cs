@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Creature = Game.Creatures.Domain.Creature;
 using TypeEnum = Game.Creatures.Domain.TypeEnum;
+using AbilityCategory = Game.Creatures.Domain.AbilityCategory;
 using Type = Game.Creatures.Data.Type;
 using Ability = Game.Creatures.Data.Ability;
 using Game.Creatures.Presentation;
@@ -14,12 +15,12 @@ namespace Game.Battle.Domain;
 
 public partial class BattleManager : Node
 {
-	[Export] private PackedScene BattleScene;
+	[Export] private PackedScene _battleScenePath;
 	[Export] private PackedScene _creatureScenePath;
 	
 	private Creature _playerCreature;
 	private Creature _enemyCreature;
-	private bool _isPlayerTurn = true;
+	private BattleScene _battleScene;
 	private int _turnCount = 0;
 	
 	private Dictionary<string, int> _playerStatModifiers = new();
@@ -44,37 +45,32 @@ public partial class BattleManager : Node
 	{
 		GD.Print("Start Battle");
 		GetTree().Paused = true;
-		BattleScene battle = BattleScene.Instantiate() as BattleScene;
+		BattleScene _battleScene = _battleScenePath.Instantiate<BattleScene>();
 		
 		CanvasLayer overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
 
 		CreatureNode playerCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
-		battle.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
+		_battleScene.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
 		playerCreatureNode.Bind(playerCreature);
 		
 		CreatureNode enemyCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
-		battle.GetEnemyPosition().CallDeferred("add_child", enemyCreatureNode);
+		_battleScene.GetEnemyPosition().CallDeferred("add_child", enemyCreatureNode);
 		enemyCreatureNode.Bind(enemyCreature);
 		
-		overlayLayer.AddChild(battle);
-		battle.Init(playerCreature);
+		overlayLayer.AddChild(_battleScene);
+		_battleScene.Init(playerCreature);
+		_battleScene.GetActiveAbilityButtons().ForEach(button => button.AbilitySelected += OnAbilitySelected);
 
 		_playerCreature = playerCreature;
 		_enemyCreature = enemyCreature;
 		_turnCount = 0;
 		
-		_playerStatModifiers.Clear();
-		_enemyStatModifiers.Clear();
-		
-		_isPlayerTurn = DetermineFirstTurn();
-		
 		EmitSignal(SignalName.BattleStarted);
-		EmitSignal(SignalName.TurnStarted, _isPlayerTurn);
 		
 		GD.Print($"Battle started! {_playerCreature.Data.Name} vs {_enemyCreature.Data.Name}");
 	}
 	
-	private bool DetermineFirstTurn()
+	private bool PlayerGoesFirst()
 	{
 		if (_playerCreature.RealStats.Speed == _enemyCreature.RealStats.Speed)
 		{
@@ -82,97 +78,93 @@ public partial class BattleManager : Node
 		}
 		return _playerCreature.RealStats.Speed >= _enemyCreature.RealStats.Speed;
 	}
-	
-	public void UseAbility(Ability ability, Creature attacker, Creature defender)
+
+	private void ManageTurn(Ability playerSelectedAbility)
 	{
 		_turnCount++;
-		
-		bool isPlayerAttacking = attacker == _playerCreature;
-		var attackerMods = isPlayerAttacking ? _playerStatModifiers : _enemyStatModifiers;
-		var defenderMods = isPlayerAttacking ? _enemyStatModifiers : _playerStatModifiers;
-		
-		GD.Print($"{attacker.Data.Name} uses {ability.Name}!");
-		
-		int damage = CalculateDamage(ability, attacker, defender, attackerMods, defenderMods);
-		
-		var defenderStats = defender.RealStats;
-		defender.CurrentHP = Math.Max(0, defender.CurrentHP - damage);
-		
-		EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
-		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defenderStats.MaxHP}");
-		
-		if (defender.CurrentHP <= 0)
+		if (PlayerGoesFirst())
 		{
-			EmitSignal(SignalName.CreatureFainted, defender.Data.Name);
-			EndBattle(defender == _enemyCreature);
-			return;
-		}
-		
-		_isPlayerTurn = !_isPlayerTurn;
-		EmitSignal(SignalName.TurnStarted, _isPlayerTurn);
-	}
-	
-	private int CalculateDamage(Ability ability, Creature attacker, Creature defender, 
-								Dictionary<string, int> attackerMods, Dictionary<string, int> defenderMods)
-	{
-		bool isPhysical = true; //IsPhysicalAbility(ability);
-		
-		int attackStat;
-		int defenseStat;
-		
-		if (isPhysical)
-		{
-			attackStat = attacker.RealStats.Attack;
-			defenseStat = defender.RealStats.Defense;
-			
-			if (attackerMods.ContainsKey("Attack"))
-				attackStat += attackerMods["Attack"];
-			if (defenderMods.ContainsKey("Defense"))
-				defenseStat += defenderMods["Defense"];
+			UseAbility(playerSelectedAbility, _playerCreature, _enemyCreature);
+			if (_enemyCreature.CurrentHP > 0)
+			{
+				EnemyTurn();
+			}
+			else
+			{
+				EndBattle(true);
+				return;
+			}
 		}
 		else
 		{
-			attackStat = attacker.RealStats.SpecialAttack;
-			defenseStat = defender.RealStats.SpecialDefense;
+			EnemyTurn();
+			if (_playerCreature.CurrentHP > 0)
+			{
+				UseAbility(playerSelectedAbility, _playerCreature, _enemyCreature);
+			}
+			else
+			{
+				EndBattle(false);
+				return;
+			}
+		}
+	}
+	
+	public void UseAbility(Ability ability, Creature attacker, Creature defender)
+	{
+		GD.Print($"{attacker.Data.Name} uses {ability.Name}!");
+		
+		int damage = CalculateDamage(ability, attacker, defender);
+		
+		defender.CurrentHP = Math.Max(0, defender.CurrentHP - damage);
+		
+		EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
+		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defender.RealStats.MaxHP}");
+	}
+	
+	private int CalculateDamage(Ability ability, Creature attacker, Creature defender)
+	{
+		int attackStat = 1;
+		int defenseStat = 1;
+		
+		switch (ability.Category)
+		{
+			case AbilityCategory.Physical:
+				attackStat = attacker.RealStats.Attack;
+				defenseStat = defender.RealStats.Defense;
+				break;
 			
-			if (attackerMods.ContainsKey("SpecialAttack"))
-				attackStat += attackerMods["SpecialAttack"];
-			if (defenderMods.ContainsKey("SpecialDefense"))
-				defenseStat += defenderMods["SpecialDefense"];
+			case AbilityCategory.Special:
+				attackStat = attacker.RealStats.SpecialAttack;
+				defenseStat = defender.RealStats.SpecialDefense;
+				break;
+			
+			case AbilityCategory.Real:
+				attackStat = Math.Max(attacker.RealStats.Attack,  attacker.RealStats.SpecialAttack);
+				defenseStat = 1;
+				break;
+			
+			case AbilityCategory.Status:
+				//ApplyStatusEffect
+				break;
+			
+			default:
+				throw new InvalidEnumArgumentException($"Unknown ability category: {ability.Category}");
 		}
 		
-		// Formule de dégâts inspirée de Pokémon
-		// Damage = ((2 * Level / 5 + 2) * Power * Attack / Defense / 50 + 2) * Modifiers
 		
-		int level = 1; // Pour l'instant, on suppose que toutes les créatures sont au niveau 1
 		int power = ability.Power;
 		
-		// Si la capacité n'inflige pas de dégâts (buff/debuff)
-		if (power == 0)
-		{
-			ApplyStatusEffect(ability, attacker, defender, attackerMods, defenderMods);
-			return 0;
-		}
+		float baseDamage = (power * attackStat / defenseStat) / 50f + 2;
 		
-		// Calcul de base
-		float baseDamage = ((2f * level / 5f + 2f) * power * attackStat / defenseStat / 50f + 2f);
-		
-		// Multiplicateur de type
 		float typeMultiplier = GetTypeEffectiveness(ability.Type, defender.Data.Type);
 		
-		// STAB (Same Type Attack Bonus) - bonus si le type de l'attaque correspond au type de la créature
 		float stabMultiplier = (ability.Type == attacker.Data.Type) ? 1.5f : 1.0f;
 		
-		// Variation aléatoire (85% - 100%)
-		float randomFactor = (float)GD.RandRange(0.85, 1.0);
+		int finalDamage = (int)(baseDamage * typeMultiplier * stabMultiplier);
 		
-		// Calcul final
-		int finalDamage = (int)(baseDamage * typeMultiplier * stabMultiplier * randomFactor);
-		
-		// Minimum 1 dégât
 		finalDamage = Math.Max(1, finalDamage);
 		
-		// Messages de type
 		if (typeMultiplier > 1.0f)
 			GD.Print("It's super effective!");
 		else if (typeMultiplier < 1.0f)
@@ -231,11 +223,11 @@ public partial class BattleManager : Node
 	{
 		if (attackType.IsStrongAgainst(defenseType))
 		{
-			return 1.5f;
+			return 2f;
 		}
 		else if (attackType.IsWeakAgainst(defenseType))
 		{
-			return 0.75f;
+			return 0.5f;
 		}
 		else if (attackType.IsUselessAgainst(defenseType))
 		{
@@ -309,7 +301,7 @@ public partial class BattleManager : Node
 	// Méthode pour l'IA (tour de l'ennemi)
 	public void EnemyTurn()
 	{
-		if (!_isPlayerTurn && _enemyCreature != null && _enemyCreature.Abilities.Count > 0)
+		if (_enemyCreature != null && _enemyCreature.Abilities.Count > 0)
 		{
 			// Choisir une capacité aléatoirement (IA simple)
 			int randomIndex = GD.RandRange(0, _enemyCreature.Abilities.Count - 1);
@@ -317,5 +309,11 @@ public partial class BattleManager : Node
 			
 			UseAbility(chosenAbility, _enemyCreature, _playerCreature);
 		}
+	}
+	
+
+	private void OnAbilitySelected(Ability ability)
+	{
+		ManageTurn(ability);
 	}
 }

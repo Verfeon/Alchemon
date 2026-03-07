@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 using Creature = Game.Creatures.Domain.Creature;
 using AbilityPanel = Game.Battle.UI.AbilityPanel;
@@ -40,5 +41,10 @@ public partial class BattleScene : CanvasLayer
 	public Node2D GetEnemyPosition()
 	{
 		return _enemyPosition;
+	}
+
+	public List<AbilityButton> GetActiveAbilityButtons()
+	{
+		return _abilityPanel.GetActiveAbilityButtons();
 	}
 }
