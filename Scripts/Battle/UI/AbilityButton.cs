@@ -64,7 +64,6 @@ public partial class AbilityButton : Node2D
 	{
 		if (_ability != null) 
 		{
-			GD.Print($"ability : {_ability.Name}");
 			EmitSignal(SignalName.AbilitySelected, _ability);
 		} else 
 		{

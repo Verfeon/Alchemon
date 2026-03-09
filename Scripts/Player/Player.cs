@@ -79,14 +79,4 @@ public partial class Player : CharacterBody2D
 			_animatedSprite.Play(animName);
 		}
 	}
-	
-	public void _OnBodyEntered(Node2D body)
-	{
-		if (!body.IsInGroup("Enemy")) return;
-		BattleManager battleManager = GetNode<GameManager>("/root/GameManager").Battle;
-		CreatureNode enemyNode = body as CreatureNode;
-		if (!enemyNode.IsWild) return;
-		Creature enemy = enemyNode.GetCreature();
-		_ = battleManager.StartBattle(enemy);
-	}
 }

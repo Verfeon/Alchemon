@@ -40,3 +40,5 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_s16ri")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

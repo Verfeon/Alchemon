@@ -112,5 +112,3 @@ sprite_frames = SubResource("SpriteFrames_vgqql")
 animation = &"idle_down"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[connection signal="body_entered" from="Area2D" to="." method="_OnBodyEntered"]

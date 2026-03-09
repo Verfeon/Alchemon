@@ -5,6 +5,8 @@ using Creature = Game.Creatures.Domain.Creature;
 using Game.Utils;
 using Godot.NativeInterop;
 using Game.Creatures.Data;
+using GameManager = Game.Core.Autoload.GameManager;
+using BattleManager = Game.Battle.Domain.BattleManager;
 
 namespace Game.Creatures.Presentation;
 
@@ -95,6 +97,16 @@ public partial class CreatureNode : Node2D
 		_creature = null;
 	}
 
+	public override void _ExitTree()
+	{
+		Unbind();
+	}
+	
+	public Creature GetCreature()
+	{
+		return _creature;
+	}
+
 	private void OnHpChanged(int current)
 	{
 		_hpBar.Value = current;
@@ -104,14 +116,21 @@ public partial class CreatureNode : Node2D
 	{
 		// animation, disparition, etc.
 	}
-
-	public override void _ExitTree()
+	
+	private void OnBattleEnded(bool playerHasWon)
 	{
-		Unbind();
+		if (playerHasWon)
+		{
+			Free();
+		}
 	}
 	
-	public Creature GetCreature()
+	public void OnBodyEntered(Node2D body)
 	{
-		return _creature;
+		if (!body.IsInGroup("Player")) return;
+		BattleManager battleManager = GetNode<GameManager>("/root/GameManager").Battle;
+		if (!IsWild) return;
+		_ = battleManager.StartBattle(_creature);
+		battleManager.BattleEnded += OnBattleEnded;
 	}
 }
