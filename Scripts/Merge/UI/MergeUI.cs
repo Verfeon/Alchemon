@@ -1,4 +1,3 @@
-using Game.Merge.Domain;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using GameManager = Game.Core.Autoload.GameManager;
 using MergeableItem = Game.Items.Domain.MergeableItem;
 
-namespace Game.UI;
+namespace Game.Merge.UI;
 
 public partial class MergeUI : Control
 {
@@ -106,6 +105,7 @@ public partial class MergeUI : Control
 					_mergeableItemsList.SetItemDisabled(i, false);
 				}
 			}
+			Visible = false;
 		}
 		else
 		{
@@ -148,8 +148,7 @@ public partial class MergeUI : Control
 	
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		// Touche pour ouvrir la merge (F)
-		if (@event.IsActionPressed("ui_merge"))
+		if (@event.IsActionPressed("open_merge_ui"))
 		{
 			GD.Print("Toggle merge");
 			Visible = !Visible;

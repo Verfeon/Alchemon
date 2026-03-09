@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://nnbl5be3ht0h"]
 
-[ext_resource type="Script" uid="uid://cjnn2yamna273" path="res://Scripts/UI/InventoryUI.cs" id="1_nxvpl"]
+[ext_resource type="Script" uid="uid://db8k1tomgn3w3" path="res://Scripts/Items/UI/InventoryUI.cs" id="1_nxvpl"]
 [ext_resource type="PackedScene" uid="uid://b23g6ftuc30n8" path="res://Scenes/UI/MergeUI.tscn" id="2_nxvpl"]
 
 [node name="Ui" type="CanvasLayer"]

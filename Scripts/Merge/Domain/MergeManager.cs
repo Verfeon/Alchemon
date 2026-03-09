@@ -15,9 +15,7 @@ public partial class MergeManager : Node
 {
 	[Export] private PackedScene _creatureScenePath;
 
-	[Signal] public delegate void MergeSuccessEventHandler(string creatureId);
-	[Signal] public delegate void MergeFailedEventHandler(string reason);
-	[Signal] public delegate void RecipeDiscoveredEventHandler(string recipeId);
+	public event Action<Creature> CreatureMerged; 
 
 
 	public bool CanMerge(List<string> items)
@@ -49,14 +47,13 @@ public partial class MergeManager : Node
 		var recipes = mergeRecipeDatabase.FindRecipes(items);
 		if (recipes.Count == 0 || recipes[0].RequiredItems.Count != items.Count)
 		{
-			EmitSignal(SignalName.MergeFailed, "No recipe found for this combination");
 			return new MergeResult { Success = false, Message = "Invalid combination" };
 		}
 		var recipe = recipes[0];
 
 		var creature = CreateCreatureFromRecipe(recipe);
 
-		EmitSignal(SignalName.MergeSuccess, creature.Data.Id);
+		CreatureMerged?.Invoke(creature);
 		return new MergeResult { Success = true, Creature = creature };
 	}
 
@@ -66,8 +63,6 @@ public partial class MergeManager : Node
 
 		CreatureNode newCreature = _creatureScenePath.Instantiate<CreatureNode>();
 		newCreature.Bind(creature);
-
-		GetTree().Root.AddChild(newCreature);
 
 		return creature;
 	}

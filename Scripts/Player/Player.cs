@@ -87,6 +87,6 @@ public partial class Player : CharacterBody2D
 		CreatureNode enemyNode = body as CreatureNode;
 		if (!enemyNode.IsWild) return;
 		Creature enemy = enemyNode.GetCreature();
-		battleManager.StartBattle(enemy, enemy);
+		_ = battleManager.StartBattle(enemy);
 	}
 }

@@ -31,8 +31,10 @@ public partial class Creature
 			HpChanged?.Invoke(_currentHP);
 
 			if (_currentHP == 0 && !IsFainted)
+			{
 				IsFainted = true;
 				Fainted?.Invoke(this);
+				}
 		}
 	}
 	
@@ -61,8 +63,7 @@ public partial class Creature
 	
 	private void InitializeAbilities()
 	{
-		if (Data.Abilities == null || Data.Abilities.Count == 0)
-			return;
+		if (Data.Abilities == null || Data.Abilities.Count == 0) return;
 
 		var pool = new List<Ability>(Data.Abilities.Count);
 		foreach (var ability in Data.Abilities)

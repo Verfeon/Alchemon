@@ -18,7 +18,6 @@ public partial class AbilityButton : Node2D
 	
 	public override void _Ready() 
 	{
-		GD.Print("ready");
 		Bitmap bitmap = new Bitmap();
 		Texture2D texture = _textureButton.GetTextureNormal();
 		Image image = texture.GetImage();
@@ -29,7 +28,6 @@ public partial class AbilityButton : Node2D
 	
 	public void Bind(Ability ability)
 	{
-		GD.Print("bind");
 		if (ability == null)
 		{
 			throw new ArgumentNullException(nameof(ability));
@@ -68,7 +66,6 @@ public partial class AbilityButton : Node2D
 		{
 			GD.Print($"ability : {_ability.Name}");
 			EmitSignal(SignalName.AbilitySelected, _ability);
-
 		} else 
 		{
 			GD.Print("No Ability here");

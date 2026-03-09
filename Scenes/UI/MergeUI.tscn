@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b23g6ftuc30n8"]
 
-[ext_resource type="Script" uid="uid://wk7cw6q04f73" path="res://Scripts/UI/MergeUI.cs" id="1_71s20"]
+[ext_resource type="Script" uid="uid://bliwd00de5q81" path="res://Scripts/Merge/UI/MergeUI.cs" id="1_71s20"]
 
 [node name="MergeUi" type="Control"]
 layout_mode = 3

@@ -3,7 +3,7 @@ using System;
 
 using GameManager = Game.Core.Autoload.GameManager;
 
-namespace Game.UI;
+namespace Game.Items.UI;
 
 public partial class InventoryUI : Control
 {
@@ -115,7 +115,7 @@ public partial class InventoryUI : Control
 	
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event.IsActionPressed("ui_inventory"))
+		if (@event.IsActionPressed("open_inventory_ui"))
 		{
 			GD.Print("Toggle inventory");
 			Visible = !Visible;

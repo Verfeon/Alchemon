@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Creature = Game.Creatures.Domain.Creature;
 using TypeEnum = Game.Creatures.Domain.TypeEnum;
@@ -10,6 +11,8 @@ using Ability = Game.Creatures.Data.Ability;
 using Game.Creatures.Presentation;
 using System.ComponentModel;
 using BattleScene = Game.Battle.UI.BattleScene;
+using GameManager = Game.Core.Autoload.GameManager;
+using MergeManager = Game.Merge.Domain.MergeManager;
 
 namespace Game.Battle.Domain;
 
@@ -41,23 +44,53 @@ public partial class BattleManager : Node
 	[Signal]
 	public delegate void CreatureFaintedEventHandler(string creatureName);
 	
-	public void StartBattle(Creature playerCreature, Creature enemyCreature)
+	private Task<Creature> WaitForCreatureMergedAsync(MergeManager mergeManager)
+	{
+	 	var tcs = new TaskCompletionSource<Creature>();
+		
+		void Handler(Creature creature)
+		{
+			mergeManager.CreatureMerged -= Handler;
+			tcs.SetResult(creature);
+		}
+		
+		mergeManager.CreatureMerged += Handler;
+		
+		return tcs.Task;
+	}
+	
+	public async Task StartBattle(Creature enemyCreature)
 	{
 		GD.Print("Start Battle");
+		
+		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager == null) return;
+		if (gameManager.Merge == null) return;
+		
 		GetTree().Paused = true;
-		BattleScene _battleScene = _battleScenePath.Instantiate<BattleScene>();
+		_battleScene = _battleScenePath.Instantiate<BattleScene>();
 		
 		CanvasLayer overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
 
-		CreatureNode playerCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
-		_battleScene.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
-		playerCreatureNode.Bind(playerCreature);
 		
 		CreatureNode enemyCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
 		_battleScene.GetEnemyPosition().CallDeferred("add_child", enemyCreatureNode);
 		enemyCreatureNode.Bind(enemyCreature);
 		
 		overlayLayer.AddChild(_battleScene);
+		overlayLayer.MoveChild(_battleScene, 0);
+		
+		var ev = new InputEventAction();
+		ev.Action = "open_merge_ui";
+		ev.Pressed = true;
+		Input.ParseInputEvent(ev);
+		GD.Print("Action ui_merged Pressed");
+		
+		Creature playerCreature = await WaitForCreatureMergedAsync(gameManager.Merge);
+		CreatureNode playerCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
+		_battleScene.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
+		playerCreatureNode.Bind(playerCreature);
+		
 		_battleScene.Init(playerCreature);
 		_battleScene.GetActiveAbilityButtons().ForEach(button => button.AbilitySelected += OnAbilitySelected);
 
@@ -253,6 +286,9 @@ public partial class BattleManager : Node
 		// }
 		
 		EmitSignal(SignalName.BattleEnded, playerWon);
+		_battleScene.EndBattle();
+		_battleScene = null;
+		GetTree().Paused = false;
 	}
 	
 	// private int CalculateExpReward(Creature defeatedCreature)
