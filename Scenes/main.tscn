@@ -63,7 +63,17 @@ IsMergeable = true
 _creatureScenePath = ExtResource("4_kry3j")
 _possibleCreatures = Array[Object]([ExtResource("5_344ge"), ExtResource("6_ynf5e"), ExtResource("7_hptm8")])
 
+[node name="Button" type="Button" parent="World"]
+offset_left = -851.0
+offset_top = -363.0
+offset_right = -656.0
+offset_bottom = -324.0
+action_mode = 0
+text = "Spawn creature"
+
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 process_mode = 3
 
 [node name="Ui" parent="OverlayLayer" instance=ExtResource("4_jjvhh")]
+
+[connection signal="pressed" from="World/Button" to="World/CreatureSpawner" method="SpawnRandomCreature"]

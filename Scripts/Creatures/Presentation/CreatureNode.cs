@@ -123,7 +123,9 @@ public partial class CreatureNode : Node2D
 	{
 		if (playerHasWon)
 		{
-			Free();
+			BattleManager battleManager = GetNode<GameManager>("/root/GameManager").Battle;
+			battleManager.BattleEnded -= OnBattleEnded;
+			QueueFree();
 		}
 	}
 	
