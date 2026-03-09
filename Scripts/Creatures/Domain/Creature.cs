@@ -34,7 +34,7 @@ public partial class Creature
 			{
 				IsFainted = true;
 				Fainted?.Invoke(this);
-				}
+			}
 		}
 	}
 	

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgh7jm40aopen"]
+
+[ext_resource type="Script" uid="uid://cdsi0txcnxxmu" path="res://Scripts/Creatures/Domain/CreatureSpawner.cs" id="1_tp665"]
+
+[node name="CreatureSpawner" type="Node2D"]
+script = ExtResource("1_tp665")

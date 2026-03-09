@@ -31,15 +31,17 @@ public partial class CreatureNode : Node2D
 	{
 		if (IsWild)
 		{
-			_hpBar.Visible = false;
-			if (possibleCreatures.Count == 0)
-			{
-				GD.PushError("CreatureNode is marked as wild but has no possible creatures assigned.");
-				return;
-			}
-			Creature creature = new Creature(possibleCreatures[_random.NextInt(0, possibleCreatures.Count - 1)], 1, new GodotRandomAdapter());
-			Bind(creature);
 			Move();
+		}
+	}
+	
+	public void Setup(Creature creature, bool isWild)
+	{
+		Bind(creature);
+		IsWild = isWild;
+		if (isWild)
+		{
+			_hpBar.Visible = false;
 		}
 	}
 

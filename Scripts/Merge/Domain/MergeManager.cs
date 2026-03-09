@@ -61,9 +61,6 @@ public partial class MergeManager : Node
 	{
 		Creature creature = new Creature(recipe.ResultCreature, 1, new GodotRandomAdapter());
 
-		CreatureNode newCreature = _creatureScenePath.Instantiate<CreatureNode>();
-		newCreature.Bind(creature);
-
 		return creature;
 	}
 }

@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://vn5706krl4pt"]
+[gd_scene load_steps=9 format=3 uid="uid://vn5706krl4pt"]
 
 [ext_resource type="PackedScene" uid="uid://c27mhvx4p0nlt" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bmpr6vljei3x1" path="res://Scenes/CollectibleItem.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://cgh7jm40aopen" path="res://Scenes/creature_spawner.tscn" id="3_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://nnbl5be3ht0h" path="res://Scenes/UI.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://br1jwst57qb3q" path="res://Scenes/Creature.tscn" id="4_kry3j"]
+[ext_resource type="Resource" uid="uid://na55uxiassjj" path="res://Resources/CreatureDatas/Treant.tres" id="5_344ge"]
+[ext_resource type="Resource" uid="uid://psk3qy5updl6" path="res://Resources/CreatureDatas/RockGolem.tres" id="6_ynf5e"]
+[ext_resource type="Resource" uid="uid://cfrhf7l4jlu2t" path="res://Resources/CreatureDatas/WingedEye.tres" id="7_hptm8"]
 
 [node name="Main" type="Node"]
 
@@ -55,9 +59,9 @@ position = Vector2(167, 24)
 ObjectId = "feather"
 IsMergeable = true
 
-[node name="Creature" parent="World" instance=ExtResource("4_kry3j")]
-position = Vector2(-147, 176)
-IsWild = true
+[node name="CreatureSpawner" parent="World" instance=ExtResource("3_jjvhh")]
+_creatureScenePath = ExtResource("4_kry3j")
+_possibleCreatures = Array[Object]([ExtResource("5_344ge"), ExtResource("6_ynf5e"), ExtResource("7_hptm8")])
 
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 process_mode = 3

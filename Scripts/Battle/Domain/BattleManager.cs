@@ -112,32 +112,26 @@ public partial class BattleManager : Node
 		return _playerCreature.RealStats.Speed >= _enemyCreature.RealStats.Speed;
 	}
 
+	private bool IsAnyoneDead()
+	{
+		return ((_playerCreature.CurrentHP <= 0) ||(_enemyCreature.CurrentHP <= 0));
+	}
+	
 	private void ManageTurn(Ability playerSelectedAbility)
 	{
 		_turnCount++;
-		if (PlayerGoesFirst())
+		
+		var actions = PlayerGoesFirst()
+			? new Action[] { () => UseAbility(playerSelectedAbility, _playerCreature, _enemyCreature), EnemyTurn }
+		: new Action[] { EnemyTurn, () => UseAbility(playerSelectedAbility, _playerCreature, _enemyCreature) };
+		
+		foreach (var action in actions)
 		{
-			UseAbility(playerSelectedAbility, _playerCreature, _enemyCreature);
-			if (_enemyCreature.CurrentHP > 0)
+			action();
+			
+			if (IsAnyoneDead())
 			{
-				EnemyTurn();
-			}
-			else
-			{
-				EndBattle(true);
-				return;
-			}
-		}
-		else
-		{
-			EnemyTurn();
-			if (_playerCreature.CurrentHP > 0)
-			{
-				UseAbility(playerSelectedAbility, _playerCreature, _enemyCreature);
-			}
-			else
-			{
-				EndBattle(false);
+				EndBattle(_enemyCreature.IsFainted == true);
 				return;
 			}
 		}
