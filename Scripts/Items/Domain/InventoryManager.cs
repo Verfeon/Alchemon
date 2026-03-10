@@ -7,13 +7,16 @@ using MergeableItemDatabase = Game.Core.Autoload.MergeableItemDatabase;
 using ItemQuality = Game.Items.Domain.ItemQuality;
 using ItemQualityWeights = Game.Items.Data.ItemQualityWeights;
 using ItemQualityRoller = Game.Items.Domain.ItemQualityRoller;
+using GameManager = Game.Core.Autoload.GameManager;
+using BattleManager = Game.Battle.Domain.BattleManager;
 
 namespace Game.Items.Domain;
 
 public partial class InventoryManager : Node
 {
-	private Dictionary<string, int> _items = new(); 
 	private const int MaxMergeableItems = 12;
+	
+	private Dictionary<string, int> _items = new(); 
 	private MergeableItem[] _mergeableItems = new MergeableItem[MaxMergeableItems]; 
 	private bool[] _isMergeableItemUsed = new bool[MaxMergeableItems];
 	
@@ -22,6 +25,12 @@ public partial class InventoryManager : Node
 	
 	[Signal]
 	public delegate void itemUsedEventHandler(string itemId);
+	
+	public override void _Ready()
+	{
+		BattleManager battleManager = GetNode<GameManager>("/root/GameManager").Battle;
+		battleManager.BattleEnded += (bool playerHasWon) => ResetMergeableItemsUsed();
+	}
 	
 	public void AddItem(string itemId, int quantity = 1, bool isMergeable = false)
 	{
@@ -123,5 +132,13 @@ public partial class InventoryManager : Node
 			}
 		}
 		return usedItems.ToArray();
+	}
+	
+	private void ResetMergeableItemsUsed()
+	{
+		for (int i = 0; i < MaxMergeableItems; i++)
+		{
+			_isMergeableItemUsed[i] = false;
+		}
 	}
 }
