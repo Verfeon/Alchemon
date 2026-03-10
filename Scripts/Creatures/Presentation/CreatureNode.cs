@@ -1,10 +1,10 @@
 using Godot;
 using System;
+using Godot.NativeInterop;
+using Game.Utils.Random;
 
 using Creature = Game.Creatures.Domain.Creature;
-using Game.Utils;
-using Godot.NativeInterop;
-using Game.Creatures.Data;
+using CreatureData = Game.Creatures.Data.CreatureData;
 using GameManager = Game.Core.Autoload.GameManager;
 using BattleManager = Game.Battle.Domain.BattleManager;
 

@@ -1,14 +1,14 @@
 using System;
 
-namespace Game.Utils;
+namespace Game.Utils.Random;
 
 public sealed class DeterministicRandom : IRandom
 {
-	private readonly Random _random;
+	private readonly System.Random _random;
 
 	public DeterministicRandom(int seed)
 	{
-		_random = new Random(seed);
+		_random = new System.Random(seed);
 	}
 
 	public int NextInt(int minInclusive, int maxInclusive)

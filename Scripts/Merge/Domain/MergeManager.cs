@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Creature = Game.Creatures.Domain.Creature;
 using CreatureNode = Game.Creatures.Presentation.CreatureNode;
 using GameManager = Game.Core.Autoload.GameManager;
-using GodotRandomAdapter = Game.Utils.GodotRandomAdapter;
+using GodotRandomAdapter = Game.Utils.Random.GodotRandomAdapter;
 using MergeRecipe = Game.Merge.Data.MergeRecipe;
 using MergeRecipeDatabase = Game.Core.Autoload.MergeRecipeDatabase;
 

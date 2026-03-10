@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Utils;
+namespace Game.Utils.Random;
 
 public sealed class GodotRandomAdapter : IRandom
 {

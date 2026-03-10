@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using CreatureData = Game.Creatures.Data.CreatureData;
 using Ability = Game.Creatures.Data.Ability;
-using IRandom = Game.Utils.IRandom;
+using IRandom = Game.Utils.Random.IRandom;
 
 namespace Game.Creatures.Domain;
 

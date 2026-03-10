@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using Game.Utils;
+using Game.Utils.Random;
 
 using CreatureData = Game.Creatures.Data.CreatureData;
 using CreatureNode = Game.Creatures.Presentation.CreatureNode;
