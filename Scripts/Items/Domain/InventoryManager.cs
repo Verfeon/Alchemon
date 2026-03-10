@@ -9,6 +9,8 @@ using ItemQualityWeights = Game.Items.Data.ItemQualityWeights;
 using ItemQualityRoller = Game.Items.Domain.ItemQualityRoller;
 using GameManager = Game.Core.Autoload.GameManager;
 using BattleManager = Game.Battle.Domain.BattleManager;
+using BaseItemData = Game.Items.Data.BaseItemData;
+using MergeableItemData = Game.Items.Data.MergeableItemData;
 
 namespace Game.Items.Domain;
 
@@ -16,7 +18,9 @@ public partial class InventoryManager : Node
 {
 	private const int MaxMergeableItems = 12;
 	
-	private Dictionary<string, int> _items = new(); 
+	[Export] private ItemQualityWeights _itemQualityWeights;
+	
+	private Dictionary<string, int> _itemIds = new(); 
 	private MergeableItem[] _mergeableItems = new MergeableItem[MaxMergeableItems]; 
 	private bool[] _isMergeableItemUsed = new bool[MaxMergeableItems];
 	
@@ -32,37 +36,36 @@ public partial class InventoryManager : Node
 		battleManager.BattleEnded += (bool playerHasWon) => ResetMergeableItemsUsed();
 	}
 	
-	public void AddItem(string itemId, int quantity = 1, bool isMergeable = false)
+	public void AddItem(BaseItemData item, int quantity = 1)
 	{
-		if (_items.ContainsKey(itemId))
+		if (_itemIds.ContainsKey(item.Id))
 		{
-			_items[itemId] += quantity;
+			_itemIds[item.Id] += quantity;
 		}
 		else
 		{
-			_items[itemId] = quantity;
+			_itemIds[item.Id] = quantity;
 		}
 		
-		if (isMergeable) 
+		if (item is MergeableItemData) 
 		{
 			for (int i = 0; i < _mergeableItems.Length; i++)
 			{
 				if (_mergeableItems[i] == null)
 				{
-					ItemQualityWeights weights = ResourceLoader.Load<ItemQualityWeights>("res://Resources/ItemQualityWeights.tres");
-					ItemQuality quality = ItemQualityRoller.Roll(weights);
-					_mergeableItems[i] = new MergeableItem(GetNode<MergeableItemDatabase>("/root/MergeableItemDatabase").Get(itemId), quality);
+					ItemQuality quality = ItemQualityRoller.Roll(_itemQualityWeights);
+					_mergeableItems[i] = new MergeableItem(item as MergeableItemData, quality);
 					break;
 				}
 			}
 		}
 		
-		EmitSignal(SignalName.itemCollected, itemId);
+		EmitSignal(SignalName.itemCollected, item.Id);
 	}
 	
 	public bool HasItem(string itemId, int quantity = 1)
 	{
-		return _items.ContainsKey(itemId) && _items[itemId] >= quantity;
+		return _itemIds.ContainsKey(itemId) && _itemIds[itemId] >= quantity;
 	}
 	
 	public bool RemoveItem(string itemId, int quantity = 1)
@@ -70,9 +73,9 @@ public partial class InventoryManager : Node
 		if (!HasItem(itemId, quantity))
 			return false;
 			
-		_items[itemId] -= quantity;
-		if (_items[itemId] <= 0)
-			_items.Remove(itemId);
+		_itemIds[itemId] -= quantity;
+		if (_itemIds[itemId] <= 0)
+			_itemIds.Remove(itemId);
 			
 		EmitSignal(SignalName.itemUsed, itemId);
 		return true;
@@ -89,18 +92,10 @@ public partial class InventoryManager : Node
 			}
 		}
 	}
-
-	public void ResetMergeableItemsUsage()
-	{
-		for (int i = 0; i < _isMergeableItemUsed.Length; i++)
-		{
-			_isMergeableItemUsed[i] = false;
-		}
-	}
 	
 	public Dictionary<string, int> GetAllItems()
 	{
-		return new Dictionary<string, int>(_items);
+		return new Dictionary<string, int>(_itemIds);
 	}
 	
 	public MergeableItem[] GetAllMergeableItems()

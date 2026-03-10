@@ -44,5 +44,5 @@ Texture2d = ExtResource("2_ajs75")
 BaseStats = SubResource("Resource_bermt")
 Type = ExtResource("9_bermt")
 Abilities = Array[ExtResource("1_g37wl")]([ExtResource("2_nm8xq"), ExtResource("1_nm8xq"), ExtResource("3_g37wl"), ExtResource("4_bermt"), ExtResource("5_e8kvg")])
-LootItems = [SubResource("Resource_omx4n"), SubResource("Resource_sd0cs")]
+LootItems = Array[ExtResource("9_p3l31")]([SubResource("Resource_omx4n"), SubResource("Resource_sd0cs")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

@@ -6,9 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1x5hq"]
 size = Vector2(15, 26)
 
-[node name="CollectibleItem" type="Area2D"]
+[node name="CollectibleItem" type="Area2D" node_paths=PackedStringArray("_sprite")]
 collision_mask = 3
 script = ExtResource("1_1x5hq")
+_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7vxoh")

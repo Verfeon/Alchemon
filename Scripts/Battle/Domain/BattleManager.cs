@@ -13,6 +13,7 @@ using System.ComponentModel;
 using BattleScene = Game.Battle.UI.BattleScene;
 using GameManager = Game.Core.Autoload.GameManager;
 using MergeManager = Game.Merge.Domain.MergeManager;
+using InventoryManager = Game.Items.Domain.InventoryManager;
 
 namespace Game.Battle.Domain;
 
@@ -36,7 +37,7 @@ public partial class BattleManager : Node
 	public delegate void BattleEndedEventHandler(bool playerWon);
 	
 	[Signal]
-	public delegate void TurnStartedEventHandler(bool isPlayerTurn);
+	public delegate void TurnEndedEventHandler();
 	
 	[Signal]
 	public delegate void DamageDealtEventHandler(string attackerName, string defenderName, int damage);
@@ -91,7 +92,7 @@ public partial class BattleManager : Node
 		_battleScene.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
 		playerCreatureNode.Bind(playerCreature);
 		
-		_battleScene.Init(playerCreature);
+		_battleScene.Init(playerCreature, this);
 		_battleScene.GetActiveAbilityButtons().ForEach(button => button.AbilitySelected += OnAbilitySelected);
 
 		_playerCreature = playerCreature;
@@ -135,9 +136,11 @@ public partial class BattleManager : Node
 				return;
 			}
 		}
+		
+		EmitSignal(SignalName.TurnEnded);
 	}
 	
-	public void UseAbility(Ability ability, Creature attacker, Creature defender)
+	private void UseAbility(Ability ability, Creature attacker, Creature defender)
 	{
 		GD.Print($"{attacker.Data.Name} uses {ability.Name}!");
 		
@@ -268,18 +271,14 @@ public partial class BattleManager : Node
 	{
 		GD.Print($"Battle ended! {(playerWon ? "Victory!" : "Defeat...")}");
 		
-		// if (playerWon)
-		// {
-		// 	// Donner de l'expérience à la créature du joueur
-		// 	int expGained = CalculateExpReward(_enemyCreature);
-		// 	_playerCreature.Experience += expGained;
-		// 	GD.Print($"{_playerCreature.Name} gained {expGained} EXP!");
-			
-		// 	// Vérifier si level up
-		// 	CheckLevelUp(_playerCreature);
-		// }
+		 if (playerWon)
+		 {
+			InventoryManager inventoryManager = GetNode<GameManager>("/root/GameManager").Inventory;
+			_enemyCreature.Data.RollLoot(inventoryManager);
+		 }
 		
 		EmitSignal(SignalName.BattleEnded, playerWon);
+		_battleScene.GetActiveAbilityButtons().ForEach(button => button.AbilitySelected -= OnAbilitySelected);
 		_battleScene.EndBattle();
 		_battleScene = null;
 		GetTree().Paused = false;

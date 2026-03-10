@@ -151,6 +151,7 @@ public partial class MergeUI : Control
 		if (@event.IsActionPressed("open_merge_ui"))
 		{
 			GD.Print("Toggle merge");
+			UpdateMergeableItemsListDisplay();
 			Visible = !Visible;
 		}
 	}

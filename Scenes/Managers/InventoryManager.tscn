@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy7xaog5r2y4h"]
+[gd_scene load_steps=3 format=3 uid="uid://cy7xaog5r2y4h"]
 
 [ext_resource type="Script" uid="uid://digxhtcqtapbi" path="res://Scripts/Items/Domain/InventoryManager.cs" id="1_boj2o"]
+[ext_resource type="Resource" uid="uid://l4cr610nptl1" path="res://Resources/ItemQualityWeights.tres" id="2_ran16"]
 
 [node name="InventoryManager" type="Node"]
 script = ExtResource("1_boj2o")
+_itemQualityWeights = ExtResource("2_ran16")

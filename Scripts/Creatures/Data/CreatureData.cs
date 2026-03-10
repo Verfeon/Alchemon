@@ -6,6 +6,7 @@ using BaseCreatureStats = Game.Creatures.Data.BaseCreatureStats;
 using Type = Game.Creatures.Data.Type;
 using BaseItemData = Game.Items.Data.BaseItemData;
 using LootEntry = Game.Items.Data.LootEntry;
+using InventoryManager = Game.Items.Domain.InventoryManager;
 
 namespace Game.Creatures.Data;
 
@@ -59,11 +60,11 @@ public partial class CreatureData : Resource
 		Abilities = unique;
 	}
 	
-	public Godot.Collections.Array<BaseItemData> RollLoot()
+	public void RollLoot(InventoryManager inventoryManager)
 	{
-		var lootedItems = new Godot.Collections.Array<BaseItemData>();
+		GD.Print("Try looting items");
 		
-		if (LootItems == null || LootItems.Count == 0) return lootedItems;
+		if (LootItems == null || LootItems.Count == 0) return;
 		
 		var rnd = new RandomNumberGenerator();
 		rnd.Randomize();
@@ -72,10 +73,9 @@ public partial class CreatureData : Resource
 		{
 			if (rnd.Randf() <= lootEntry.Probability)
 			{
-				lootedItems.Add(lootEntry.Item);
+				inventoryManager.AddItem(lootEntry.Item);
+				GD.Print($"Loot {lootEntry.Item.Name}");
 			}
 		}
-		
-		return lootedItems;
 	}
 }
