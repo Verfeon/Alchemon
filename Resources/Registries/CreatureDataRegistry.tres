@@ -1,6 +1,56 @@
-[gd_resource type="Resource" script_class="Registry" load_steps=2 format=3 uid="uid://cfm4vs71530b1"]
+[gd_resource type="Resource" script_class="Registry" load_steps=22 format=3 uid="uid://cfm4vs71530b1"]
 
 [ext_resource type="Script" uid="uid://dqtv77mng5dyh" path="res://addons/yard/registry.gd" id="1_3hfvd"]
+[ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_gipko"]
+[ext_resource type="Resource" uid="uid://suxlcaaklhsx" path="res://Resources/Abilities/Wait.tres" id="2_sqi85"]
+[ext_resource type="Resource" uid="uid://dddkx13dwujh2" path="res://Resources/Abilities/Punch.tres" id="3_7rrjx"]
+[ext_resource type="Resource" uid="uid://brqcinifpqxrn" path="res://Resources/Abilities/Tackle.tres" id="4_dkaxa"]
+[ext_resource type="Resource" uid="uid://ciah307vaepge" path="res://Resources/Abilities/LaserBeam.tres" id="5_q2oex"]
+[ext_resource type="Resource" uid="uid://dc2moog1rmcrs" path="res://Resources/Abilities/FireBreath.tres" id="6_82okj"]
+[ext_resource type="Resource" uid="uid://bpyxte7j0wvkk" path="res://Resources/Abilities/WaterGun.tres" id="7_a4ly1"]
+[ext_resource type="Script" uid="uid://dcbwlk2yokgmo" path="res://Scripts/Items/Data/LootEntry.cs" id="8_4hpo5"]
+[ext_resource type="Resource" uid="uid://bp5o2ba8v41po" path="res://Resources/MergeableItemDatas/Eye.tres" id="9_gbheo"]
+[ext_resource type="Resource" uid="uid://ggpjm8s6jrmr" path="res://Resources/MergeableItemDatas/Feather.tres" id="10_uw7ca"]
+[ext_resource type="Resource" uid="uid://ciwu0jkuadewg" path="res://Resources/MergeableItemDatas/WoodStick.tres" id="11_hu72j"]
+[ext_resource type="Resource" uid="uid://dyl2ese180f5r" path="res://Resources/MergeableItemDatas/Leaf.tres" id="12_5jhrn"]
+[ext_resource type="Resource" uid="uid://dbmelw6ar1e8g" path="res://Resources/MergeableItemDatas/Stone.tres" id="13_h66vh"]
+[ext_resource type="Resource" uid="uid://dyqqfnwa42ca8" path="res://Resources/MergeableItemDatas/Pebble.tres" id="14_qq27a"]
+
+[sub_resource type="Resource" id="Resource_72rqx"]
+script = ExtResource("8_4hpo5")
+Item = ExtResource("9_gbheo")
+Probability = 0.8
+metadata/_custom_type_script = "uid://dcbwlk2yokgmo"
+
+[sub_resource type="Resource" id="Resource_sjxxe"]
+script = ExtResource("8_4hpo5")
+Item = ExtResource("10_uw7ca")
+Probability = 0.2
+metadata/_custom_type_script = "uid://dcbwlk2yokgmo"
+
+[sub_resource type="Resource" id="Resource_ipjic"]
+script = ExtResource("8_4hpo5")
+Item = ExtResource("11_hu72j")
+Probability = 0.25
+metadata/_custom_type_script = "uid://dcbwlk2yokgmo"
+
+[sub_resource type="Resource" id="Resource_0h6pb"]
+script = ExtResource("8_4hpo5")
+Item = ExtResource("12_5jhrn")
+Probability = 0.1
+metadata/_custom_type_script = "uid://dcbwlk2yokgmo"
+
+[sub_resource type="Resource" id="Resource_omx4n"]
+script = ExtResource("8_4hpo5")
+Item = ExtResource("13_h66vh")
+Probability = 0.05
+metadata/_custom_type_script = "uid://dcbwlk2yokgmo"
+
+[sub_resource type="Resource" id="Resource_sd0cs"]
+script = ExtResource("8_4hpo5")
+Item = ExtResource("14_qq27a")
+Probability = 0.2
+metadata/_custom_type_script = "uid://dcbwlk2yokgmo"
 
 [resource]
 script = ExtResource("1_3hfvd")
@@ -15,4 +65,26 @@ _string_ids_to_uids = Dictionary[StringName, StringName]({
 &"RockGolem": &"uid://psk3qy5updl6",
 &"Treant": &"uid://na55uxiassjj",
 &"WingedEye": &"uid://cfrhf7l4jlu2t"
+})
+_property_index = Dictionary[StringName, Dictionary]({
+&"Abilities": {
+Array[ExtResource("1_gipko")]([ExtResource("2_sqi85"), ExtResource("3_7rrjx"), ExtResource("4_dkaxa"), ExtResource("5_q2oex"), ExtResource("6_82okj"), ExtResource("7_a4ly1")]): {
+&"RockGolem": true,
+&"WingedEye": true
+},
+Array[ExtResource("1_gipko")]([ExtResource("2_sqi85"), ExtResource("3_7rrjx"), ExtResource("4_dkaxa"), ExtResource("5_q2oex"), ExtResource("7_a4ly1"), ExtResource("6_82okj")]): {
+&"Treant": true
+}
+},
+&"LootItems": {
+Array[ExtResource("8_4hpo5")]([SubResource("Resource_72rqx"), SubResource("Resource_sjxxe")]): {
+&"WingedEye": true
+},
+Array[ExtResource("8_4hpo5")]([SubResource("Resource_ipjic"), SubResource("Resource_0h6pb")]): {
+&"Treant": true
+},
+Array[ExtResource("8_4hpo5")]([SubResource("Resource_omx4n"), SubResource("Resource_sd0cs")]): {
+&"RockGolem": true
+}
+}
 })

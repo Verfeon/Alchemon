@@ -39,6 +39,7 @@ public partial class CreatureData : Resource
 		{
 			if (ability == null)
 			{
+				unique.Add(ability);
 				continue;
 			}
 			

@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="Registry" load_steps=2 format=3 uid="uid://ngvmcua847ck"]
+[gd_resource type="Resource" script_class="Registry" load_steps=7 format=3 uid="uid://cbke4j5e7tphj"]
 
 [ext_resource type="Script" uid="uid://dqtv77mng5dyh" path="res://addons/yard/registry.gd" id="1_1ajm7"]
+[ext_resource type="Script" uid="uid://ccsxrvv1k3vi" path="res://Scripts/Items/Data/MergeableItemData.cs" id="1_c2y8w"]
+[ext_resource type="Resource" uid="uid://dbmelw6ar1e8g" path="res://Resources/MergeableItemDatas/Stone.tres" id="2_nrh0t"]
+[ext_resource type="Resource" uid="uid://ciwu0jkuadewg" path="res://Resources/MergeableItemDatas/WoodStick.tres" id="3_l33q5"]
+[ext_resource type="Resource" uid="uid://bp5o2ba8v41po" path="res://Resources/MergeableItemDatas/Eye.tres" id="4_rirgh"]
+[ext_resource type="Resource" uid="uid://ggpjm8s6jrmr" path="res://Resources/MergeableItemDatas/Feather.tres" id="5_upy8x"]
 
 [resource]
 script = ExtResource("1_1ajm7")
@@ -15,4 +20,17 @@ _string_ids_to_uids = Dictionary[StringName, StringName]({
 &"RockGolem": &"uid://dviac0j8r68k0",
 &"Treant": &"uid://fij74q5o04kf",
 &"WingedEye": &"uid://bkb3t2ouw56v"
+})
+_property_index = Dictionary[StringName, Dictionary]({
+&"RequiredItems": {
+Array[ExtResource("1_c2y8w")]([ExtResource("2_nrh0t"), ExtResource("2_nrh0t")]): {
+&"RockGolem": true
+},
+Array[ExtResource("1_c2y8w")]([ExtResource("3_l33q5"), ExtResource("3_l33q5")]): {
+&"Treant": true
+},
+Array[ExtResource("1_c2y8w")]([ExtResource("4_rirgh"), ExtResource("5_upy8x")]): {
+&"WingedEye": true
+}
+}
 })

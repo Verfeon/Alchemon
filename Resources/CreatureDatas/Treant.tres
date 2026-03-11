@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CreatureData" load_steps=17 format=3 uid="uid://na55uxiassjj"]
+[gd_resource type="Resource" script_class="CreatureData" load_steps=18 format=3 uid="uid://na55uxiassjj"]
 
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_3cmqm"]
 [ext_resource type="Resource" uid="uid://dddkx13dwujh2" path="res://Resources/Abilities/Punch.tres" id="1_vfuwl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://ciah307vaepge" path="res://Resources/Abilities/LaserBeam.tres" id="4_3cmqm"]
 [ext_resource type="Resource" uid="uid://dc2moog1rmcrs" path="res://Resources/Abilities/FireBreath.tres" id="5_i8sur"]
 [ext_resource type="Script" uid="uid://bxeke84vubmt1" path="res://Scripts/Creatures/Data/BaseCreatureStats.cs" id="6_dp24q"]
+[ext_resource type="Resource" uid="uid://bpyxte7j0wvkk" path="res://Resources/Abilities/WaterGun.tres" id="6_ipjic"]
 [ext_resource type="Resource" uid="uid://ciwu0jkuadewg" path="res://Resources/MergeableItemDatas/WoodStick.tres" id="8_bfjda"]
 [ext_resource type="Resource" uid="uid://c3dsiawte4vv6" path="res://Resources/Types/Plant.tres" id="9_i8sur"]
 [ext_resource type="Script" uid="uid://dcbwlk2yokgmo" path="res://Scripts/Items/Data/LootEntry.cs" id="9_ld03i"]
@@ -43,6 +44,6 @@ Name = "Treant"
 Texture2d = ExtResource("2_vfuwl")
 BaseStats = SubResource("Resource_i8sur")
 Type = ExtResource("9_i8sur")
-Abilities = Array[ExtResource("1_3cmqm")]([ExtResource("2_yj7qr"), ExtResource("1_vfuwl"), ExtResource("3_36rse"), ExtResource("4_3cmqm"), ExtResource("5_i8sur")])
+Abilities = Array[ExtResource("1_3cmqm")]([ExtResource("2_yj7qr"), ExtResource("1_vfuwl"), ExtResource("3_36rse"), ExtResource("4_3cmqm"), ExtResource("6_ipjic"), ExtResource("5_i8sur")])
 LootItems = Array[ExtResource("9_ld03i")]([SubResource("Resource_ipjic"), SubResource("Resource_0h6pb")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

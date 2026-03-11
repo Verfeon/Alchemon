@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CreatureData" load_steps=17 format=3 uid="uid://psk3qy5updl6"]
+[gd_resource type="Resource" script_class="CreatureData" load_steps=18 format=3 uid="uid://psk3qy5updl6"]
 
 [ext_resource type="Script" uid="uid://fvt1k1fhpaxg" path="res://Scripts/Creatures/Data/CreatureData.cs" id="1_cemps"]
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_g37wl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://brqcinifpqxrn" path="res://Resources/Abilities/Tackle.tres" id="3_g37wl"]
 [ext_resource type="Resource" uid="uid://ciah307vaepge" path="res://Resources/Abilities/LaserBeam.tres" id="4_bermt"]
 [ext_resource type="Resource" uid="uid://dc2moog1rmcrs" path="res://Resources/Abilities/FireBreath.tres" id="5_e8kvg"]
+[ext_resource type="Resource" uid="uid://bpyxte7j0wvkk" path="res://Resources/Abilities/WaterGun.tres" id="7_p3l31"]
 [ext_resource type="Resource" uid="uid://dyqqfnwa42ca8" path="res://Resources/MergeableItemDatas/Pebble.tres" id="8_e8kvg"]
 [ext_resource type="Resource" uid="uid://dbmelw6ar1e8g" path="res://Resources/MergeableItemDatas/Stone.tres" id="8_u4hyv"]
 [ext_resource type="Resource" uid="uid://dfahuhn5nqnjf" path="res://Resources/Types/Rock.tres" id="9_bermt"]
@@ -43,6 +44,6 @@ Name = "Rock Golem"
 Texture2d = ExtResource("2_ajs75")
 BaseStats = SubResource("Resource_bermt")
 Type = ExtResource("9_bermt")
-Abilities = Array[ExtResource("1_g37wl")]([ExtResource("2_nm8xq"), ExtResource("1_nm8xq"), ExtResource("3_g37wl"), ExtResource("4_bermt"), ExtResource("5_e8kvg")])
+Abilities = Array[ExtResource("1_g37wl")]([ExtResource("2_nm8xq"), ExtResource("1_nm8xq"), ExtResource("3_g37wl"), ExtResource("4_bermt"), ExtResource("5_e8kvg"), ExtResource("7_p3l31")])
 LootItems = Array[ExtResource("9_p3l31")]([SubResource("Resource_omx4n"), SubResource("Resource_sd0cs")])
 metadata/_custom_type_script = "uid://fvt1k1fhpaxg"

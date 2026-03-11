@@ -46,3 +46,147 @@ _string_ids_to_uids = Dictionary[StringName, StringName]({
 &"Toxic": &"uid://bqq1bgxmhelds",
 &"Water": &"uid://db1ljf0wj5mv7"
 })
+_property_index = Dictionary[StringName, Dictionary]({
+&"StrongAgainst": {
+[]: {
+&"Neutral": true
+},
+[1, 3, 7]: {
+&"Water": true
+},
+[2, 4]: {
+&"Electric": true
+},
+[2, 7, 3, 14]: {
+&"Plant": true
+},
+[4, 1, 9, 6]: {
+&"Rock": true
+},
+[5]: {
+&"Toxic": true
+},
+[5, 3, 4]: {
+&"Ice": true
+},
+[5, 6]: {
+&"Air": true
+},
+[5, 6, 9, 16]: {
+&"Fire": true
+},
+[5, 10]: {
+&"Bug": true
+},
+[7, 8, 1, 12, 16]: {
+&"Earth": true
+},
+[7, 16, 9, 6]: {
+&"Fighting": true
+},
+[10, 11]: {
+&"Dark": true
+},
+[10, 13]: {
+&"Ghost": true
+},
+[11, 1, 2, 5, 17]: {
+&"Space": true
+},
+[11, 12]: {
+&"Psychic": true
+},
+[15, 11, 17]: {
+&"Light": true
+},
+[17, 7, 9]: {
+&"Tech": true
+}
+},
+&"UselessAgainst": {
+[]: {
+&"Air": true,
+&"Bug": true,
+&"Fire": true,
+&"Ghost": true,
+&"Ice": true,
+&"Neutral": true,
+&"Plant": true,
+&"Psychic": true,
+&"Rock": true,
+&"Space": true,
+&"Tech": true,
+&"Toxic": true,
+&"Water": true
+},
+[3]: {
+&"Electric": true
+},
+[4]: {
+&"Earth": true
+},
+[13]: {
+&"Fighting": true
+},
+[14]: {
+&"Dark": true,
+&"Light": true
+}
+},
+&"WeakAgainst": {
+[]: {
+&"Neutral": true
+},
+[1, 11, 12, 16, 17]: {
+&"Bug": true
+},
+[2, 3, 1, 7, 17]: {
+&"Fire": true
+},
+[3, 11, 16]: {
+&"Rock": true
+},
+[5, 1, 12, 8]: {
+&"Light": true
+},
+[5, 2, 8, 17]: {
+&"Water": true
+},
+[5, 6]: {
+&"Earth": true
+},
+[5, 8, 17]: {
+&"Electric": true
+},
+[6, 1, 4, 5, 12, 17, 16]: {
+&"Plant": true
+},
+[7, 16, 17]: {
+&"Air": true
+},
+[9, 2, 1, 16, 17]: {
+&"Ice": true
+},
+[10, 4, 12, 15, 14]: {
+&"Fighting": true
+},
+[10, 16, 6]: {
+&"Psychic": true
+},
+[11, 1, 2, 8, 16]: {
+&"Tech": true
+},
+[12, 3, 7]: {
+&"Toxic": true
+},
+[13, 17, 6]: {
+&"Dark": true
+},
+[15]: {
+&"Ghost": true
+},
+[16]: {
+&"Space": true
+}
+}
+})

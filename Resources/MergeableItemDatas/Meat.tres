@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_400y4")
 Id = "meat"
+Name = "Meat"
 Texture2d = ExtResource("1_jubd1")
 metadata/_custom_type_script = "uid://ccsxrvv1k3vi"

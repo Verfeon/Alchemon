@@ -7,7 +7,7 @@ using CreatureNode = Game.Creatures.Presentation.CreatureNode;
 using GameManager = Game.Core.Autoload.GameManager;
 using GodotRandomAdapter = Game.Utils.Random.GodotRandomAdapter;
 using MergeRecipe = Game.Merge.Data.MergeRecipe;
-using MergeRecipeDatabase = Game.Core.Autoload.MergeRecipeDatabase;
+using MergeRecipeRegistry = Game.Core.Registries.MergeRecipeRegistry;
 
 namespace Game.Merge.Domain;
 
@@ -22,9 +22,9 @@ public partial class MergeManager : Node
 	{
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
 		var inventory = gameManager.Inventory;
-
-		MergeRecipeDatabase mergeRecipeDatabase = GetNode<MergeRecipeDatabase>("/root/MergeRecipeDatabase");
-		var recipes = mergeRecipeDatabase.FindRecipes(items);
+		
+		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
+		var recipes = mergeRecipeRegistry.FindRecipes(items);
 		return !(recipes.Count == 0 || recipes[0].RequiredItems.Count != items.Count);
 	}
 
@@ -33,8 +33,8 @@ public partial class MergeManager : Node
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
 		var inventory = gameManager.Inventory;
 
-		MergeRecipeDatabase mergeRecipeDatabase = GetNode<MergeRecipeDatabase>("/root/MergeRecipeDatabase");
-		var compatibleItems = mergeRecipeDatabase.FindCompatibleItems(selectedItems);
+		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
+		var compatibleItems = mergeRecipeRegistry.FindCompatibleItems(selectedItems);
 		return compatibleItems;
 	}
 
@@ -43,8 +43,8 @@ public partial class MergeManager : Node
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
 		var inventory = gameManager.Inventory;
 
-		MergeRecipeDatabase mergeRecipeDatabase = GetNode<MergeRecipeDatabase>("/root/MergeRecipeDatabase");
-		var recipes = mergeRecipeDatabase.FindRecipes(items);
+		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
+		var recipes = mergeRecipeRegistry.FindRecipes(items);
 		if (recipes.Count == 0 || recipes[0].RequiredItems.Count != items.Count)
 		{
 			return new MergeResult { Success = false, Message = "Invalid combination" };
