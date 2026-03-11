@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Registry" load_steps=2 format=3 uid="uid://c7r32xjpe514f"]
+
+[ext_resource type="Script" uid="uid://dqtv77mng5dyh" path="res://addons/yard/registry.gd" id="1_xbqs7"]
+
+[resource]
+script = ExtResource("1_xbqs7")
+_class_restriction = &"Type"
+_scan_directory = "res://Resources/Types"
+_uids_to_string_ids = Dictionary[StringName, StringName]({
+&"uid://6p50rv4vavmv": &"Fire",
+&"uid://b7146mh74nwbd": &"Air",
+&"uid://bkk7xe8dowfcf": &"Tech",
+&"uid://bqq1bgxmhelds": &"Toxic",
+&"uid://bvi620n6x0gni": &"Ghost",
+&"uid://bw6v4mv1phe7d": &"Earth",
+&"uid://c3dsiawte4vv6": &"Plant",
+&"uid://cjs87n5fsh1vq": &"Light",
+&"uid://ckb28xu6wdwnv": &"Neutral",
+&"uid://cospvdv4s84yh": &"Ice",
+&"uid://cp6vy6gpx743x": &"Dark",
+&"uid://db1ljf0wj5mv7": &"Water",
+&"uid://dfahuhn5nqnjf": &"Rock",
+&"uid://dfciyhj66f2wb": &"Bug",
+&"uid://dlhsgrmkokoiw": &"Fighting",
+&"uid://dukrvimi546yl": &"Electric",
+&"uid://ot18ysnl6teu": &"Space",
+&"uid://p220p64wqims": &"Psychic"
+})
+_string_ids_to_uids = Dictionary[StringName, StringName]({
+&"Air": &"uid://b7146mh74nwbd",
+&"Bug": &"uid://dfciyhj66f2wb",
+&"Dark": &"uid://cp6vy6gpx743x",
+&"Earth": &"uid://bw6v4mv1phe7d",
+&"Electric": &"uid://dukrvimi546yl",
+&"Fighting": &"uid://dlhsgrmkokoiw",
+&"Fire": &"uid://6p50rv4vavmv",
+&"Ghost": &"uid://bvi620n6x0gni",
+&"Ice": &"uid://cospvdv4s84yh",
+&"Light": &"uid://cjs87n5fsh1vq",
+&"Neutral": &"uid://ckb28xu6wdwnv",
+&"Plant": &"uid://c3dsiawte4vv6",
+&"Psychic": &"uid://p220p64wqims",
+&"Rock": &"uid://dfahuhn5nqnjf",
+&"Space": &"uid://ot18ysnl6teu",
+&"Tech": &"uid://bkk7xe8dowfcf",
+&"Toxic": &"uid://bqq1bgxmhelds",
+&"Water": &"uid://db1ljf0wj5mv7"
+})

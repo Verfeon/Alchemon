@@ -32,6 +32,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Alchemon"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/yard/plugin.cfg")
+
 [global_group]
 
 Enemy=""

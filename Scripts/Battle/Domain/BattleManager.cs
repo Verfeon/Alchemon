@@ -2,14 +2,14 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 using Creature = Game.Creatures.Domain.Creature;
+using CreatureNode = Game.Creatures.Presentation.CreatureNode;
 using TypeEnum = Game.Creatures.Domain.TypeEnum;
 using AbilityCategory = Game.Creatures.Domain.AbilityCategory;
 using Type = Game.Creatures.Data.Type;
 using Ability = Game.Creatures.Data.Ability;
-using Game.Creatures.Presentation;
-using System.ComponentModel;
 using BattleScene = Game.Battle.UI.BattleScene;
 using GameManager = Game.Core.Autoload.GameManager;
 using MergeManager = Game.Merge.Domain.MergeManager;

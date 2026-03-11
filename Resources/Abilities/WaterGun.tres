@@ -10,4 +10,5 @@ Name = "Water Gun"
 Category = 1
 Power = 50
 Type = ExtResource("1_gn0a6")
+Description = "Spits water to the enemy."
 metadata/_custom_type_script = "uid://vy1r708gni21"

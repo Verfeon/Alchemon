@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Registry" load_steps=2 format=3 uid="uid://clkfkwi7x43if"]
+
+[ext_resource type="Script" uid="uid://dqtv77mng5dyh" path="res://addons/yard/registry.gd" id="1_gaayl"]
+
+[resource]
+script = ExtResource("1_gaayl")
+_class_restriction = &"MergeableItemData"
+_scan_directory = "res://Resources/MergeableItemDatas"
+_uids_to_string_ids = Dictionary[StringName, StringName]({
+&"uid://12xm3v41bv3t": &"Bone",
+&"uid://bp5o2ba8v41po": &"Eye",
+&"uid://c73nim3y50a1w": &"Egg",
+&"uid://chmgkn663wq0g": &"Meat",
+&"uid://ciwu0jkuadewg": &"WoodStick",
+&"uid://cucy7ub10i1cv": &"Leather",
+&"uid://dbmelw6ar1e8g": &"Stone",
+&"uid://dyl2ese180f5r": &"Leaf",
+&"uid://dyqqfnwa42ca8": &"Pebble",
+&"uid://ggpjm8s6jrmr": &"Feather"
+})
+_string_ids_to_uids = Dictionary[StringName, StringName]({
+&"Bone": &"uid://12xm3v41bv3t",
+&"Egg": &"uid://c73nim3y50a1w",
+&"Eye": &"uid://bp5o2ba8v41po",
+&"Feather": &"uid://ggpjm8s6jrmr",
+&"Leaf": &"uid://dyl2ese180f5r",
+&"Leather": &"uid://cucy7ub10i1cv",
+&"Meat": &"uid://chmgkn663wq0g",
+&"Pebble": &"uid://dyqqfnwa42ca8",
+&"Stone": &"uid://dbmelw6ar1e8g",
+&"WoodStick": &"uid://ciwu0jkuadewg"
+})

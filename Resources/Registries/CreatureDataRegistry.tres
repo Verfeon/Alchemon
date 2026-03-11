@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Registry" load_steps=2 format=3 uid="uid://cfm4vs71530b1"]
+
+[ext_resource type="Script" uid="uid://dqtv77mng5dyh" path="res://addons/yard/registry.gd" id="1_3hfvd"]
+
+[resource]
+script = ExtResource("1_3hfvd")
+_class_restriction = &"CreatureData"
+_scan_directory = "res://Resources/CreatureDatas"
+_uids_to_string_ids = Dictionary[StringName, StringName]({
+&"uid://cfrhf7l4jlu2t": &"WingedEye",
+&"uid://na55uxiassjj": &"Treant",
+&"uid://psk3qy5updl6": &"RockGolem"
+})
+_string_ids_to_uids = Dictionary[StringName, StringName]({
+&"RockGolem": &"uid://psk3qy5updl6",
+&"Treant": &"uid://na55uxiassjj",
+&"WingedEye": &"uid://cfrhf7l4jlu2t"
+})
