@@ -2,7 +2,6 @@ using Godot;
 using System;
 
 using GameManager = Game.Core.Autoload.GameManager;
-using MergeableItemDatabase = Game.Core.Autoload.MergeableItemDatabase;
 using BaseItemData = Game.Items.Data.BaseItemData;
 using MergeableItemData = Game.Items.Data.MergeableItemData;
 

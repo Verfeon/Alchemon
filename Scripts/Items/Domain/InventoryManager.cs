@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 
 using MergeableItem = Game.Items.Domain.MergeableItem;
-using MergeableItemDatabase = Game.Core.Autoload.MergeableItemDatabase;
 using ItemQuality = Game.Items.Domain.ItemQuality;
 using ItemQualityWeights = Game.Items.Data.ItemQualityWeights;
 using ItemQualityRoller = Game.Items.Domain.ItemQualityRoller;
