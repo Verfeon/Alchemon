@@ -16,12 +16,12 @@ public partial class AbilityPanel : Node2D
 		int abilityIdx = 0;
 		foreach (Ability ability in creature.GetAbilities())
 		{
-			_buttons[abilityIdx].Bind(ability);
-			abilityIdx++;
 			if (abilityIdx >= 6) 
 			{
 				GD.PushError($"Too many abilities in creature {creature}");
 			}
+			_buttons[abilityIdx].Bind(ability);
+			abilityIdx++;
 		}
 	}
 	
