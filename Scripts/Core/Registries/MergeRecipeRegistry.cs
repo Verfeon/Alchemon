@@ -7,7 +7,7 @@ using MergeRecipe = Game.Merge.Data.MergeRecipe;
 
 namespace Game.Core.Registries;
 
-public class MergeRecipeRegistry : YARD.RegistryWrapper<MergeRecipe>
+public class MergeRecipeRegistry : YARD.Registry<MergeRecipe>
 {
 	public MergeRecipeRegistry() : base("res://Resources/Registries/MergeRecipeRegistry.tres") {}
 	

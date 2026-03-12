@@ -8,17 +8,22 @@ namespace YARD;
 /// See "registry.gd" for more info.
 /// </summary>
 /// <typeparam name="TResource">The type of Resource contained in the Registry.</typeparam>
-public class RegistryWrapper<[MustBeVariant] TResource> where TResource : Resource
+public class Registry<[MustBeVariant] TResource> where TResource : Resource
 {
 	private readonly Resource _registry;
 
-	public RegistryWrapper(string path)
+	public Registry(string path)
 	{
-		_registry = GD.Load<Resource>(path);
+		_registry = ResourceLoader.Load<Resource>(path);
 		if (_registry == null)
 		{
 			GD.PushError($"Registry not found: {path}");
 		}
+	}
+
+	public Registry(Resource registry)
+	{
+		_registry = registry;
 	}
 
 	// -----------------------------
@@ -48,15 +53,15 @@ public class RegistryWrapper<[MustBeVariant] TResource> where TResource : Resour
 		var typedDict = new Dictionary<StringName, TResource>();
 		foreach (var key in rawDict.Keys)
 		{
-			typedDict[key] = (TResource)rawDict[key];
+			typedDict[key] = (TResource) rawDict[key];
 		}
 		return typedDict;
 	}
 	
-	public RegistryLoadTrackerWrapper LoadAllThreadedRequest(string typeHint = "", bool useSubThreads = false, ResourceLoader.CacheMode cacheMode = ResourceLoader.CacheMode.Reuse)
+	public RegistryLoadTracker LoadAllThreadedRequest(string typeHint = "", bool useSubThreads = false, ResourceLoader.CacheMode cacheMode = ResourceLoader.CacheMode.Reuse)
 	{
 		var tracker = (GodotObject) _registry.Call("load_all_threaded_request", typeHint, useSubThreads, (int)cacheMode);
-		return new RegistryLoadTrackerWrapper(tracker);
+		return new RegistryLoadTracker(tracker);
 	}
 
 	// -----------------------------
@@ -73,11 +78,11 @@ public class RegistryWrapper<[MustBeVariant] TResource> where TResource : Resour
 	// -----------------------------
 	// Wrapper for RegistryLoadTracker
 	// -----------------------------
-	public class RegistryLoadTrackerWrapper
+	public class RegistryLoadTracker
 	{
 		private readonly GodotObject _tracker;
 
-		public RegistryLoadTrackerWrapper(GodotObject tracker)
+		public RegistryLoadTracker(GodotObject tracker)
 		{
 			_tracker = tracker;
 		}

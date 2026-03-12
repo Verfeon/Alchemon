@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs4h5yku8uu8w"
-path="res://.godot/imported/github_icon.svg-d75d68307ea573bd6226cb744859ccc8.ctex"
+uid="uid://bwklh5nan56ao"
+path="res://.godot/imported/Stat.png-112a35050236ee06a78e933864d4c1b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/yard/editor_only/assets/github_icon.svg"
-dest_files=["res://.godot/imported/github_icon.svg-d75d68307ea573bd6226cb744859ccc8.ctex"]
+source_file="res://addons/StatHub/Assets/Stat.png"
+dest_files=["res://.godot/imported/Stat.png-112a35050236ee06a78e933864d4c1b1.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

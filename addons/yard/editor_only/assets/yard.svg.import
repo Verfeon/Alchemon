@@ -2,10 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw7cbjylu0lj7"
+uid="uid://c3ld6rbc8tm2g"
 path="res://.godot/imported/yard.svg-fd52e4d0002b0f5afc49c6000f44b803.ctex"
 metadata={
-"has_editor_variant": true,
 "vram_texture": false
 }
 
@@ -40,5 +39,5 @@ process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
 svg/scale=1.0
-editor/scale_with_editor_scale=true
-editor/convert_colors_with_editor_theme=true
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
