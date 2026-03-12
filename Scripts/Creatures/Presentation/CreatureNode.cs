@@ -4,6 +4,7 @@ using Godot.NativeInterop;
 using Game.Utils.Random;
 
 using Creature = Game.Creatures.Domain.Creature;
+using StatEnum = Game.Creatures.Domain.StatEnum;
 using CreatureData = Game.Creatures.Data.CreatureData;
 using GameManager = Game.Core.Autoload.GameManager;
 using BattleManager = Game.Battle.Domain.BattleManager;
@@ -83,7 +84,7 @@ public partial class CreatureNode : Node2D
 
 		_sprite.Texture = creature.Data.Texture2d;
 
-		_hpBar.MaxValue = creature.RealStats.MaxHP;
+		_hpBar.MaxValue = creature.GetBattleStat(StatEnum.MaxHP);
 		_hpBar.Value = creature.CurrentHP;
 
 		_creature.HpChanged += OnHpChanged;

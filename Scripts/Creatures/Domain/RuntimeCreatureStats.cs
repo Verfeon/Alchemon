@@ -7,20 +7,28 @@ namespace Game.Creatures.Domain;
 
 public class RuntimeCreatureStats
 {
-	public int MaxHP { get; }
-	public int Attack { get; }
-	public int Defense { get; }
-	public int SpecialAttack { get; }
-	public int SpecialDefense { get; }
-	public int Speed { get; }
+	private readonly int[] _stats = new int[6];
+
+	public int Get(StatEnum stat) => _stats[(int)stat];
 
 	public RuntimeCreatureStats(BaseCreatureStats baseStats, int level)
 	{
-		MaxHP = (baseStats.MaxHP * 2 * level) / 100 + level + 10;
-		Attack = (baseStats.Attack * 2 * level) / 100 + 5;
-		Defense = (baseStats.Defense * 2 * level) / 100 + 5;
-		Speed = (baseStats.Speed * 2 * level) / 100 + 5;
-		SpecialAttack = (baseStats.SpecialAttack * 2 * level) / 100 + 5;
-		SpecialDefense = (baseStats.SpecialDefense * 2 * level) / 100 + 5;
+		_stats[(int)StatEnum.MaxHP] =
+			(baseStats.MaxHP * 2 * level) / 100 + level + 10;
+
+		_stats[(int)StatEnum.Attack] =
+			(baseStats.Attack * 2 * level) / 100 + 5;
+
+		_stats[(int)StatEnum.Defense] =
+			(baseStats.Defense * 2 * level) / 100 + 5;
+
+		_stats[(int)StatEnum.SpecialAttack] =
+			(baseStats.SpecialAttack * 2 * level) / 100 + 5;
+
+		_stats[(int)StatEnum.SpecialDefense] =
+			(baseStats.SpecialDefense * 2 * level) / 100 + 5;
+
+		_stats[(int)StatEnum.Speed] =
+			(baseStats.Speed * 2 * level) / 100 + 5;
 	}
 }

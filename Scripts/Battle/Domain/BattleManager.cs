@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 
 using Creature = Game.Creatures.Domain.Creature;
+using StatEnum = Game.Creatures.Domain.StatEnum;
 using CreatureNode = Game.Creatures.Presentation.CreatureNode;
 using TypeEnum = Game.Creatures.Domain.TypeEnum;
 using AbilityCategory = Game.Creatures.Domain.AbilityCategory;
@@ -106,11 +107,11 @@ public partial class BattleManager : Node
 	
 	private bool PlayerGoesFirst()
 	{
-		if (_playerCreature.RealStats.Speed == _enemyCreature.RealStats.Speed)
+		if (_playerCreature.GetBattleStat(StatEnum.Speed) == _enemyCreature.GetBattleStat(StatEnum.Speed))
 		{
 			return GD.Randf() > 0.5f;
 		}
-		return _playerCreature.RealStats.Speed >= _enemyCreature.RealStats.Speed;
+		return _playerCreature.GetBattleStat(StatEnum.Speed) >= _enemyCreature.GetBattleStat(StatEnum.Speed);
 	}
 
 	private bool IsAnyoneDead()
@@ -149,7 +150,7 @@ public partial class BattleManager : Node
 		defender.CurrentHP = Math.Max(0, defender.CurrentHP - damage);
 		
 		EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
-		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defender.RealStats.MaxHP}");
+		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defender.GetBattleStat(StatEnum.MaxHP)}");
 	}
 	
 	private int CalculateDamage(Ability ability, Creature attacker, Creature defender)
@@ -160,17 +161,17 @@ public partial class BattleManager : Node
 		switch (ability.Category)
 		{
 			case AbilityCategory.Physical:
-				attackStat = attacker.RealStats.Attack;
-				defenseStat = defender.RealStats.Defense;
+				attackStat = attacker.GetBattleStat(StatEnum.Attack);
+				defenseStat = defender.GetBattleStat(StatEnum.Defense);
 				break;
 			
 			case AbilityCategory.Special:
-				attackStat = attacker.RealStats.SpecialAttack;
-				defenseStat = defender.RealStats.SpecialDefense;
+				attackStat = attacker.GetBattleStat(StatEnum.SpecialAttack);
+				defenseStat = defender.GetBattleStat(StatEnum.SpecialDefense);
 				break;
 			
 			case AbilityCategory.Real:
-				attackStat = Math.Max(attacker.RealStats.Attack,  attacker.RealStats.SpecialAttack);
+				attackStat = Math.Max(attacker.GetBattleStat(StatEnum.Attack),  attacker.GetBattleStat(StatEnum.SpecialAttack));
 				defenseStat = 1;
 				break;
 			
@@ -228,16 +229,6 @@ public partial class BattleManager : Node
 			targetMods["Defense"] = targetMods.GetValueOrDefault("Defense", 0) + 25;
 			targetMods["SpecialDefense"] = targetMods.GetValueOrDefault("SpecialDefense", 0) + 25;
 			GD.Print($"{attacker.Data.Name}'s Defense increased!");
-		}
-		
-		// Soins
-		if (abilityName.Contains("soin") || abilityName.Contains("photosynthèse") || 
-			abilityName.Contains("réparation") || abilityName.Contains("renaissance"))
-		{
-			var attackerStats = attacker.RealStats;
-			int healAmount = attackerStats.MaxHP * 30 / 100; // 30% des HP max
-			attacker.CurrentHP = Math.Min(attackerStats.MaxHP, attacker.CurrentHP + healAmount);
-			GD.Print($"{attacker.Data.Name} restored {healAmount} HP!");
 		}
 		
 		// Debuffs sur l'ennemi

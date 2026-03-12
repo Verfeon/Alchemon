@@ -16,16 +16,17 @@ public partial class Creature
 	private const int MaxAbilities = 6;
 	
 	private int _currentHP;
+	private RuntimeCreatureStats _realStats { get; }   
+	private CreatureStatModifiers _statModifiers { get; } = new();
 	
 	public CreatureData Data { get; }
-	public RuntimeCreatureStats RealStats { get; }   
 	
 	public int CurrentHP
 	{
 		get => _currentHP;
 		set
 		{
-			int clamped = Math.Clamp(value, 0, RealStats.MaxHP);
+			int clamped = Math.Clamp(value, 0, _realStats.Get(StatEnum.MaxHP));
 			if (_currentHP == clamped) return;
 
 			_currentHP = clamped;
@@ -54,9 +55,9 @@ public partial class Creature
 		
 		Data = data;
 		_rng = rng;
-		RealStats = new RuntimeCreatureStats(Data.BaseStats, level);
+		_realStats = new RuntimeCreatureStats(Data.BaseStats, level);
 		IsFainted = false;
-		_currentHP = RealStats.MaxHP;
+		_currentHP = _realStats.Get(StatEnum.MaxHP);
 
 		_abilities = new List<Ability>(MaxAbilities);
 		InitializeAbilities();
@@ -89,5 +90,13 @@ public partial class Creature
 	public List<Ability> GetAbilities ()
 	{
 		return _abilities;
+	}
+	
+	public int GetBattleStat(StatEnum stat)
+	{
+		int baseStat = _realStats.Get(stat);
+		double multiplier = _statModifiers.GetMultiplier(stat);
+		
+		return (int)Math.Round(baseStat * multiplier, MidpointRounding.AwayFromZero);
 	}
 }
