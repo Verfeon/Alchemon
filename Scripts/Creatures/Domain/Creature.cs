@@ -99,4 +99,9 @@ public partial class Creature
 		
 		return (int)Math.Round(baseStat * multiplier, MidpointRounding.AwayFromZero);
 	}
+
+	public void ChangeStatModifier(StatEnum stat, int change)
+	{
+		_statModifiers.ChangeModifier(stat, change);
+	}
 }

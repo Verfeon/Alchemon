@@ -151,6 +151,8 @@ public partial class BattleManager : Node
 		
 		EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
 		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defender.GetBattleStat(StatEnum.MaxHP)}");
+		
+		ability.Effect?.ApplyEffect(attacker, defender);
 	}
 	
 	private int CalculateDamage(Ability ability, Creature attacker, Creature defender)
@@ -176,7 +178,6 @@ public partial class BattleManager : Node
 				break;
 			
 			case AbilityCategory.Status:
-				//ApplyStatusEffect
 				break;
 			
 			default:
@@ -192,9 +193,7 @@ public partial class BattleManager : Node
 		
 		float stabMultiplier = (ability.Type == attacker.Data.Type) ? 1.5f : 1.0f;
 		
-		int finalDamage = (int)(baseDamage * typeMultiplier * stabMultiplier);
-		
-		finalDamage = Math.Max(1, finalDamage);
+		int finalDamage = (int)Math.Ceiling(baseDamage * typeMultiplier * stabMultiplier);
 		
 		if (typeMultiplier > 1.0f)
 			GD.Print("It's super effective!");
@@ -207,37 +206,9 @@ public partial class BattleManager : Node
 		return finalDamage;
 	}
 	
-	private void ApplyStatusEffect(Ability ability, Creature attacker, Creature defender,
-								   Dictionary<string, int> attackerMods, Dictionary<string, int> defenderMods)
+	private void ApplyStatusEffect(Ability ability, Creature attacker, Creature defender)
 	{
-		// Gérer les capacités qui n'infligent pas de dégâts (buffs, debuffs, soins)
-		string abilityName = ability.Name.ToLower();
 		
-		bool isPlayerAttacking = attacker == _playerCreature;
-		var targetMods = isPlayerAttacking ? _playerStatModifiers : _enemyStatModifiers;
-		
-		// Buffs d'attaque
-		if (abilityName.Contains("rage") || abilityName.Contains("puissance"))
-		{
-			targetMods["Attack"] = targetMods.GetValueOrDefault("Attack", 0) + 20;
-			GD.Print($"{attacker.Data.Name}'s Attack increased!");
-		}
-		
-		// Buffs de défense
-		if (abilityName.Contains("armure") || abilityName.Contains("bouclier"))
-		{
-			targetMods["Defense"] = targetMods.GetValueOrDefault("Defense", 0) + 25;
-			targetMods["SpecialDefense"] = targetMods.GetValueOrDefault("SpecialDefense", 0) + 25;
-			GD.Print($"{attacker.Data.Name}'s Defense increased!");
-		}
-		
-		// Debuffs sur l'ennemi
-		if (abilityName.Contains("brume") || abilityName.Contains("aveugle"))
-		{
-			var enemyMods = isPlayerAttacking ? _enemyStatModifiers : _playerStatModifiers;
-			enemyMods["Attack"] = enemyMods.GetValueOrDefault("Attack", 0) - 15;
-			GD.Print($"{defender.Data.Name}'s accuracy decreased!");
-		}
 	}
 	
 	private float GetTypeEffectiveness(Type attackType, Type defenseType)

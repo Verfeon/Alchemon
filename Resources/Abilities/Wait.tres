@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://suxlcaaklhsx"]
+[gd_resource type="Resource" script_class="Ability" load_steps=4 format=3 uid="uid://suxlcaaklhsx"]
 
 [ext_resource type="Resource" uid="uid://ckb28xu6wdwnv" path="res://Resources/Types/Neutral.tres" id="1_7dpnk"]
+[ext_resource type="Resource" uid="uid://cftdyafkhhvbh" path="res://Resources/AbilityEffects/SmallAttackBuff.tres" id="1_ibg7w"]
 [ext_resource type="Script" uid="uid://vy1r708gni21" path="res://Scripts/Creatures/Data/Ability.cs" id="1_xmmam"]
 
 [resource]
@@ -9,4 +10,5 @@ Id = "wait"
 Name = "Wait"
 Type = ExtResource("1_7dpnk")
 Description = "Your creature is waiting."
+Effect = ExtResource("1_ibg7w")
 metadata/_custom_type_script = "uid://vy1r708gni21"

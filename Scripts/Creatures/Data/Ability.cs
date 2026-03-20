@@ -1,7 +1,6 @@
 using Godot;
 using System;
 
-using Type = Game.Creatures.Data.Type;
 using AbilityCategory = Game.Creatures.Domain.AbilityCategory;
 
 namespace Game.Creatures.Data;
@@ -15,4 +14,5 @@ public partial class Ability : Resource
 	[Export(PropertyHint.Range, "0,300")] public int Power { get; private set; }
 	[Export] public Type Type { get; private set; }
 	[Export(PropertyHint.MultilineText)] public string Description { get; private set; }
+	[Export] public AbilityEffect Effect { get; private set; }
 }
