@@ -8,6 +8,9 @@ using MergeableItem = Game.Items.Domain.MergeableItem;
 
 namespace Game.Merge.UI;
 
+/// <summary>
+/// Represents the UI for the merge system, allowing the player to select items to merge.
+/// </summary>
 public partial class MergeUI : Control
 {
 	[Export] NodePath MergeButton;
@@ -40,11 +43,20 @@ public partial class MergeUI : Control
 		_mergeableItemsList.ItemClicked += OnMergeableItemListItemClicked;
 	}
 	
+	/// <summary>
+	/// Handles the event when an item is collected by updating the display of mergeable items in the UI, ensuring that the player can see and select newly collected items for merging.
+	/// </summary>
+	/// <param name="itemId"></param>
 	private void OnItemCollected(string itemId)
 	{
 		UpdateMergeableItemsListDisplay();
 	}
 	
+	/// <summary>
+	/// Updates the display of mergeable items in the UI.
+	/// This method clears the current list of mergeable items and repopulates it based on the player's inventory, marking any items that have already been used in a merge as disabled to prevent them from being selected again.
+	/// It ensures that the player has an up-to-date view of their available items for merging and can easily identify which items are currently eligible for selection in the merge process.
+	/// </summary>
 	private void UpdateMergeableItemsListDisplay()
 	{
 		_mergeableItemsList.Clear();
@@ -67,6 +79,9 @@ public partial class MergeUI : Control
 		}
 	}
 	
+	/// <summary>
+	/// Handles the event when the merge button is pressed, attempting to merge the selected items and updating the UI accordingly.
+	/// </summary>
 	private void OnMergePressed()
 	{
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
@@ -114,6 +129,12 @@ public partial class MergeUI : Control
 		}
 	}
 	
+	/// <summary>
+	/// Handles the event when an item in the mergeable items list is clicked, updating the selection and enabling or disabling the merge button based on whether the selected items can be merged together.
+	/// </summary>
+	/// <param name="index"></param>
+	/// <param name="position"></param>
+	/// <param name="mouseButtonIndex"></param>
 	private void OnMergeableItemListItemClicked(long index, Vector2 position, long mouseButtonIndex)
 	{
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
@@ -147,6 +168,10 @@ public partial class MergeUI : Control
 		}
 	}
 	
+	/// <summary>
+	/// Handles unhandled input events, specifically listening for the "open_merge_ui" action to toggle the visibility of the merge UI and update the display of mergeable items when the UI is opened, ensuring that the player can access the merge interface and see their available items for merging when they press the designated key or button.
+	/// </summary>
+	/// <param name="event"></param>
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed("open_merge_ui"))

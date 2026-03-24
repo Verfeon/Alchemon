@@ -1,15 +1,16 @@
 using Godot;
-using System;
 using System.Diagnostics;
 
 using InventoryManager = Game.Items.Domain.InventoryManager;
 using MergeManager = Game.Merge.Domain.MergeManager;
 using BattleManager = Game.Battle.Domain.BattleManager;
-using PlayerManager = Game.Player.PlayerManager;
 using SaveManager = Game.Managers.SaveManager;
 
 namespace Game.Core.Autoload;
 
+/// <summary>
+/// Manages the overall game state and provides access to various managers.
+/// </summary>
 public partial class GameManager : Node
 {
 	[Export] public InventoryManager Inventory { get; private set; }

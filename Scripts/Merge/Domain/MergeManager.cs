@@ -7,17 +7,23 @@ using Creature = Game.Creatures.Domain.Creature;
 using GameManager = Game.Core.Autoload.GameManager;
 using GodotRandomAdapter = Game.Utils.Random.GodotRandomAdapter;
 using MergeRecipe = Game.Merge.Data.MergeRecipe;
-using MergeRecipeRegistry = Game.Core.Registries.MergeRecipeRegistry;
 
 namespace Game.Merge.Domain;
 
+/// <summary>
+/// Manages the merge operations for the game.
+/// </summary>
 public partial class MergeManager : Node
 {
 	[Export] private PackedScene _creatureScenePath;
 
 	public event Action<Creature> CreatureMerged; 
 
-
+	/// <summary>
+	/// Determines if the given items can be merged together.
+	/// </summary>
+	/// <param name="items">list of item IDs</param>
+	/// <returns></returns>
 	public bool CanMerge(List<string> items)
 	{
 		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
@@ -25,6 +31,11 @@ public partial class MergeManager : Node
 		return !(recipes.Count == 0 || recipes[0].RequiredItems.Count != items.Count);
 	}
 
+	/// <summary>
+	/// Determines if there is a valid merge combination among the given items.
+	/// </summary>
+	/// <param name="items">list of item IDs</param>
+	/// <returns></returns>
 	public bool IsMergePossible(List<string> items)
 	{
 		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
@@ -60,6 +71,11 @@ public partial class MergeManager : Node
 		return false;
 	}
 
+	/// <summary>
+	/// Gets a list of items that can be merged with the selected items.
+	/// </summary>
+	/// <param name="selectedItems">list of selected item IDs</param>
+	/// <returns>list of compatible item IDs</returns>
 	public List<string> GetCompatibleItems(List<string> selectedItems)
 	{
 		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
@@ -67,6 +83,11 @@ public partial class MergeManager : Node
 		return compatibleItems;
 	}
 
+	/// <summary>
+	/// Attempts to merge the given items and returns the result, including success status and the resulting creature if successful.
+	/// </summary>
+	/// <param name="items">list of item IDs to merge</param>
+	/// <returns></returns> <summary>
 	public MergeResult AttemptMerge(List<string> items)
 	{
 		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
@@ -94,6 +115,9 @@ public partial class MergeManager : Node
 	}
 }
 
+/// <summary>
+/// Represents the result of a merge operation, including whether it was successful, an optional message, and the resulting creature if the merge was successful.
+/// </summary>
 public struct MergeResult
 {
 	public bool Success;

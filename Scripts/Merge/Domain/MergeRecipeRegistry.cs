@@ -5,12 +5,21 @@ using System.Linq;
 
 using MergeRecipe = Game.Merge.Data.MergeRecipe;
 
-namespace Game.Core.Registries;
+namespace Game.Merge.Domain;
 
+/// <summary>
+/// A registry for managing merge recipes.
+/// </summary>
 public class MergeRecipeRegistry : YARD.Registry<MergeRecipe>
 {
 	public MergeRecipeRegistry() : base("res://Resources/Registries/MergeRecipeRegistry.tres") {}
 	
+	/// <summary>
+	/// Finds all merge recipes that can be created with the given list of item IDs.
+	/// if multiple recipes are found, sort them by number of required items (ascending)
+	/// </summary>
+	/// <param name="itemIds"></param>
+	/// <returns></returns>
 	public List<MergeRecipe> FindRecipes(List<string> itemIds)
 	{
 		List<MergeRecipe> foundRecipes = LoadAllBlocking().Values.ToList().FindAll(recipe =>
@@ -19,7 +28,6 @@ public class MergeRecipeRegistry : YARD.Registry<MergeRecipe>
 			return itemIds.All(item => requiredIds.Contains(item));
 		});
 		
-		// if multiple recipes are found, sort by number of required items (ascending)
 		foundRecipes.Sort((a, b) =>
 		{
 			int aCount = a.RequiredItems.Count;
@@ -29,6 +37,11 @@ public class MergeRecipeRegistry : YARD.Registry<MergeRecipe>
 		return foundRecipes;
 	}
 
+	/// <summary>
+	/// Finds all item IDs that are compatible for merging with the currently selected item IDs, meaning that they are required by at least one merge recipe that can be made with the selected items.
+	/// </summary>
+	/// <param name="selectedItemIds"></param>
+	/// <returns></returns>
 	public List<string> FindCompatibleItems(List<string> selectedItemIds)
 	{
 		HashSet<string> compatibleItemIds = new HashSet<string>();
