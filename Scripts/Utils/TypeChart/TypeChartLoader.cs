@@ -1,19 +1,24 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using Game.Creatures.Data;
-using Game.Creatures.Domain;
 
 using TypeEnum = Game.Creatures.Domain.TypeEnum;
 using Type = Game.Creatures.Data.Type;
 
 namespace Game.Utils.TypeChart;
 
+/// <summary>
+/// Loads and manages the type chart for the game.
+/// </summary>
 public static class TypeChartLoader
 {
 	public static Dictionary<TypeEnum, Type> Types = new();
 	public static float[,] Chart;
 
+	/// <summary>
+	/// Loads all type resources from the specified folder and builds the type effectiveness chart.
+	/// </summary>
+	/// <param name="folderPath"></param>
 	public static void LoadTypes(string folderPath)
 	{
 		Types.Clear();
@@ -48,6 +53,9 @@ public static class TypeChartLoader
 		BuildChart();
 	}
 
+	/// <summary>
+	/// Builds the type effectiveness chart based on the loaded types and their relationships.
+	/// </summary>
 	private static void BuildChart()
 	{
 		int count = Enum.GetValues(typeof(TypeEnum)).Length;
@@ -72,6 +80,12 @@ public static class TypeChartLoader
 		}
 	}
 
+	/// <summary>
+	/// Gets the effectiveness of an attack type against a defense type.
+	/// </summary>
+	/// <param name="attack"></param>
+	/// <param name="defense"></param>
+	/// <returns></returns>
 	public static float GetEffectiveness(TypeEnum attack, TypeEnum defense)
 	{
 		return Chart[(int)attack, (int)defense];

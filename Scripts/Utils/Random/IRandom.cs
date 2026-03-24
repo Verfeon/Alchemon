@@ -1,5 +1,3 @@
-using System;
-
 namespace Game.Utils.Random;
 
 public interface IRandom

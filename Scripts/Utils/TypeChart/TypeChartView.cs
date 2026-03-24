@@ -7,6 +7,10 @@ using Type = Game.Creatures.Data.Type;
 
 namespace Game.Utils.TypeChart;
 
+/// <summary>
+/// A control that displays the type effectiveness chart in the Godot editor.
+/// It loads type data from resources and builds a visual grid showing the effectiveness of each type against every other type.
+/// </summary>
 [Tool]
 public partial class TypeChartView : Control
 {
@@ -40,6 +44,10 @@ public partial class TypeChartView : Control
 		Build();
 	}
 
+	/// <summary>
+	/// Builds the type effectiveness chart by loading type data from resources and creating a grid of panels that visually represent the effectiveness of each type against every other type.
+	/// Each cell in the grid is colored based on the effectiveness multiplier (e.g., green for super effective, red for not very effective, gray for no effect) and displays the multiplier value.
+	/// </summary>
 	private void Build()
 	{
 		GD.Print("Build Type Chart");
@@ -174,17 +182,22 @@ public partial class TypeChartView : Control
 		AddNode(panel, label);
 	}
 
+	/// <summary>
+	/// Gets the color corresponding to the effectiveness multiplier value for a type matchup.
+	/// </summary>
+	/// <param name="value"></param>
+	/// <returns></returns>
 	private Color GetColor(float value)
 	{
 		if (value == 2f)
-			return new Color(0.5f, 1f, 0.5f);
+			return new Color(0.5f, 1f, 0.5f); // Green
 
 		if (value == 0.5f)
-			return new Color(1f, 0.5f, 0.5f);
+			return new Color(1f, 0.5f, 0.5f); // Reg
 
 		if (value == 0f)
-			return new Color(0.6f, 0.6f, 0.6f);
+			return new Color(0.6f, 0.6f, 0.6f); // Gray
 
-		return new Color(1f, 1f, 1f);
+		return new Color(1f, 1f, 1f); // White
 	}
 }

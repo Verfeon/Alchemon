@@ -1,11 +1,6 @@
 using Godot;
 using System;
 
-using GameManager = Game.Core.Autoload.GameManager;
-using BattleManager = Game.Battle.Domain.BattleManager;
-using CreatureNode = Game.Creatures.Presentation.CreatureNode;
-using Creature = Game.Creatures.Domain.Creature;
-
 namespace Game.Player;
 
 public partial class Player : CharacterBody2D
@@ -38,7 +33,7 @@ public partial class Player : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
+		Vector2 velocity;
 		Vector2 direction = Input.GetVector("left", "right", "up", "down");
 		
 		if (direction != Vector2.Zero)
@@ -56,6 +51,11 @@ public partial class Player : CharacterBody2D
 		MoveAndSlide();
 	}
 	
+	/// <summary>
+	/// Updates the animation of the player based on their movement direction and state.
+	/// </summary>
+	/// <param name="direction"></param>
+	/// <param name="isMoving"></param>
 	private void UpdateAnimation(Vector2 direction, bool isMoving)
 	{
 		if (_animatedSprite == null) return;
