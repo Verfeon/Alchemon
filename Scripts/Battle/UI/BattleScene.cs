@@ -3,15 +3,18 @@ using System;
 using System.Collections.Generic;
 
 using Creature = Game.Creatures.Domain.Creature;
-using AbilityPanel = Game.Battle.UI.AbilityPanel;
+using CreatureNode = Game.Creatures.Presentation.CreatureNode;
 using BattleManager = Game.Battle.Domain.BattleManager;
 using Ability = Game.Creatures.Data.Ability;
 using GameManager = Game.Core.Autoload.GameManager;
+using System.Linq;
 
 namespace Game.Battle.UI;
 
 public partial class BattleScene : CanvasLayer
 {
+	[Export] private PackedScene _creatureScenePath;
+
 	[Export] private TextureRect _background;
 	[Export] private Node2D _playerPosition;
 	[Export] private Node2D _enemyPosition;
@@ -24,9 +27,8 @@ public partial class BattleScene : CanvasLayer
 		tween.TweenProperty(_background, "modulate:a", 1, 0.5f);
 	}
 	
-	public void Init(Creature playerCreature, BattleManager battleManager)
+	public void Init(BattleManager battleManager)
 	{
-		_abilityPanel.BindButtons(playerCreature);
 		GetActiveAbilityButtons().ForEach(button => button.AbilitySelected += (Ability ability) => HideUI());
 		battleManager.TurnEnded += ShowUI;
 	}
@@ -50,14 +52,22 @@ public partial class BattleScene : CanvasLayer
 		tween.TweenCallback(Callable.From(() => QueueFree()));
 	}
 
-	public Node2D GetPlayerPosition()
+	public void SetPlayerCreature(Creature playerCreature)
 	{
-		return _playerPosition;
+		_playerPosition.GetChildren().ToList().ForEach(child => child.QueueFree());
+		var playerNode = _creatureScenePath.Instantiate<CreatureNode>();
+		playerNode.Setup(playerCreature, false);
+		_playerPosition.AddChild(playerNode);
+
+		_abilityPanel.BindButtons(playerCreature);
 	}
 
-	public Node2D GetEnemyPosition()
+	public void SetEnemyCreature(Creature enemyCreature)
 	{
-		return _enemyPosition;
+		_enemyPosition.GetChildren().ToList().ForEach(child => child.QueueFree());
+		var enemyNode = _creatureScenePath.Instantiate<CreatureNode>();
+		enemyNode.Setup(enemyCreature, false);
+		_enemyPosition.AddChild(enemyNode);
 	}
 
 	public List<AbilityButton> GetActiveAbilityButtons()

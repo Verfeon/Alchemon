@@ -6,8 +6,6 @@ using System.ComponentModel;
 
 using Creature = Game.Creatures.Domain.Creature;
 using StatEnum = Game.Creatures.Domain.StatEnum;
-using CreatureNode = Game.Creatures.Presentation.CreatureNode;
-using TypeEnum = Game.Creatures.Domain.TypeEnum;
 using AbilityCategory = Game.Creatures.Domain.AbilityCategory;
 using Type = Game.Creatures.Data.Type;
 using Ability = Game.Creatures.Data.Ability;
@@ -15,6 +13,7 @@ using BattleScene = Game.Battle.UI.BattleScene;
 using GameManager = Game.Core.Autoload.GameManager;
 using MergeManager = Game.Merge.Domain.MergeManager;
 using InventoryManager = Game.Items.Domain.InventoryManager;
+using System.Linq;
 
 namespace Game.Battle.Domain;
 
@@ -50,6 +49,13 @@ public partial class BattleManager : Node
 	{
 	 	var tcs = new TaskCompletionSource<Creature>();
 		
+		var ev = new InputEventAction // open merge UI
+		{
+			Action = "open_merge_ui",
+			Pressed = true
+		};
+		Input.ParseInputEvent(ev);
+
 		void Handler(Creature creature)
 		{
 			mergeManager.CreatureMerged -= Handler;
@@ -74,26 +80,15 @@ public partial class BattleManager : Node
 		
 		CanvasLayer overlayLayer = GetTree().Root.GetNode<CanvasLayer>("Main/OverlayLayer");
 
+		_battleScene.SetEnemyCreature(enemyCreature);
 		
-		CreatureNode enemyCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
-		_battleScene.GetEnemyPosition().CallDeferred("add_child", enemyCreatureNode);
-		enemyCreatureNode.Bind(enemyCreature);
-		
-		overlayLayer.AddChild(_battleScene);
-		overlayLayer.MoveChild(_battleScene, 0);
-		
-		var ev = new InputEventAction();
-		ev.Action = "open_merge_ui";
-		ev.Pressed = true;
-		Input.ParseInputEvent(ev);
-		GD.Print("Action ui_merged Pressed");
+		overlayLayer.CallDeferred(MethodName.AddChild, _battleScene);
+		overlayLayer.CallDeferred(MethodName.MoveChild, _battleScene, 0);
 		
 		Creature playerCreature = await WaitForCreatureMergedAsync(gameManager.Merge);
-		CreatureNode playerCreatureNode = _creatureScenePath.Instantiate<CreatureNode>();
-		_battleScene.GetPlayerPosition().CallDeferred("add_child", playerCreatureNode);
-		playerCreatureNode.Bind(playerCreature);
+		_battleScene.SetPlayerCreature(playerCreature);
 		
-		_battleScene.Init(playerCreature, this);
+		_battleScene.Init(this);
 		_battleScene.GetActiveAbilityButtons().ForEach(button => button.AbilitySelected += OnAbilitySelected);
 
 		_playerCreature = playerCreature;
@@ -113,13 +108,8 @@ public partial class BattleManager : Node
 		}
 		return _playerCreature.GetBattleStat(StatEnum.Speed) >= _enemyCreature.GetBattleStat(StatEnum.Speed);
 	}
-
-	private bool IsAnyoneDead()
-	{
-		return ((_playerCreature.CurrentHP <= 0) ||(_enemyCreature.CurrentHP <= 0));
-	}
 	
-	private void ManageTurn(Ability playerSelectedAbility)
+	private async Task ManageTurn(Ability playerSelectedAbility)
 	{
 		_turnCount++;
 		GD.Print($"Turn {_turnCount}");
@@ -132,9 +122,29 @@ public partial class BattleManager : Node
 		{
 			action();
 			
-			if (IsAnyoneDead())
+			if (_playerCreature.CurrentHP <= 0)
 			{
-				EndBattle(_enemyCreature.IsFainted == true);
+				GameManager gameManager = GetNode<GameManager>("/root/GameManager");
+				MergeManager mergeManager = gameManager.Merge;
+				InventoryManager inventoryManager = gameManager.Inventory;
+				var unusedIds = inventoryManager.GetUnusedMergeableItems().ToList().ConvertAll(item => item.Data.Id);
+				if (mergeManager.IsMergePossible(unusedIds))
+				{
+					_playerCreature = await WaitForCreatureMergedAsync(gameManager.Merge);
+					_battleScene.SetPlayerCreature(_playerCreature);
+
+					break;
+				}
+				else
+				{
+					EndBattle(false);
+					return;
+				}
+			}
+
+			if (_enemyCreature.CurrentHP <= 0)
+			{
+				EndBattle(true);
 				return;
 			}
 		}
@@ -205,11 +215,6 @@ public partial class BattleManager : Node
 			GD.Print($"STAB bonus applied! ({attacker.Data.Type} type attack)");
 		
 		return finalDamage;
-	}
-	
-	private void ApplyStatusEffect(Ability ability, Creature attacker, Creature defender)
-	{
-		
 	}
 	
 	private float GetTypeEffectiveness(Type attackType, Type defenseType)

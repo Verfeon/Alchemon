@@ -1,9 +1,9 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Creature = Game.Creatures.Domain.Creature;
-using CreatureNode = Game.Creatures.Presentation.CreatureNode;
 using GameManager = Game.Core.Autoload.GameManager;
 using GodotRandomAdapter = Game.Utils.Random.GodotRandomAdapter;
 using MergeRecipe = Game.Merge.Data.MergeRecipe;
@@ -20,19 +20,48 @@ public partial class MergeManager : Node
 
 	public bool CanMerge(List<string> items)
 	{
-		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
-		var inventory = gameManager.Inventory;
-		
 		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
 		var recipes = mergeRecipeRegistry.FindRecipes(items);
 		return !(recipes.Count == 0 || recipes[0].RequiredItems.Count != items.Count);
 	}
 
+	public bool IsMergePossible(List<string> items)
+	{
+		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
+		var recipes = mergeRecipeRegistry.LoadAllBlocking().Values;
+
+		var itemCounts = items
+			.GroupBy(i => i)
+			.ToDictionary(g => g.Key, g => g.Count());
+
+		foreach (var recipe in recipes)
+		{
+			var requiredCounts = recipe.RequiredItems
+				.GroupBy(i => i.Id)
+				.ToDictionary(g => g.Key, g => g.Count());
+
+			bool canMerge = true;
+
+			foreach (var req in requiredCounts)
+			{
+				if (!itemCounts.TryGetValue(req.Key, out int available) || available < req.Value)
+				{
+					canMerge = false;
+					break;
+				}
+			}
+
+			if (canMerge)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public List<string> GetCompatibleItems(List<string> selectedItems)
 	{
-		GameManager gameManager = GetNode<GameManager>("/root/GameManager");
-		var inventory = gameManager.Inventory;
-
 		MergeRecipeRegistry mergeRecipeRegistry = new MergeRecipeRegistry();
 		var compatibleItems = mergeRecipeRegistry.FindCompatibleItems(selectedItems);
 		return compatibleItems;

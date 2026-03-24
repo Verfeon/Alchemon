@@ -52,11 +52,16 @@ public partial class MergeUI : Control
 		if (gameManager.Inventory != null)
 		{
 			MergeableItem[] items = gameManager.Inventory.GetAllMergeableItems();
+			MergeableItem[] usedItems = gameManager.Inventory.GetUsedMergeableItems();
 			foreach (MergeableItem item in items)
 			{
 				if (item != null)
 				{
 					_mergeableItemsList.AddItem($"{item.Data.Id}", item.Data.Texture2d);
+					if (usedItems.Contains(item))
+					{
+						_mergeableItemsList.SetItemDisabled(_mergeableItemsList.GetItemCount() - 1, true);
+					}
 				}
 			}
 		}
@@ -87,10 +92,6 @@ public partial class MergeUI : Control
 			}
 
 			List<string> usedItems = gameManager.Inventory.GetUsedMergeableItems().Select(item => item.Data.Id).ToList();
-			foreach (var usedItem in usedItems)
-			{
-				GD.Print($"Used item: {usedItem}");
-			}
 
 			for (int i = 0; i < _mergeableItemsList.GetItemCount(); i++)
 			{
