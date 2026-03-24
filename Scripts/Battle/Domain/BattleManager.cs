@@ -17,6 +17,10 @@ using System.Linq;
 
 namespace Game.Battle.Domain;
 
+/// <summary>
+/// Manages the battle logic, including turn order, ability usage, damage calculation and battle flow.
+/// Handles the interaction between the player's creature and the enemy creature, as well as the integration with the merge system to allow the player to merge a new creature if their current creature faints during battle.
+/// </summary>
 public partial class BattleManager : Node
 {
 	[Export] private PackedScene _battleScenePath;
@@ -45,6 +49,14 @@ public partial class BattleManager : Node
 	[Signal]
 	public delegate void CreatureFaintedEventHandler(string creatureName);
 	
+	/// <summary>
+	/// Waits for the player to merge a creature and returns the merged creature once the merge is completed. 
+	/// The method listens for the CreatureMerged event from the MergeManager and resolves the task when the event is triggered. 
+	/// It also simulates an input event to open the merge UI, allowing the player to perform the merge action. 
+	/// This method is used in the battle flow to allow the player to merge a new creature if their current creature faints during battle.
+	/// </summary>
+	/// <param name="mergeManager"></param>
+	/// <returns></returns>
 	private Task<Creature> WaitForCreatureMergedAsync(MergeManager mergeManager)
 	{
 	 	var tcs = new TaskCompletionSource<Creature>();
@@ -67,6 +79,11 @@ public partial class BattleManager : Node
 		return tcs.Task;
 	}
 	
+	/// <summary>
+	/// Starts a new battle against the specified enemy creature.
+	/// </summary>
+	/// <param name="enemyCreature"></param>
+	/// <returns></returns>
 	public async Task StartBattle(Creature enemyCreature)
 	{
 		GD.Print("Start Battle");
@@ -100,6 +117,11 @@ public partial class BattleManager : Node
 		GD.Print($"Battle started! {_playerCreature.Data.Name} vs {_enemyCreature.Data.Name}");
 	}
 	
+	/// <summary>
+	/// Determines if the player starts first based on the speed stats of the player's creature and the enemy creature.
+	/// If the speed stats are equal, it randomly decides who goes first.
+	/// </summary>
+	/// <returns></returns>
 	private bool PlayerGoesFirst()
 	{
 		if (_playerCreature.GetBattleStat(StatEnum.Speed) == _enemyCreature.GetBattleStat(StatEnum.Speed))
@@ -109,6 +131,13 @@ public partial class BattleManager : Node
 		return _playerCreature.GetBattleStat(StatEnum.Speed) >= _enemyCreature.GetBattleStat(StatEnum.Speed);
 	}
 	
+	/// <summary>
+	/// Manages the turn order and actions for the battle.
+	/// Checks for creature fainting and handles the end of the battle, including victory and defeat conditions.
+	/// If the player's creature faints, it checks if a merge is possible with the unused items in the inventory and allows the player to merge a new creature to continue the battle.
+	/// </summary>
+	/// <param name="playerSelectedAbility"></param>
+	/// <returns></returns>
 	private async Task ManageTurn(Ability playerSelectedAbility)
 	{
 		_turnCount++;
@@ -152,20 +181,35 @@ public partial class BattleManager : Node
 		EmitSignal(SignalName.TurnEnded);
 	}
 	
+	/// <summary>
+	/// Uses the specified ability from the attacker creature on the defender creature.
+	/// </summary>
+	/// <param name="ability"></param>
+	/// <param name="attacker"></param>
+	/// <param name="defender"></param>
 	private void UseAbility(Ability ability, Creature attacker, Creature defender)
 	{
 		GD.Print($"{attacker.Data.Name} uses {ability.Name}!");
 		
-		int damage = CalculateDamage(ability, attacker, defender);
-		
-		defender.CurrentHP = Math.Max(0, defender.CurrentHP - damage);
-		
-		EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
-		GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defender.GetBattleStat(StatEnum.MaxHP)}");
-		
+		if (ability.Category != AbilityCategory.Status)
+		{
+			int damage = CalculateDamage(ability, attacker, defender);
+			
+			defender.CurrentHP = Math.Max(0, defender.CurrentHP - damage);
+			
+			EmitSignal(SignalName.DamageDealt, attacker.Data.Name, defender.Data.Name, damage);
+			GD.Print($"{defender.Data.Name} takes {damage} damage! HP: {defender.CurrentHP}/{defender.GetBattleStat(StatEnum.MaxHP)}");
+		}
 		ability.Effect?.ApplyEffect(attacker, defender);
 	}
 	
+	/// <summary>
+	/// Calculates the damage dealt by an ability from the attacker to the defender based on the ability's category, power, type effectiveness, and STAB (Same Type Attack Bonus).
+	/// </summary>
+	/// <param name="ability"></param>
+	/// <param name="attacker"></param>
+	/// <param name="defender"></param>
+	/// <returns></returns>
 	private int CalculateDamage(Ability ability, Creature attacker, Creature defender)
 	{
 		int attackStat = 1;
@@ -198,7 +242,7 @@ public partial class BattleManager : Node
 		
 		int power = ability.Power;
 		
-		float baseDamage = (power * attackStat / defenseStat) / 50f + 2;
+		float baseDamage = (power * attackStat / defenseStat) / 50f;
 		
 		float typeMultiplier = GetTypeEffectiveness(ability.Type, defender.Data.Type);
 		
@@ -217,6 +261,12 @@ public partial class BattleManager : Node
 		return finalDamage;
 	}
 	
+	/// <summary>
+	/// Gets the effectiveness of an attack type against a defense type.
+	/// </summary>
+	/// <param name="attackType"></param>
+	/// <param name="defenseType"></param>
+	/// <returns></returns>
 	private float GetTypeEffectiveness(Type attackType, Type defenseType)
 	{
 		if (attackType.IsStrongAgainst(defenseType))
@@ -235,6 +285,10 @@ public partial class BattleManager : Node
 		return 1.0f;
 	}
 	
+	/// <summary>
+	/// Ends the battle and handles the aftermath.
+	/// </summary>
+	/// <param name="playerWon"></param>
 	private void EndBattle(bool playerWon)
 	{
 		GD.Print($"Battle ended! {(playerWon ? "Victory!" : "Defeat...")}");
@@ -295,12 +349,13 @@ public partial class BattleManager : Node
 	// 	}
 	// }
 	
-	// Méthode pour l'IA (tour de l'ennemi)
-	public void EnemyTurn()
+	/// <summary>
+	/// Performs the enemy's turn by selecting a random ability from the enemy creature's abilities.
+	/// </summary>
+	private void EnemyTurn()
 	{
 		if (_enemyCreature != null && _enemyCreature.Abilities.Count > 0)
 		{
-			// Choisir une capacité aléatoirement (IA simple)
 			int randomIndex = GD.RandRange(0, _enemyCreature.Abilities.Count - 1);
 			Ability chosenAbility = _enemyCreature.Abilities[randomIndex];
 			
@@ -308,9 +363,12 @@ public partial class BattleManager : Node
 		}
 	}
 	
-
+	/// <summary>
+	/// Handles the selection of an ability by the player.
+	/// </summary>
+	/// <param name="ability"></param>
 	private void OnAbilitySelected(Ability ability)
 	{
-		ManageTurn(ability);
+        _ = ManageTurn(ability);
 	}
 }

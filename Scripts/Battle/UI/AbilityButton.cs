@@ -5,6 +5,10 @@ using Ability = Game.Creatures.Data.Ability;
 
 namespace Game.Battle.UI;
 
+/// <summary>
+/// Represents a button in the ability panel that can be bound to a specific ability of a creature.
+/// Handles the display of the ability's name, icon and the type color, as well as the click event to select the ability for use in battle.
+/// </summary>
 public partial class AbilityButton : Node2D
 {
 	[Signal] public delegate void AbilitySelectedEventHandler(Ability ability);
@@ -26,6 +30,10 @@ public partial class AbilityButton : Node2D
 		_abilityLabel.Text = "";
 	}
 	
+	/// <summary>
+	/// Binds the ability button to a specific ability.
+	/// </summary>
+	/// <param name="ability"></param>
 	public void Bind(Ability ability)
 	{
 		if (ability == null)
@@ -44,6 +52,9 @@ public partial class AbilityButton : Node2D
 		_iconSprite.Texture = ability.Type.Icon;
 	}
 	
+	/// <summary>
+	/// Unbinds the ability button, clearing its display and disabling it.
+	/// </summary>
 	private void Unbind()
 	{
 		if (_ability == null) return;
@@ -55,11 +66,18 @@ public partial class AbilityButton : Node2D
 		_iconSprite.Texture = null;
 	}
 
+	/// <summary>
+	/// Checks if the ability button is currently bound to an ability.
+	/// </summary>
+	/// <returns></returns>
 	public bool IsBound()
 	{
 		return _ability != null;
 	}
 	
+	/// <summary>
+	/// Handles the button press event, emitting the AbilitySelected signal if an ability is bound to the button.
+	/// </summary>
 	public void OnButtonPressed() 
 	{
 		if (_ability != null) 
