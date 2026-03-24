@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 using GameManager = Game.Core.Autoload.GameManager;
 using BaseItemData = Game.Items.Data.BaseItemData;
@@ -7,6 +6,10 @@ using MergeableItemData = Game.Items.Data.MergeableItemData;
 
 namespace Game.Items.Presentation;
 
+/// <summary>
+/// Represents a collectible item in the game world. 
+/// When the player collides with this item, it will be added to their inventory.
+/// </summary>
 public partial class CollectibleItem : Area2D
 {
 	[Export] private BaseItemData _itemData;
@@ -43,6 +46,11 @@ public partial class CollectibleItem : Area2D
 		Position = _initialPosition + new Vector2(0, offset);
 	}
 	
+	/// <summary>
+	/// Handles the event when a body enters the area of the collectible item.
+	/// If the body is the player, the item will be collected and added to the inventory
+	/// </summary>
+	/// <param name="body"></param>
 	private void OnBodyEntered(Node2D body)
 	{
 		if (_isCollected) return;
@@ -53,6 +61,9 @@ public partial class CollectibleItem : Area2D
 		}
 	}
 	
+	/// <summary>
+	/// Collects the item, adds it to the player's inventory and plays a collection animation before freeing the node.
+	/// </summary>
 	private void CollectItem()
 	{
 		_isCollected = true;

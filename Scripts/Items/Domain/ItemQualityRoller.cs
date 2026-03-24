@@ -1,12 +1,14 @@
 using Godot;
 using System;
 
-using ItemQuality = Game.Items.Domain.ItemQuality;
 using ItemQualityWeight = Game.Items.Data.ItemQualityWeight;
 using ItemQualityWeights = Game.Items.Data.ItemQualityWeights;
 
 namespace Game.Items.Domain;
 
+/// <summary>
+/// Provides functionality for rolling item quality based on defined weights.
+/// </summary>
 public static class ItemQualityRoller
 {
 	private static readonly RandomNumberGenerator rng = new();
@@ -16,6 +18,11 @@ public static class ItemQualityRoller
 		rng.Randomize();
 	}
 
+	/// <summary>
+	/// Rolls a random item quality based on the provided weights.
+	/// </summary>
+	/// <param name="itemQualityWeights"></param>
+	/// <returns></returns>
 	public static ItemQuality Roll(ItemQualityWeights itemQualityWeights)
 	{
 		if (itemQualityWeights.Weights.Length == 0)
@@ -35,7 +42,9 @@ public static class ItemQualityRoller
 		foreach (ItemQualityWeight entry in itemQualityWeights.Weights)
 		{
 			if (r < entry.Weight)
+			{
 				return entry.Quality;
+			}
 			r -= entry.Weight;
 		}
 

@@ -1,11 +1,7 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
-using MergeableItem = Game.Items.Domain.MergeableItem;
-using ItemQuality = Game.Items.Domain.ItemQuality;
 using ItemQualityWeights = Game.Items.Data.ItemQualityWeights;
-using ItemQualityRoller = Game.Items.Domain.ItemQualityRoller;
 using GameManager = Game.Core.Autoload.GameManager;
 using BattleManager = Game.Battle.Domain.BattleManager;
 using BaseItemData = Game.Items.Data.BaseItemData;
@@ -13,6 +9,9 @@ using MergeableItemData = Game.Items.Data.MergeableItemData;
 
 namespace Game.Items.Domain;
 
+/// <summary>
+/// Manages the player's inventory, including collecting and using items.
+/// </summary>
 public partial class InventoryManager : Node
 {
 	private const int MaxMergeableItems = 12;
@@ -35,6 +34,12 @@ public partial class InventoryManager : Node
 		battleManager.BattleEnded += (bool playerHasWon) => ResetMergeableItemsUsed();
 	}
 	
+	/// <summary>
+	/// Adds an item to the inventory.
+	/// If the item is mergeable, it will be added to the mergeable items array and assigned a quality based on the defined weights.
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="quantity"></param>
 	public void AddItem(BaseItemData item, int quantity = 1)
 	{
 		if (_itemIds.ContainsKey(item.Id))
@@ -62,11 +67,24 @@ public partial class InventoryManager : Node
 		EmitSignal(SignalName.itemCollected, item.Id);
 	}
 	
+	/// <summary>
+	/// Checks if the inventory contains a specific item at a certain quantity.
+	/// </summary>
+	/// <param name="itemId"></param>
+	/// <param name="quantity"></param>
+	/// <returns></returns>
 	public bool HasItem(string itemId, int quantity = 1)
 	{
 		return _itemIds.ContainsKey(itemId) && _itemIds[itemId] >= quantity;
 	}
 	
+	/// <summary>
+	/// Removes a specified quantity of an item from the inventory if it exists.
+	/// Returns true if the item was successfully removed, false otherwise.
+	/// </summary>
+	/// <param name="itemId"></param>
+	/// <param name="quantity"></param>
+	/// <returns></returns>
 	public bool RemoveItem(string itemId, int quantity = 1)
 	{
 		if (!HasItem(itemId, quantity))
@@ -80,6 +98,11 @@ public partial class InventoryManager : Node
 		return true;
 	}
 
+	/// <summary>
+	/// Marks a mergeable item as used based on its item ID.
+	/// This is used to track which mergeable items have been used in the current battle.
+	/// </summary>
+	/// <param name="itemId"></param>
 	public void MarkMergeableItemAsUsed(string itemId)
 	{
 		for (int i = 0; i < _mergeableItems.Length; i++)
@@ -92,16 +115,28 @@ public partial class InventoryManager : Node
 		}
 	}
 	
+	/// <summary>
+	/// Gets a dictionary of all item IDs in the inventory along with their quantity.
+	/// </summary>
+	/// <returns></returns>
 	public Dictionary<string, int> GetAllItems()
 	{
 		return new Dictionary<string, int>(_itemIds);
 	}
 	
+	/// <summary>
+	/// Gets all mergeable items in the inventory, regardless of whether they have been used or not.
+	/// </summary>
+	/// <returns></returns>
 	public MergeableItem[] GetAllMergeableItems()
 	{
 		return _mergeableItems;
 	}
 
+	/// <summary>
+	/// Gets all unused mergeable items in the inventory.
+	/// </summary>
+	/// <returns></returns>
 	public MergeableItem[] GetUnusedMergeableItems()
 	{
 		List<MergeableItem> unusedItems = new List<MergeableItem>();
@@ -115,6 +150,10 @@ public partial class InventoryManager : Node
 		return unusedItems.ToArray();
 	}
 
+	/// <summary>
+	/// Gets all used mergeable items in the inventory.
+	/// </summary>
+	/// <returns></returns>
 	public MergeableItem[] GetUsedMergeableItems()
 	{
 		List<MergeableItem> usedItems = new List<MergeableItem>();
@@ -128,6 +167,9 @@ public partial class InventoryManager : Node
 		return usedItems.ToArray();
 	}
 	
+	/// <summary>
+	/// Resets the used status of all mergeable items in the inventory.
+	/// </summary>
 	private void ResetMergeableItemsUsed()
 	{
 		for (int i = 0; i < MaxMergeableItems; i++)

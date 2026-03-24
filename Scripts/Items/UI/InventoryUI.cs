@@ -1,10 +1,12 @@
 using Godot;
-using System;
 
 using GameManager = Game.Core.Autoload.GameManager;
 
 namespace Game.Items.UI;
 
+/// <summary>
+/// Represents the inventory UI, allowing player to view their collected items and mergeable items.
+/// </summary>
 public partial class InventoryUI : Control
 {
 	[Export] private NodePath InventoryLabelPath;
@@ -40,11 +42,19 @@ public partial class InventoryUI : Control
 		UpdateInventoryDisplay();
 	}
 	
+	/// <summary>
+	/// Handles the event when an item is collected.
+	/// Updates the inventory display to reflect the newly collected item.
+	/// </summary>
+	/// <param name="itemId"></param>
 	private void OnItemCollected(string itemId)
 	{
 		UpdateInventoryDisplay();
 	}
 	
+	/// <summary>
+	/// Updates the inventory display by clearing the current lists and repopulating them with the latest items from the inventory.
+	/// </summary>
 	private void UpdateInventoryDisplay()
 	{
 		foreach (Node child in _itemsList.GetChildren())
@@ -99,6 +109,9 @@ public partial class InventoryUI : Control
 		}
 	}
 	
+	/// <summary>
+	/// Toggles between the collected items list and the mergeable items list in the inventory UI.
+	/// </summary>
 	private void ChangeItemsList()
 	{
 		_currentItemsList.Visible = false;
@@ -113,6 +126,10 @@ public partial class InventoryUI : Control
 		_currentItemsList.Visible = true;
 	}
 	
+	/// <summary>
+	/// Handles unhandled input events, such as opening the inventory UI.
+	/// </summary>
+	/// <param name="@event"></param>
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed("open_inventory_ui"))
