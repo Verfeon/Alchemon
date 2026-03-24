@@ -1,10 +1,10 @@
-using Godot;
-using System;
-
 using BaseCreatureStats = Game.Creatures.Data.BaseCreatureStats;
 
 namespace Game.Creatures.Domain;
 
+/// <summary>
+/// Represents the runtime stats of a creature, which are calculated based on its base stats and level.
+/// </summary>
 public class RuntimeCreatureStats
 {
 	private readonly int[] _stats = new int[6];

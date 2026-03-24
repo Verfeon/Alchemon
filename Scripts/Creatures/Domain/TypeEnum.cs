@@ -1,8 +1,8 @@
-using Godot;
-using System;
-
 namespace Game.Creatures.Domain;
 
+/// <summary>
+/// Represents the different types that a creature or ability can have.
+/// </summary>
 public enum TypeEnum
 {
 	Neutral,

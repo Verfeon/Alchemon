@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 using AbilityCategory = Game.Creatures.Domain.AbilityCategory;
 

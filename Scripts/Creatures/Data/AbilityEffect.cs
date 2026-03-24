@@ -1,6 +1,5 @@
 using Game.Creatures.Domain;
 using Godot;
-using System;
 
 namespace Game.Creatures.Data;
 

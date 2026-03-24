@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using Godot.NativeInterop;
 using Game.Utils.Random;
 
 using Creature = Game.Creatures.Domain.Creature;
@@ -11,6 +10,10 @@ using BattleManager = Game.Battle.Domain.BattleManager;
 
 namespace Game.Creatures.Presentation;
 
+/// <summary>
+/// Represents the visual and interactive representation of a creature in the game world.
+/// It binds to a Creature instance to handle interactions.
+/// </summary>
 public partial class CreatureNode : Node2D
 {
 	[Export] private Sprite2D _sprite;
@@ -36,6 +39,11 @@ public partial class CreatureNode : Node2D
 		}
 	}
 	
+	/// <summary>
+	/// Sets up the creature node with the specified creature and wild status.
+	/// </summary>
+	/// <param name="creature"></param>
+	/// <param name="isWild"></param>
 	public void Setup(Creature creature, bool isWild)
 	{
 		Bind(creature);
@@ -46,6 +54,10 @@ public partial class CreatureNode : Node2D
 		}
 	}
 
+	/// <summary>
+	/// Makes the creature move in a random direction, changing direction at regular intervals defined by <see cref="changeDirectionTime"/>.
+	/// </summary>
+	/// <returns></returns>
 	private async void Move()
 	{
 		while (true)
@@ -63,12 +75,19 @@ public partial class CreatureNode : Node2D
 		}
 	}
 
+	/// <summary>
+	/// Chooses a new random direction for the creature to move in.
+	/// </summary>
 	private void PickNewDirection()
 	{
 		float angle = _random.NextFloat(0f, 2 * (float)Math.PI);
 		_direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).Normalized();
 	}
 	
+	/// <summary>
+	/// Binds the creature node to a specific <see cref="Creature"/> instance, updating the visual and setting up event handlers for HP changes and fainting. 
+	/// </summary>
+	/// <param name="creature"></param>
 	public void Bind(Creature creature)
 	{
 		if (creature == null)
@@ -91,6 +110,9 @@ public partial class CreatureNode : Node2D
 		_creature.Fainted += OnFainted;
 	}
 
+	/// <summary>
+	/// Unbinds the creature node from its current <see cref="Creature"/> instance, removing event handlers and clearing the reference.
+	/// </summary>
 	private void Unbind()
 	{
 		if (_creature == null) return;
@@ -120,6 +142,10 @@ public partial class CreatureNode : Node2D
 		// animation, disparition, etc.
 	}
 	
+	/// <summary>
+	/// Handles the end of battle event. 
+	/// </summary>
+	/// <param name="playerHasWon"></param>
 	private void OnBattleEnded(bool playerHasWon)
 	{
 		if (playerHasWon)
@@ -130,6 +156,11 @@ public partial class CreatureNode : Node2D
 		}
 	}
 	
+	/// <summary>
+	/// Handles the event when a body enters the creature's area.
+	/// If the body is the player and the creature is wild, it starts a battle with the creature and binds the battle end event to handle post-battle logic.
+	/// </summary>
+	/// <param name="body"></param>
 	public void OnBodyEntered(Node2D body)
 	{
 		if (!body.IsInGroup("Player")) return;

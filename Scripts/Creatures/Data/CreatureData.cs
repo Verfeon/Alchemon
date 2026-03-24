@@ -1,10 +1,6 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
-using BaseCreatureStats = Game.Creatures.Data.BaseCreatureStats;
-using Type = Game.Creatures.Data.Type;
-using BaseItemData = Game.Items.Data.BaseItemData;
 using LootEntry = Game.Items.Data.LootEntry;
 using InventoryManager = Game.Items.Domain.InventoryManager;
 
@@ -29,6 +25,9 @@ public partial class CreatureData : Resource
 		}
 	}
 
+	/// <summary>
+	/// Removes duplicate abilities from the list.
+	/// </summary>
 	private void RemoveDuplicateAbilities()
 	{
 		var seenIds = new HashSet<string>();
@@ -61,6 +60,10 @@ public partial class CreatureData : Resource
 		Abilities = unique;
 	}
 	
+	/// <summary>
+	/// Rolls the loot for the creature, adding items to the inventory based on their probabilities.
+	/// </summary>
+	/// <param name="inventoryManager"></param>
 	public void RollLoot(InventoryManager inventoryManager)
 	{
 		GD.Print("Try looting items");
