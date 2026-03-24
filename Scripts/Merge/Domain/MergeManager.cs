@@ -59,7 +59,7 @@ public partial class MergeManager : Node
 
 	private Creature CreateCreatureFromRecipe(MergeRecipe recipe)
 	{
-		Creature creature = new Creature(recipe.ResultCreature, 1, new GodotRandomAdapter());
+		Creature creature = new Creature(recipe.ResultCreature, 10, new GodotRandomAdapter());
 
 		return creature;
 	}

@@ -122,6 +122,7 @@ public partial class BattleManager : Node
 	private void ManageTurn(Ability playerSelectedAbility)
 	{
 		_turnCount++;
+		GD.Print($"Turn {_turnCount}");
 		
 		var actions = PlayerGoesFirst()
 			? new Action[] { () => UseAbility(playerSelectedAbility, _playerCreature, _enemyCreature), EnemyTurn }

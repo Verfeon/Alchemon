@@ -26,7 +26,7 @@ public partial class CreatureSpawner : Node2D
 			GD.PushError("CreatureNode is marked as wild but has no possible creatures assigned.");
 			return;
 		}
-		Creature creature = new Creature(_possibleCreatures[_random.NextInt(0, _possibleCreatures.Count - 1)], 1, new GodotRandomAdapter());
+		Creature creature = new Creature(_possibleCreatures[_random.NextInt(0, _possibleCreatures.Count - 1)], 10, new GodotRandomAdapter());
 		
 		CreatureNode newCreature = _creatureScenePath.Instantiate<CreatureNode>();
 		newCreature.Setup(creature, true);
