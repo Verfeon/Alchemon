@@ -1,93 +1,72 @@
-using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using TypeEnum = Game.Creatures.Domain.TypeEnum;
 using Type = Game.Creatures.Data.Type;
+using TypeRegistry = Game.Creatures.Domain.TypeRegistry;
 
 namespace Game.Utils.TypeChart;
 
 /// <summary>
 /// Loads and manages the type chart for the game.
 /// </summary>
-public static class TypeChartLoader
+public class TypeChartLoader
 {
-	public static Dictionary<TypeEnum, Type> Types = new();
-	public static float[,] Chart;
+	private List<Type> _types = new();
+	private float[,] _chart;
 
-	/// <summary>
-	/// Loads all type resources from the specified folder and builds the type effectiveness chart.
-	/// </summary>
-	/// <param name="folderPath"></param>
-	public static void LoadTypes(string folderPath)
+	public TypeChartLoader(List<Type> types)
 	{
-		Types.Clear();
-
-		var dir = DirAccess.Open(folderPath);
-		if (dir == null)
-		{
-			GD.PushError($"Type folder not found: {folderPath}");
-			return;
-		}
-
-		dir.ListDirBegin();
-		string file;
-
-		while ((file = dir.GetNext()) != "")
-		{
-			if (dir.CurrentIsDir())
-				continue;
-
-			if (!file.EndsWith(".tres") && !file.EndsWith(".res"))
-				continue;
-
-			string path = folderPath + "/" + file;
-			var type = ResourceLoader.Load<Type>(path);
-
-			if (type != null)
-				Types[type.TypeEnum] = type;
-		}
-
-		dir.ListDirEnd();
-
+		_types = types;
 		BuildChart();
 	}
 
 	/// <summary>
 	/// Builds the type effectiveness chart based on the loaded types and their relationships.
 	/// </summary>
-	private static void BuildChart()
+	private void BuildChart()
 	{
 		int count = Enum.GetValues(typeof(TypeEnum)).Length;
-		Chart = new float[count, count];
+		_chart = new float[count, count];
 
 		for (int atk = 0; atk < count; atk++)
-		for (int def = 0; def < count; def++)
-			Chart[atk, def] = 1f;
+		{
+			for (int def = 0; def < count; def++)
+			{
+				_chart[atk, def] = 1f;
+			}
+		}
 
-		foreach (var type in Types.Values)
+		foreach (var type in _types)
 		{
 			int atk = (int)type.TypeEnum;
 
 			foreach (var strong in type.StrongAgainst)
-				Chart[atk, (int)strong] = 2f;
+			{
+				_chart[atk, (int)strong] = 2f;
+			}
 
 			foreach (var weak in type.WeakAgainst)
-				Chart[atk, (int)weak] = 0.5f;
+			{
+				_chart[atk, (int)weak] = 0.5f;
+			}
 
 			foreach (var useless in type.UselessAgainst)
-				Chart[atk, (int)useless] = 0f;
+			{
+				_chart[atk, (int)useless] = 0f;
+			}
 		}
 	}
 
 	/// <summary>
-	/// Gets the effectiveness of an attack type against a defense type.
+	/// Gets the effectiveness of an attack type against a defense type./// If the type chart has not been built yet, it loads the types from resources and builds the chart before returning the effectiveness multiplier.
 	/// </summary>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
 	/// <returns></returns>
-	public static float GetEffectiveness(TypeEnum attack, TypeEnum defense)
+	public float GetEffectiveness(TypeEnum attack, TypeEnum defense)
 	{
-		return Chart[(int)attack, (int)defense];
+		return _chart[(int)attack, (int)defense];
 	}
 }
