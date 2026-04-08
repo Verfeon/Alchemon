@@ -25,20 +25,14 @@ public static class ItemQualityRoller
 	/// <returns></returns>
 	public static ItemQuality Roll(ItemQualityWeights itemQualityWeights)
 	{
-		if (itemQualityWeights.Weights.Length == 0)
+		if (itemQualityWeights.Weights.Count == 0)
 		{
 			GD.PushWarning("Item Quality Weights empty. Using first quality");
 			return ((ItemQuality[])Enum.GetValues(typeof(ItemQuality)))[0];
 		}
 		
-		float totalWeight = 0f;
-		foreach (ItemQualityWeight entry in itemQualityWeights.Weights)
-		{
-			totalWeight += entry.Weight;
-		}
-
-		float r = (float)GD.Randf() * totalWeight;
-
+		float r = (float)GD.Randf() * itemQualityWeights.TotalWeight;
+		
 		foreach (ItemQualityWeight entry in itemQualityWeights.Weights)
 		{
 			if (r < entry.Weight)
