@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=4 uid="uid://dpemd3uvchc23"]
+
+[ext_resource type="Script" uid="uid://dq6s2wwesguou" path="res://Scripts/Battle/UI/AbilityButton.cs" id="1_wlat2"]
+[ext_resource type="Texture2D" uid="uid://bbwv5qy3u2ajj" path="res://Assets/Battle/ability_button.png" id="2_i10xl"]
+[ext_resource type="Theme" uid="uid://vx7hvoobihwx" path="res://Resources/UITheme.tres" id="3_ky2u6"]
+
+[sub_resource type="BitMap" id="BitMap_wlat2"]
+data = {
+"data": PackedByteArray("///////////////////////////+////////////////////////f/7///////////////////////9//P///////////////////////z/8////////////////////////P/j///////////////////////8f+P///////////////////////x/w////////////////////////D+D///////////////////////8H4P///////////////////////wfA////////////////////////A8D///////////////////////8DgP///////////////////////wGA////////////////////////AQD///////////////////////8AAP7/////////////////////fwAA/v////////////////////9/AAD8/////////////////////z8AAPz/////////////////////PwAA+P////////////////////8fAADw/////////////////////w8AAPD/////////////////////DwAA4P////////////////////8HAADg/////////////////////wcAAMD/////////////////////AwAAwP////////////////////8DAACA/////////////////////wEAAAD/////////////////////AAAAAP////////////////////8AAAAA/v//////////////////fwAAAAD+//////////////////9/AAAAAPz//////////////////z8AAAAA+P//////////////////HwAAAAD4//////////////////8fAAAAAPD//////////////////w8AAAAA8P//////////////////DwAAAADg//////////////////8HAAAAAOD//////////////////wcAAAAAwP//////////////////AwAAAACA//////////////////8BAAAAAID//////////////////wEAAAAAAP//////////////////AAAAAAAA//////////////////8AAAAAAAD+////////////////fwAAAAAAAPz///////////////8/AAAAAAAA/P///////////////z8AAAAAAAD4////////////////HwAAAAAAAPj///////////////8fAAAAAAAA8P///////////////w8AAAAAAADw////////////////DwAAAAAAAOD///////////////8HAAAAAAAAwP///////////////wMAAAAAAADA////////////////AwAAAAAAAID///////////////8BAAAAAAAAgP///////////////wEAAAAAAAAA////////////////AAAAAAAAAAD+/////////////38AAAAAAAAAAP7/////////////fwAAAAAAAAAA/P////////////8/AAAAAAAAAAD8/////////////z8AAAAAAAAAAPj/////////////HwAAAAAAAAAA+P////////////8fAAAAAAAAAADw/////////////w8AAAAAAAAAAOD/////////////BwAAAAAAAAAA4P////////////8HAAAAAAAAAADA/////////////wMAAAAAAAAAAMD/////////////AwAAAAAAAAAAgP////////////8BAAAAAAAAAAAA/////////////wAAAAAAAAAAAAD/////////////AAAAAAAAAAAAAP7//////////38AAAAAAAAAAAAA/v//////////fwAAAAAAAAAAAAD8//////////8/AAAAAAAAAAAAAPz//////////z8AAAAAAAAAAAAA+P//////////HwAAAAAAAAAAAADw//////////8PAAAAAAAAAAAAAPD//////////w8AAAAAAAAAAAAA4P//////////BwAAAAAAAAAAAADg//////////8HAAAAAAAAAAAAAMD//////////wMAAAAAAAAAAAAAwP//////////AwAAAAAAAAAAAACA//////////8BAAAAAAAAAAAAAAD//////////wAAAAAAAAAAAAAAAP//////////AAAAAAAAAAAAAAAA/v///////38AAAAAAAAAAAAAAAD+////////fwAAAAAAAAAAAAAAAPz///////8/AAAAAAAAAAAAAAAA+P///////x8AAAAAAAAAAAAAAAD4////////HwAAAAAAAAAAAAAAAPD///////8PAAAAAAAAAAAAAAAA8P///////w8AAAAAAAAAAAAAAADg////////BwAAAAAAAAAAAAAAAOD///////8HAAAAAAAAAAAAAAAAwP///////wMAAAAAAAAAAAAAAACA////////AQAAAAAAAAAAAAAAAID///////8BAAAAAAAAAAAAAAAAAP///////wAAAAAAAAAAAAAAAAAA////////AAAAAAAAAAAAAAAAAAD+/////38AAAAAAAAAAAAAAAAAAPz/////PwAAAAAAAAAAAAAAAAAA/P////8/AAAAAAAAAAAAAAAAAAD4/////x8AAAAAAAAAAAAAAAAAAPj/////HwAAAAAAAAAAAAAAAAAA8P////8PAAAAAAAAAAAAAAAAAADw/////w8AAAAAAAAAAAAAAAAAAOD/////BwAAAAAAAAAAAAAAAAAAwP////8DAAAAAAAAAAAAAAAAAADA/////wMAAAAAAAAAAAAAAAAAAID/////AQAAAAAAAAAAAAAAAAAAgP////8BAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAAAAAAAAAP7//38AAAAAAAAAAAAAAAAAAAAA/P//PwAAAAAAAAAAAAAAAAAAAAD8//8/AAAAAAAAAAAAAAAAAAAAAPj//x8AAAAAAAAAAAAAAAAAAAAA+P//HwAAAAAAAAAAAAAAAAAAAADw//8PAAAAAAAAAAAAAAAAAAAAAOD//wcAAAAAAAAAAAAAAAAAAAAA4P//BwAAAAAAAAAAAAAAAAAAAADA//8DAAAAAAAAAAAAAAAAAAAAAMD//wMAAAAAAAAAAAAAAAAAAAAAgP//AQAAAAAAAAAAAAAAAAAAAACA//8BAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAP5/AAAAAAAAAAAAAAAAAAAAAAAA/n8AAAAAAAAAAAAAAAAAAAAAAAD8PwAAAAAAAAAAAAAAAAAAAAAAAPw/AAAAAAAAAAAAAAAAAAAAAAAA+B8AAAAAAAAAAAAAAAAAAAAAAADwDwAAAAAAAAAAAAAAAAAAAAAAAPAPAAAAAAAAAAAAAAAAAAAAAAAA4AcAAAAAAAAAAAAAAAAAAAAAAADgBwAAAAAAAAAAAAAAAAAAAAAAAMADAAAAAAAAAAAAAAAAAAAAAAAAwAMAAAAAAAAAAAAAAAAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+"size": Vector2i(160, 160)
+}
+
+[node name="AbilityButton" type="Node2D" node_paths=PackedStringArray("_abilityLabel", "_textureButton", "_iconSprite")]
+script = ExtResource("1_wlat2")
+_abilityLabel = NodePath("AbilityName")
+_textureButton = NodePath("TextureButton")
+_iconSprite = NodePath("Symbol")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_i10xl")
+texture_pressed = ExtResource("2_i10xl")
+texture_hover = ExtResource("2_i10xl")
+texture_disabled = ExtResource("2_i10xl")
+texture_focused = ExtResource("2_i10xl")
+texture_click_mask = SubResource("BitMap_wlat2")
+
+[node name="AbilityName" type="Label" parent="."]
+offset_left = 30.0
+offset_right = 130.0
+offset_bottom = 55.0
+theme = ExtResource("3_ky2u6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+
+[node name="Symbol" type="Sprite2D" parent="."]
+position = Vector2(80, 96)
+
+[connection signal="pressed" from="TextureButton" to="." method="OnButtonPressed"]

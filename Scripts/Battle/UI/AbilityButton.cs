@@ -9,6 +9,7 @@ namespace Game.Battle.UI;
 /// Represents a button in the ability panel that can be bound to a specific ability of a creature.
 /// Handles the display of the ability's name, icon and the type color, as well as the click event to select the ability for use in battle.
 /// </summary>
+[Tool]
 public partial class AbilityButton : Node2D
 {
 	[Signal] public delegate void AbilitySelectedEventHandler(Ability ability);
@@ -17,7 +18,20 @@ public partial class AbilityButton : Node2D
 	[Export] private Label _abilityLabel;
 	[Export] private TextureButton _textureButton;
 	[Export] private Sprite2D _iconSprite;
-	
+
+	private bool _flipV = false;
+	[Export] private bool FlipV
+	{
+		get => _flipV;
+		set
+		{
+			_flipV = value;
+
+			if (IsInsideTree())
+				ApplyFlip();
+		}
+	}
+
 	private Ability _ability;
 	
 	public override void _Ready() 
@@ -25,11 +39,41 @@ public partial class AbilityButton : Node2D
 		Bitmap bitmap = new Bitmap();
 		Texture2D texture = _textureButton.GetTextureNormal();
 		Image image = texture.GetImage();
+		if (_flipV)
+		{
+			image.FlipY();
+		}
 		bitmap.CreateFromImageAlpha(image);
 		_textureButton.SetClickMask(bitmap);
 		_abilityLabel.Text = "";
+		
+		ApplyFlip();
 	}
 	
+	/// <summary>
+	/// Flips the button vertically and moves icon sprite and ability name accordingly
+	/// </summary>
+	private void ApplyFlip()
+	{
+		if (_textureButton == null || _iconSprite == null || _abilityLabel == null)
+			return;
+
+		_textureButton.FlipV = _flipV;
+
+		if (_flipV)
+		{
+			_iconSprite.Position = new Vector2(
+				_iconSprite.Position.X,
+				_textureButton.Size.Y - _iconSprite.Position.Y - _iconSprite.GetRect().Size.Y
+			);
+
+			_abilityLabel.Position = new Vector2(
+				_abilityLabel.Position.X,
+				_textureButton.Size.Y - _abilityLabel.Position.Y - _abilityLabel.Size.Y
+			);
+		}
+	}
+
 	/// <summary>
 	/// Binds the ability button to a specific ability.
 	/// </summary>
@@ -80,6 +124,7 @@ public partial class AbilityButton : Node2D
 	/// </summary>
 	public void OnButtonPressed() 
 	{
+		GD.Print("button clicked");
 		if (_ability != null) 
 		{
 			EmitSignal(SignalName.AbilitySelected, _ability);

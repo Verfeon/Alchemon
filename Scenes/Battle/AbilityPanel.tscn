@@ -1,27 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://bg1bpu54h6kk5"]
+[gd_scene load_steps=3 format=3 uid="uid://bg1bpu54h6kk5"]
 
 [ext_resource type="Script" uid="uid://ckflxkgy5nlxa" path="res://Scripts/Battle/UI/AbilityPanel.cs" id="1_bjr3h"]
-[ext_resource type="PackedScene" uid="uid://d4jh34jfeegw7" path="res://Scenes/Battle/AbilityButtonUp.tscn" id="1_yyh3d"]
-[ext_resource type="PackedScene" uid="uid://dpemd3uvchc23" path="res://Scenes/Battle/AbilityButtonDown.tscn" id="2_bjr3h"]
+[ext_resource type="PackedScene" uid="uid://dpemd3uvchc23" path="res://Scenes/Battle/AbilityButton.tscn" id="2_hbx14"]
 
 [node name="AbilityPanel" type="Node2D" node_paths=PackedStringArray("_buttons")]
+texture_filter = 1
 script = ExtResource("1_bjr3h")
 _buttons = [NodePath("AbilityButton"), NodePath("AbilityButton2"), NodePath("AbilityButton3"), NodePath("AbilityButton4"), NodePath("AbilityButton5"), NodePath("AbilityButton6")]
 
-[node name="AbilityButton" parent="." instance=ExtResource("1_yyh3d")]
-position = Vector2(0, -12)
+[node name="AbilityButton" parent="." instance=ExtResource("2_hbx14")]
+texture_filter = 1
+position = Vector2(0, -10)
+FlipV = true
 
-[node name="AbilityButton2" parent="." instance=ExtResource("2_bjr3h")]
+[node name="AbilityButton2" parent="." instance=ExtResource("2_hbx14")]
 position = Vector2(100, 0)
 
-[node name="AbilityButton3" parent="." instance=ExtResource("1_yyh3d")]
-position = Vector2(100, 155)
+[node name="AbilityButton3" parent="." instance=ExtResource("2_hbx14")]
+position = Vector2(200, -10)
+FlipV = true
 
-[node name="AbilityButton4" parent="." instance=ExtResource("2_bjr3h")]
-position = Vector2(200, 166)
+[node name="AbilityButton4" parent="." instance=ExtResource("2_hbx14")]
+position = Vector2(200, 170)
 
-[node name="AbilityButton5" parent="." instance=ExtResource("1_yyh3d")]
-position = Vector2(200, -12)
+[node name="AbilityButton5" parent="." instance=ExtResource("2_hbx14")]
+position = Vector2(100, 160)
+FlipV = true
 
-[node name="AbilityButton6" parent="." instance=ExtResource("2_bjr3h")]
-position = Vector2(0, 166)
+[node name="AbilityButton6" parent="." instance=ExtResource("2_hbx14")]
+position = Vector2(0, 170)
